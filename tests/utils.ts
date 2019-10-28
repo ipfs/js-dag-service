@@ -14,8 +14,10 @@ import WebSocketStarMulti from 'libp2p-websocket-star-multi'
 import GossipSub from 'libp2p-gossipsub'
 // @todo: Avoid depending on promisify once libp2p better supports async/await peer-id/-info
 import { promisify } from 'es6-promisify'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Protector = require('libp2p/src/pnet')
 
-export const defaultIPFSBootstrapPeers = [
+const defaultIPFSBootstrapPeers = [
   '/ip4/10.0.100.132/tcp/4001/ipfs/QmRjftLSFyW5yKThhqpJUbi2GaAbzpUczfC6zV9cu49BuP',
   '/ip4/184.66.241.40/tcp/4001/ipfs/QmRjftLSFyW5yKThhqpJUbi2GaAbzpUczfC6zV9cu49BuP',
   '/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z',
@@ -113,9 +115,6 @@ class Node extends LibP2p {
     super(merged)
   }
 }
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Protector = require('libp2p/src/pnet')
 
 export const setupLibP2PHost = async (
   hostKey?: Buffer,
