@@ -1,0 +1,103 @@
+version: 2
+
+jobs:
+    lint-test:
+        docker:
+            - image: node:10.13.0
+        working_directory: ~/js-ipfs-lite
+        steps:
+            - checkout
+            - restore_cache:
+                key: npm-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+            - restore_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+            - run: npm install
+            - run:
+                name: lint
+                command: |
+                    npm run lint
+            - save_cache:
+                key: npm-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+                paths:
+                    - ~/.cache/npm
+            - save_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+                paths:
+                    - node_modules
+            - run:
+                name: test
+                command: |
+                    mkdir -p test-results/jest
+                    npm test
+                environment:
+                    JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+            - store_test_results:
+                path: test-results
+            - store_artifacts:
+                path: test-results
+    docs:
+        docker:
+            - image: node:10.13.0
+        working_directory: ~/js-ipfs-lite
+        steps:
+            - checkout
+            - restore_cache:
+                key: npm-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+            - restore_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+            - run: npm install
+            - run:
+                name: build docs
+                command: |
+                    npm run docs
+            - run:
+                name: docs dependencies
+                command: |
+                  npm install -g --silent gh-pages@2.1.1
+                  git config --global user.email "$GIT_AUTHOR_EMAIL"
+                  git config --global user.name "$GIT_AUTHOR_NAME"
+            - run:
+                name: deploy to gh-pages
+                command: gh-pages --dist docs
+    deploy:
+        docker:
+            - image: node:10.13.0
+        working_directory: ~/js-ipfs-lite
+        steps:
+            - checkout
+            - restore_cache:
+                key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+            - restore_cache:
+                key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+            - run: yarn install
+            - attach_workspace:
+                at: ~/js-ipfs-lite
+            - run:
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/js-ipfs-lite/.npmrc
+            - run:
+                name: Publish package
+                command: npm publish --access=public --unsafe-perm
+
+workflows:
+    version: 2
+    js-ipfs-lite:
+        jobs:
+            - lint-test:
+                filters:
+                    tags:
+                        only: /^v.*/
+            - docs:
+                requires:
+                    - lint-test
+                filters:
+                    tags:
+                        only: /^v.*/
+            - deploy:
+                requires:
+                    - docs
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        ignore: /.*/

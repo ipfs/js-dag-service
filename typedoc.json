@@ -1,0 +1,18 @@
+{
+  "readme": "./README.md",
+  "mode": "file",
+  "out": "docs",
+  "include": "src/",
+  "exclude": "**/test/**/*",
+  "gitRevision": "master",
+  "excludePrivate": true,
+  "excludeNotExported": true,
+  "excludeProtected": true,
+  "hideGenerator": true,
+  "target": "ES6",
+  "moduleResolution": "node",
+  "preserveConstEnums": true,
+  "stripInternal": true,
+  "module": "commonjs",
+  "mdHideSources": true
+}

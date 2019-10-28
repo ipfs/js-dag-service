@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "**/tests/*"
+  ]
+}
