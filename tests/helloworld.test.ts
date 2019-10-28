@@ -20,9 +20,13 @@ describe.skip('fetching IPLD dag from network', () => {
     jest.setTimeout(30000)
     const cid = new CID('QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u')
     const block = await lite.get(cid)
-    if (block && block.data) {
-      const msg = block.data.toString()
+    if (block && block.Data) {
+      const msg = block.Data.toString()
+        .replace(/[^0-9a-zA-Z_\s]/gi, '')
+        .trim()
       expect(msg).toEqual('Hello World')
+    } else {
+      throw Error('Expected block to have data')
     }
     await lite.stop()
   })
