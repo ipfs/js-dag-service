@@ -48,17 +48,19 @@ jobs:
             - run: npm install
             - run:
                 name: build docs
-                command: |
-                    npm run docs
+                command: npm run docs
             - run:
-                name: docs dependencies
+                name: prepare docs
                 command: |
                   npm install -g --silent gh-pages@2.1.1
-                  git config --global user.email "$GIT_AUTHOR_EMAIL"
-                  git config --global user.name "$GIT_AUTHOR_NAME"
+                  git config --global user.email "circleci@tetile.io"
+                  git config --global user.name "circleci"
+            - add_ssh_keys:
+                fingerprints:
+                    - 9f:f4:f0:11:36:b4:d9:c4:d6:e8:9a:78:9a:be:57:73
             - run:
-                name: deploy to gh-pages
-                command: gh-pages --dist docs
+                name: deploy docs
+                command: gh-pages --message "[skip ci] docs update" --dist docs
     deploy:
         docker:
             - image: node:10.13.0
@@ -87,6 +89,8 @@ workflows:
                 filters:
                     tags:
                         only: /^v.*/
+                    branches:
+                        ignore: gh-pages
             - docs:
                 requires:
                     - lint-test
