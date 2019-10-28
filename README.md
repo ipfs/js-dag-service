@@ -7,13 +7,13 @@
 [![npm (scoped)](https://img.shields.io/npm/v/@textile/ipfs-lite.svg?style=popout-square)](https://www.npmjs.com/package/@textile/wallet)
 [![node (scoped)](https://img.shields.io/node/v/@textile/ipfs-lite.svg?style=popout-square)](https://www.npmjs.com/package/@textile/ipfs-lite)
 [![Release](https://img.shields.io/github/release/textileio/js-ipfs-lite.svg?style=flat-square)](https://github.com/textileio/js-ipfs-lite/releases/latest)
-<!-- [![CircleCI branch](https://img.shields.io/circleci/project/github/textileio/js-ipfs-lite/master.svg?style=flat-square)](https://circleci.com/gh/textileio/js-ipfs-lite) -->
+[![CircleCI branch](https://img.shields.io/circleci/project/github/textileio/js-ipfs-lite/master.svg?style=flat-square)](https://circleci.com/gh/textileio/js-ipfs-lite)
 [![docs](https://img.shields.io/badge/docs-master-success.svg?style=popout-square)](https://textileio.github.io/js-ipfs-lite/)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 > A lightweight minimal IPFS peer for typescript/javascript.
 
-IPFS-Lite runs the minimal setup required to provide an DAGService. It is a port of the Go IPFS-Lite library, and as such, has the same requirements. The goal of IPFS-Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS Network by getting and putting blocks to it, rather than having to deal with the complexities of using a full IPFS daemon, and with the liberty of sharing the needed libp2p Host and DHT for other things.
+IPFS Lite runs the minimal setup required to provide an DAGService. It is a port of the Go IPFS Lite library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network by getting and putting blocks to it, rather than having to deal with the complexities of using a full IPFS daemon, and with the liberty of sharing the needed libp2p host and DHT for other things. This is _not_ a batteries-included library, however, we do provide additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).
 
 ## Table of Contents
 
@@ -31,8 +31,33 @@ Coming Soon
 
 ## Install
 
+### Node
+
 ```
 npm i @textile/ipfs-lite
+```
+
+### Browser
+
+```
+git checkout https://github.com/textileio/js-ipfs-lite.git
+cd js-ipfs-lite
+npm i
+npm run build:browser
+```
+
+The above creates a minified + gzipped asset in `dist/browser`, which you can load using a `<script>` tag. This will make an `ipfsLite` object available in the global (`window`) namespace. You'll also get an example `index.html` file to help get you started, which contains the following:
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>IPFS Lite App</title>
+  </head>
+  <body>
+  <script type="text/javascript" src="index.min.js"></script></body>
+</html>
 ```
 
 ## Usage
@@ -43,7 +68,7 @@ Coming Soon
 
 ## API
 
-Coming Soon
+See https://textileio.github.io/js-ipfs-lite
 
 ## Maintainers
 
