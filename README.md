@@ -13,7 +13,7 @@
 
 > A lightweight minimal IPFS peer for typescript/javascript.
 
-IPFS Lite runs the minimal setup required to provide an DAGService. It is a port of the Go IPFS Lite library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network by getting and putting blocks to it, rather than having to deal with the complexities of using a full IPFS daemon, and with the liberty of sharing the needed libp2p host and DHT for other things. This is _not_ a batteries-included library, however, we do provide additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).
+IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS network. It is a port of the [Go IPFS Lite](https://github.com/hsanjuan/ipfs-lite) library.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ IPFS Lite runs the minimal setup required to provide an DAGService. It is a port
 
 ## Background
 
-Coming Soon
+IPFS Lite runs the minimal setup required to provide a DAG service. It is a port of the [Go IPFS Lite](https://github.com/hsanjuan/ipfs-lite) library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network (by getting and putting blocks). This saves having to deal with the complexities of using a full IPFS daemon, while maintaining the ability to share the underlying libp2p host and DHT with other components. It is also extremely lightweight, coming in at under 115KBs (when minified and gzipped). With that in mind, IPFS Lite is _not_ a batteries-included library; you need to provide your own data store and libp2p host. However, the library does come with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).
 
 ## Install
 
@@ -62,9 +62,27 @@ The above creates a minified + gzipped asset in `dist/browser`, which you can lo
 
 ## Usage
 
+```typescript
+import { Peer, Blockstore } from '@textile/ipfs-lite'
+// Use any interface-datastore compliant store
+import { MemoryDatastore } from 'interface-datastore'
+import Libp2p from 'libp2p'
+
+const store = new Blockstore(new MemoryDatastore())
+const host = new Libp2p({ settings... })
+const lite = new Peer(bs, host)
+
+await lite.start()
+
+const cid = new CID('QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u')
+const block = await lite.get(cid)
+console.log(block.Data.toString())
+// Hello World
+
+await lite.stop()
 ```
-Coming Soon
-```
+
+There are also several useful examples included in the [`tests` folder](https://github.com/textileio/js-ipfs-lite/tree/master/tests) of this repo, with tools for creating a default `libp2p` host.
 
 ## API
 

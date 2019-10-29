@@ -1,9 +1,6 @@
 import Libp2p from 'libp2p'
 import Bitswap from 'ipfs-bitswap'
 import Ipld from 'ipld'
-import CID from 'cids'
-import exporter, { Entry } from 'ipfs-unixfs-exporter'
-import importer, { Options as ImportOptions, File, Result } from 'ipfs-unixfs-importer'
 import { BlockService } from './blockservice'
 import { Blockstore } from './blockstore'
 
@@ -49,28 +46,5 @@ export class Peer extends Ipld {
   async stop() {
     this.blockExchange.stop()
     await this.host.stop()
-  }
-
-  /**
-   * AddFile chunks and adds content to the DAGService from a reader. The content is stored as a UnixFS DAG
-   * (default for IPFS). It returns the root IPLD node.
-   * @param file Object with path and content keys.
-   * @param options Configurable parameters needed to specify the importing process of a file.
-   */
-  async addFile(file: File, options?: ImportOptions) {
-    const opts = { cidVersion: 1, ...(options || {}) }
-    let result: Result | undefined
-    for await (const entry of importer(file, this, opts)) {
-      result = entry
-    }
-    return result
-  }
-
-  async getFile(cid: CID): Promise<Entry> {
-    return exporter(cid, this)
-  }
-
-  async hasBlock(cid: CID) {
-    return this.store.has(cid)
   }
 }
