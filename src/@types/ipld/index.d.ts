@@ -17,13 +17,13 @@ declare module 'ipld' {
   class Ipld {
     constructor(opts: {})
     put(node: object, format: string, options?: AddOptions): Promise<CID>
-    putMany(nodes: AsyncIterable<object>, format: string, options?: AddOptions): Promise<AsyncIterable<CID>>
-    resolve(cid: CID, path: string): Promise<AsyncIterable<{ remainderPath: string, value: any}>>
-    get(cid: CID): any
-    getMany(cids: AsyncIterable<CID>): Promise<AsyncIterable<any>>
-    remove(cid: CID): void
-    removeMany(cids: AsyncIterable<CID>): void
-    tree(cid: CID, path?: string, options?: { recursive: boolean }): Promise<AsyncIterable<string>>
+    putMany(nodes: AsyncIterable<object>, format: string, options?: AddOptions): AsyncIterator<CID>
+    resolve(cid: CID, path: string): AsyncIterator<{ remainderPath: string, value: any}>
+    get(cid: CID): Promise<any>
+    getMany(cids: AsyncIterable<CID>): AsyncIterator<any>
+    remove(cid: CID): Promise<void>
+    removeMany(cids: AsyncIterable<CID>): Promise<void>
+    tree(cid: CID, path?: string, options?: { recursive: boolean }): AsyncIterator<string>
     addFormat(ipldFormatImplementation: Function): Ipld
     removeFormat(codec: any): Ipld
     defaultOptions: AddOptions

@@ -131,6 +131,9 @@ export const setupLibP2PHost = async (
   }
   const options = { peerInfo, ...opts }
   if (secret) {
+    if (!options.modules) {
+      options.modules = {}
+    }
     options.modules.connProtector = new Protector(secret)
   }
   const node = new Node(options)
