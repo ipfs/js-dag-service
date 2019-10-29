@@ -126,9 +126,10 @@
 <span class="hljs-keyword">import</span> { MemoryDatastore } <span class="hljs-keyword">from</span> <span class="hljs-string">'interface-datastore'</span>
 <span class="hljs-keyword">import</span> Libp2p <span class="hljs-keyword">from</span> <span class="hljs-string">'libp2p'</span>
 
+<span class="hljs-keyword">const</span> settings = getLibp2pSettings(...)
 <span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Blockstore(<span class="hljs-keyword">new</span> MemoryDatastore())
-<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ settings... })
-<span class="hljs-keyword">const</span> lite = <span class="hljs-keyword">new</span> Peer(bs, host)
+<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...settings })
+<span class="hljs-keyword">const</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
 
 <span class="hljs-keyword">await</span> lite.start()
 
