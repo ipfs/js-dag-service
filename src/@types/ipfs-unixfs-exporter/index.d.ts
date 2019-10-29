@@ -9,7 +9,7 @@ declare module 'ipfs-unixfs-exporter' {
     path: string
     cid: CID
     node: any
-    content?(opts?: { offset?: number, length?: number }): AsyncIterator<Buffer | Entry>
+    content?(opts?: { offset?: number, length?: number }): AsyncIterable<Buffer | Entry>
     unixfs?: UnixFS
   }
 
