@@ -68,9 +68,10 @@ import { Peer, Blockstore } from '@textile/ipfs-lite'
 import { MemoryDatastore } from 'interface-datastore'
 import Libp2p from 'libp2p'
 
+const settings = getLibp2pSettings(...)
 const store = new Blockstore(new MemoryDatastore())
-const host = new Libp2p({ settings... })
-const lite = new Peer(bs, host)
+const host = new Libp2p({ ...settings })
+const lite = new Peer(store, host)
 
 await lite.start()
 
