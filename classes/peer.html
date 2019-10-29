@@ -99,12 +99,9 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="peer.html#addfile" class="tsd-kind-icon">add<wbr>File</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#addformat" class="tsd-kind-icon">add<wbr>Format</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="peer.html#getfile" class="tsd-kind-icon">get<wbr>File</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#getmany" class="tsd-kind-icon">get<wbr>Many</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="peer.html#hasblock" class="tsd-kind-icon">has<wbr>Block</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#put" class="tsd-kind-icon">put</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#putmany" class="tsd-kind-icon">put<wbr>Many</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="peer.html#remove" class="tsd-kind-icon">remove</a></li>
@@ -132,7 +129,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Ipld.__constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L25">src/index.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L22">src/index.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -165,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/options.html" class="tsd-signature-type">Options</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L21">src/index.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L18">src/index.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Libp2p</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L22">src/index.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L19">src/index.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -196,51 +193,13 @@
 					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <a href="blockstore.html" class="tsd-signature-type">Blockstore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L23">src/index.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L20">src/index.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="addfile" class="tsd-anchor"></a>
-					<h3>add<wbr>File</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>File<span class="tsd-signature-symbol">(</span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">File</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ImportOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L60">src/index.ts:60</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>AddFile chunks and adds content to the DAGService from a reader. The content is stored as a UnixFS DAG
-									(default for IPFS). It returns the root IPLD node.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>file: <span class="tsd-signature-type">File</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Object with path and content keys.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">ImportOptions</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Configurable parameters needed to specify the importing process of a file.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="addformat" class="tsd-anchor"></a>
 					<h3>add<wbr>Format</h3>
@@ -269,7 +228,7 @@
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -285,30 +244,7 @@
 									<h5>cid: <span class="tsd-signature-type">CID</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getfile" class="tsd-anchor"></a>
-					<h3>get<wbr>File</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>File<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entry</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L69">src/index.ts:69</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cid: <span class="tsd-signature-type">CID</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entry</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -316,7 +252,7 @@
 					<a name="getmany" class="tsd-anchor"></a>
 					<h3>get<wbr>Many</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Many<span class="tsd-signature-symbol">(</span>cids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Many<span class="tsd-signature-symbol">(</span>cids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -332,30 +268,7 @@
 									<h5>cids: <span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="hasblock" class="tsd-anchor"></a>
-					<h3>has<wbr>Block</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Block<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L73">src/index.ts:73</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cid: <span class="tsd-signature-type">CID</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -393,7 +306,7 @@
 					<a name="putmany" class="tsd-anchor"></a>
 					<h3>put<wbr>Many</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">put<wbr>Many<span class="tsd-signature-symbol">(</span>nodes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span>, format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AddOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">put<wbr>Many<span class="tsd-signature-symbol">(</span>nodes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span>, format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AddOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -415,7 +328,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">AddOptions</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -423,7 +336,7 @@
 					<a name="remove" class="tsd-anchor"></a>
 					<h3>remove</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">remove<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -439,7 +352,7 @@
 									<h5>cid: <span class="tsd-signature-type">CID</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -471,7 +384,7 @@
 					<a name="removemany" class="tsd-anchor"></a>
 					<h3>remove<wbr>Many</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">remove<wbr>Many<span class="tsd-signature-symbol">(</span>cids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Many<span class="tsd-signature-symbol">(</span>cids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -487,7 +400,7 @@
 									<h5>cids: <span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -495,7 +408,7 @@
 					<a name="resolve" class="tsd-anchor"></a>
 					<h3>resolve</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -514,7 +427,7 @@
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -528,7 +441,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L44">src/index.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L41">src/index.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -545,7 +458,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L49">src/index.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/index.ts#L46">src/index.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -556,7 +469,7 @@
 					<a name="tree" class="tsd-anchor"></a>
 					<h3>tree</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">tree<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span>, path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">tree<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span>, path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -578,7 +491,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -623,23 +536,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="peer.html#store" class="tsd-kind-icon">store</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="peer.html#addfile" class="tsd-kind-icon">add<wbr>File</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="peer.html#addformat" class="tsd-kind-icon">add<wbr>Format</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="peer.html#get" class="tsd-kind-icon">get</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="peer.html#getfile" class="tsd-kind-icon">get<wbr>File</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="peer.html#getmany" class="tsd-kind-icon">get<wbr>Many</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="peer.html#hasblock" class="tsd-kind-icon">has<wbr>Block</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="peer.html#put" class="tsd-kind-icon">put</a>

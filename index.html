@@ -78,7 +78,7 @@
 				<blockquote>
 					<p>A lightweight minimal IPFS peer for typescript/javascript.</p>
 				</blockquote>
-				<p>IPFS Lite runs the minimal setup required to provide an DAGService. It is a port of the Go IPFS Lite library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network by getting and putting blocks to it, rather than having to deal with the complexities of using a full IPFS daemon, and with the liberty of sharing the needed libp2p host and DHT for other things. This is <em>not</em> a batteries-included library, however, we do provide additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).</p>
+				<p>IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS network. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library.</p>
 				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
 					<h2>Table of Contents</h2>
 				</a>
@@ -94,7 +94,7 @@
 				<a href="#background" id="background" style="color: inherit; text-decoration: none;">
 					<h2>Background</h2>
 				</a>
-				<p>Coming Soon</p>
+				<p>IPFS Lite runs the minimal setup required to provide a DAG service. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network (by getting and putting blocks). This saves having to deal with the complexities of using a full IPFS daemon, while maintaining the ability to share the underlying libp2p host and DHT with other components. It is also extremely lightweight, coming in at under 115KBs (when minified and gzipped). With that in mind, IPFS Lite is <em>not</em> a batteries-included library; you need to provide your own data store and libp2p host. However, the library does come with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
 				</a>
@@ -121,7 +121,24 @@
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<pre><code><span class="hljs-attribute">Coming Soon</span></code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Peer, Blockstore } <span class="hljs-keyword">from</span> <span class="hljs-string">'@textile/ipfs-lite'</span>
+<span class="hljs-comment">// Use any interface-datastore compliant store</span>
+<span class="hljs-keyword">import</span> { MemoryDatastore } <span class="hljs-keyword">from</span> <span class="hljs-string">'interface-datastore'</span>
+<span class="hljs-keyword">import</span> Libp2p <span class="hljs-keyword">from</span> <span class="hljs-string">'libp2p'</span>
+
+<span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Blockstore(<span class="hljs-keyword">new</span> MemoryDatastore())
+<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ settings... })
+<span class="hljs-keyword">const</span> lite = <span class="hljs-keyword">new</span> Peer(bs, host)
+
+<span class="hljs-keyword">await</span> lite.start()
+
+<span class="hljs-keyword">const</span> cid = <span class="hljs-keyword">new</span> CID(<span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>)
+<span class="hljs-keyword">const</span> block = <span class="hljs-keyword">await</span> lite.get(cid)
+<span class="hljs-built_in">console</span>.log(block.Data.toString())
+<span class="hljs-comment">// Hello World</span>
+
+<span class="hljs-keyword">await</span> lite.stop()</code></pre>
+				<p>There are also several useful examples included in the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/tests"><code>tests</code> folder</a> of this repo, with tools for creating a default <code>libp2p</code> host.</p>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h2>API</h2>
 				</a>
