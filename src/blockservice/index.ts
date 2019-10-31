@@ -1,23 +1,25 @@
 import Bitswap from 'ipfs-bitswap'
 import CID from 'cids'
-import { Blockstore, Block } from '../blockstore'
+import { BlockStore, Block } from '../BlockStore'
 
 /**
- * `BlockService` is a hybrid block data-store.
- * It stores data in a local data-store and may retrieve data from a remote exchange.
+ * `BlockService` is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
+ * A block service is backed by a block store as its datastore for blocks, and uses an "exchange" (bitswap) to fetch
+ * blocks from the network. This implementation is a simplified variant of the official IPFS block service, requiring
+ * only a simple block store (not a full IPFS repo), and reference to a bitwap exchange.
  */
 export class BlockService {
   /**
-   * `constructor` creates a new BlockService.
+   * `constructor` creates a new block service.
    * @param store The block store to use for local block storage.
    * @param exchange Add a "bitswap" instance that communicates with the network to retrieve blocks that are not in
    * the local store. If the node is online, all requests for blocks first check locally and then ask the network
    * for the blocks. To 'go offline', simply set `exchange` to undefined or null.
    */
-  constructor(public store: Blockstore, public exchange?: Bitswap) {}
+  constructor(public store: BlockStore, public exchange?: Bitswap) {}
 
   /**
-   * `online` returns whether the block-service is online or not.
+   * `online` returns whether the block service is online or not.
    * i.e. does it have a valid exchange?
    */
   online() {
@@ -51,9 +53,8 @@ export class BlockService {
   }
 
   /**
-   * `get` returns a block by cid.
-   * If the block is not available locally and the exchange is online, it will request the block from the
-   * exchange/network.
+   * `get` returns a block by its content identifier.
+   * If the block is not available locally and the exchange is online, it will request the block from the network.
    *
    * @param cid The content identifier for an immutable block of data.
    */
@@ -66,7 +67,7 @@ export class BlockService {
   }
 
   /**
-   * `getMany` returns multiple blocks from an iterable of CIDs.
+   * `getMany` returns multiple blocks from an iterable of content identifiers.
    * If any of the blocks are not available locally and the exchange is online, it will request the block(s) from the
    * exchange/network.
    *
@@ -88,6 +89,7 @@ export class BlockService {
    * @param cid The content identifier for an immutable block of data.
    */
   async delete(cid: CID) {
-    return this.store.delete(cid)
+    await this.store.delete(cid)
+    return cid
   }
 }

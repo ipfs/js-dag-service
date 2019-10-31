@@ -3,7 +3,7 @@ import { MemoryDatastore } from 'interface-datastore'
 import exporter from 'ipfs-unixfs-exporter'
 import importer from 'ipfs-unixfs-importer'
 import { Peer } from '../src'
-import { Blockstore } from '../src/blockstore'
+import { BlockStore } from '../src/blockstore'
 import { setupLibP2PHost } from './utils'
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
@@ -12,7 +12,7 @@ const results: any[] = []
 
 describe('getting and putting files', () => {
   beforeAll(async () => {
-    const bs = new Blockstore(new MemoryDatastore())
+    const bs = new BlockStore(new MemoryDatastore())
     const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/4004'])
     lite = new Peer(bs, host)
     await lite.start()

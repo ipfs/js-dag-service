@@ -1,10 +1,12 @@
 import CID from 'cids'
 import { Query, Key, Datastore, Result } from 'interface-datastore'
 
-// Block represents an immutable block of data that is uniquely referenced with a cid.
+/**
+ * `Block` represents an immutable block of data that is uniquely referenced with a cid.
+ */
 export class Block {
   /**
-   * Create an immutable block of data with the given content identifier.
+   * `Block` creates an immutable block of data with the given content identifier (CID).
    * @param data The data to be stored in the block as a buffer.
    * @param cid The content identifier of the data.
    */
@@ -12,7 +14,7 @@ export class Block {
 }
 
 /**
- * Transform a CID to the appropriate block store key.
+ * `cidToKey` transforms a CID to the appropriate block store key.
  *
  * @param cid The content identifier for an immutable block of data.
  */
@@ -25,7 +27,7 @@ export const cidToKey = (cid: CID) => {
 }
 
 /**
- * Transform a block store key to a CID.
+ * `keyToCid` transforms a block store key to a CID.
  *
  * @param key The key used to encode the CID.
  */
@@ -34,12 +36,11 @@ export const keyToCid = (key: Key) => {
 }
 
 /**
- * Blockstore defines a simple key/value store for storing and retrieving blocks of data.
- * It nearly implements the IPFS `datastore` interface, but is specific to storage of immutable blocks of data.
+ * `Blockstore` is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
  */
-export class Blockstore {
+export class BlockStore {
   /**
-   * `constructor` creates a new Blockstore.
+   * `BlockStore` creates a new block store.
    * @param store The underlying datastore for locally caching immutable blocks of data.
    */
   constructor(private store: Datastore) {}
