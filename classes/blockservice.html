@@ -67,8 +67,10 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p><code>BlockService</code> is a hybrid block data-store.
-						It stores data in a local data-store and may retrieve data from a remote exchange.</p>
+						<p><code>BlockService</code> is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
+							A block service is backed by a block store as its datastore for blocks, and uses an &quot;exchange&quot; (bitswap) to fetch
+							blocks from the network. This implementation is a simplified variant of the official IPFS block service, requiring
+						only a simple block store (not a full IPFS repo), and reference to a bitwap exchange.</p>
 					</div>
 				</div>
 			</section>
@@ -117,24 +119,24 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Block<wbr>Service<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="blockstore.html" class="tsd-signature-type">Blockstore</a>, exchange<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Bitswap</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="blockservice.html" class="tsd-signature-type">BlockService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Block<wbr>Service<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="blockstore.html" class="tsd-signature-type">BlockStore</a>, exchange<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Bitswap</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="blockservice.html" class="tsd-signature-type">BlockService</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L9">src/blockservice/index.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L11">src/blockservice/index.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p><code>constructor</code> creates a new BlockService.</p>
+									<p><code>constructor</code> creates a new block service.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>store: <a href="blockstore.html" class="tsd-signature-type">Blockstore</a></h5>
+									<h5>store: <a href="blockstore.html" class="tsd-signature-type">BlockStore</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The block store to use for local block storage.</p>
@@ -165,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">exchange<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Bitswap</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L17">src/blockservice/index.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L19">src/blockservice/index.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -179,10 +181,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="store" class="tsd-anchor"></a>
 					<h3>store</h3>
-					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <a href="blockstore.html" class="tsd-signature-type">Blockstore</a></div>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <a href="blockstore.html" class="tsd-signature-type">BlockStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L17">src/blockservice/index.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L19">src/blockservice/index.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -198,13 +200,13 @@
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L90">src/blockservice/index.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L91">src/blockservice/index.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -221,7 +223,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CID</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -235,14 +237,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L60">src/blockservice/index.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L61">src/blockservice/index.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p><code>get</code> returns a block by cid.
-										If the block is not available locally and the exchange is online, it will request the block from the
-									exchange/network.</p>
+									<p><code>get</code> returns a block by its content identifier.
+									If the block is not available locally and the exchange is online, it will request the block from the network.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -268,12 +269,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L75">src/blockservice/index.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L76">src/blockservice/index.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p><code>getMany</code> returns multiple blocks from an iterable of CIDs.
+									<p><code>getMany</code> returns multiple blocks from an iterable of content identifiers.
 										If any of the blocks are not available locally and the exchange is online, it will request the block(s) from the
 									exchange/network.</p>
 								</div>
@@ -301,12 +302,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L23">src/blockservice/index.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L25">src/blockservice/index.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p><code>online</code> returns whether the block-service is online or not.
+									<p><code>online</code> returns whether the block service is online or not.
 									i.e. does it have a valid exchange?</p>
 								</div>
 							</div>
@@ -324,7 +325,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L32">src/blockservice/index.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L34">src/blockservice/index.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -355,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L45">src/blockservice/index.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/blockservice/index.ts#L47">src/blockservice/index.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +429,7 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="blockstore.html" class="tsd-kind-icon">Blockstore</a>
+						<a href="blockstore.html" class="tsd-kind-icon">Block<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="peer.html" class="tsd-kind-icon">Peer</a>
