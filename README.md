@@ -31,6 +31,8 @@ IPFS Lite runs the minimal setup required to provide a DAG service. It is a port
 
 ## Install
 
+*note*: @textile/ipfs-lite has not yet been 'officially' released, the following install directions will not work until the first official release. In the mean time, please feel free to git clone the repo until an official release is available.
+
 ### Node
 
 ```
