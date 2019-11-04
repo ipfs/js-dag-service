@@ -1,6 +1,6 @@
 import { MemoryDatastore } from 'interface-datastore'
 import { Peer } from '../src'
-import { Blockstore } from '../src/blockstore'
+import { BlockStore } from '../src/blockstore'
 import { setupLibP2PHost } from './utils'
 
 const writeKey = require('libp2p/src/pnet').generate
@@ -17,8 +17,8 @@ let p2: Peer
 describe('sync IPLD DAG between IPFS lite peers', () => {
   beforeAll(async () => {
     jest.setTimeout(20000)
-    p1 = new Peer(new Blockstore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
-    p2 = new Peer(new Blockstore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
+    p1 = new Peer(new BlockStore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
+    p2 = new Peer(new BlockStore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
     await p1.start()
     await p2.start()
     await sleep(500)

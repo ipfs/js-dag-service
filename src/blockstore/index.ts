@@ -34,12 +34,12 @@ export const keyToCid = (key: Key) => {
 }
 
 /**
- * Blockstore defines a simple key/value store for storing and retrieving blocks of data.
+ * BlockStore defines a simple key/value store for storing and retrieving blocks of data.
  * It nearly implements the IPFS `datastore` interface, but is specific to storage of immutable blocks of data.
  */
-export class Blockstore {
+export class BlockStore {
   /**
-   * `constructor` creates a new Blockstore.
+   * `constructor` creates a new BlockStore.
    * @param store The underlying datastore for locally caching immutable blocks of data.
    */
   constructor(private store: Datastore) {}

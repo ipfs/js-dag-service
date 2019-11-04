@@ -2,9 +2,9 @@ import CID from 'cids'
 import { Key, MemoryDatastore, Query } from 'interface-datastore'
 import multihashing from 'multihashing-async'
 import { collect } from 'streaming-iterables'
-import { cidToKey, keyToCid, Block, Blockstore } from '../src/blockstore'
+import { cidToKey, keyToCid, Block, BlockStore } from '../src/blockstore'
 
-let blocks: Blockstore
+let blocks: BlockStore
 
 class ExplodingStore {
   commitInvoked: boolean
@@ -51,7 +51,7 @@ class ExplodingStore {
 }
 
 beforeAll(async () => {
-  blocks = new Blockstore(new MemoryDatastore())
+  blocks = new BlockStore(new MemoryDatastore())
 })
 
 describe('blockstore', () => {
@@ -75,7 +75,7 @@ describe('blockstore', () => {
   })
 
   describe('.put', () => {
-    let other: Blockstore
+    let other: BlockStore
 
     it('simple', async () => {
       await blocks.put(b)
@@ -125,7 +125,7 @@ describe('blockstore', () => {
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
       const store = new ExplodingStore()
-      other = new Blockstore(store)
+      other = new BlockStore(store)
 
       await other.putMany([
         {
@@ -149,7 +149,7 @@ describe('blockstore', () => {
   })
 
   describe('.get', () => {
-    let other: Blockstore
+    let other: BlockStore
 
     it('simple', async () => {
       const block = await blocks.get(b.cid)
@@ -218,7 +218,7 @@ describe('blockstore', () => {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
-      const other = new Blockstore(new ExplodingStore())
+      const other = new BlockStore(new ExplodingStore())
       await expect(other.get(cid)).rejects.toThrow('error')
     })
   })

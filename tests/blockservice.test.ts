@@ -4,11 +4,11 @@ import { collect } from 'streaming-iterables'
 import Bitswap from 'ipfs-bitswap'
 import { MemoryDatastore } from 'interface-datastore'
 import { BlockService } from '../src/blockservice'
-import { Blockstore, Block } from '../src/blockstore'
+import { BlockStore, Block } from '../src/blockstore'
 
 let bs: BlockService
 let testBlocks: Block[]
-const store = new Blockstore(new MemoryDatastore())
+const store = new BlockStore(new MemoryDatastore())
 
 beforeAll(async () => {
   bs = new BlockService(store)

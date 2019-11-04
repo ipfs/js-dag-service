@@ -2,7 +2,10 @@ import Libp2p from 'libp2p'
 import Bitswap from 'ipfs-bitswap'
 import Ipld from 'ipld'
 import { BlockService } from './blockservice'
-import { Blockstore } from './blockstore'
+import { BlockStore } from './blockstore'
+
+export { BlockService } from './blockservice'
+export { BlockStore, Block } from './blockstore'
 
 // Options wraps configuration options for the Peer.
 export interface Options {
@@ -17,7 +20,7 @@ export class Peer extends Ipld {
   // Ipld makes us a "DAG service"
   public config: Options
   public host: Libp2p
-  public store: Blockstore
+  public store: BlockStore
   private blockService: BlockService
   private blockExchange: Bitswap
   // reprovider: Reprovider
@@ -27,7 +30,7 @@ export class Peer extends Ipld {
   /**
    * Initialize an IPFS-Lite Peer
    */
-  constructor(store: Blockstore, host: Libp2p, config: Options = { offline: false }) {
+  constructor(store: BlockStore, host: Libp2p, config: Options = { offline: false }) {
     const blockExchange = new Bitswap(host, store)
     const blockService = new BlockService(store, config.offline ? undefined : blockExchange)
     super({ blockService })

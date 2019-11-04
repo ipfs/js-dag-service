@@ -1,7 +1,7 @@
 import { MemoryDatastore } from 'interface-datastore'
 import CID from 'cids'
 import { Peer } from '../src'
-import { Blockstore } from '../src/blockstore'
+import { BlockStore } from '../src/blockstore'
 import { setupLibP2PHost } from './utils'
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
@@ -9,7 +9,7 @@ let lite: Peer
 
 describe.skip('fetching IPLD dag from network', () => {
   beforeAll(async () => {
-    const bs = new Blockstore(new MemoryDatastore())
+    const bs = new BlockStore(new MemoryDatastore())
     const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/4005'])
     lite = new Peer(bs, host)
     await lite.start()
