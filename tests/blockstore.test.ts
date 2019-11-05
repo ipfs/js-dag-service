@@ -54,7 +54,7 @@ beforeAll(async () => {
   blocks = new BlockStore(new MemoryDatastore())
 })
 
-describe('blockstore', () => {
+describe('BlockStore', () => {
   it('converts a CID to a datastore Key and back', () => {
     const originalCid = new CID('Qme6KJdKcp85TYbLxuLV7oQzMiLremD7HMoXLZEmgo6Rnh')
     const key = cidToKey(originalCid)
