@@ -41,6 +41,7 @@ export const keyToCid = (key: Key) => {
 export class BlockStore {
   /**
    * `BlockStore` creates a new block store.
+   *
    * @param store The underlying datastore for locally caching immutable blocks of data.
    */
   constructor(private store: Datastore) {}

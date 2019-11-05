@@ -4,6 +4,9 @@ import Ipld from 'ipld'
 import { BlockService } from './blockservice'
 import { BlockStore } from './blockstore'
 
+export { BlockService } from './blockservice'
+export { BlockStore, Block } from './blockstore'
+
 /**
  * `Options` wraps configuration options for the IPFS Lite Peer.
  */

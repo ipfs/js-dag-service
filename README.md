@@ -11,7 +11,7 @@
 [![docs](https://img.shields.io/badge/docs-master-success.svg?style=popout-square)](https://textileio.github.io/js-ipfs-lite/)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> A lightweight minimal IPFS peer for typescript/javascript.
+> A lightweight, extensible IPFS peer for Nodejs and the browser.
 
 IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS network. It is a port of the [Go IPFS Lite](https://github.com/hsanjuan/ipfs-lite) library.
 
@@ -30,6 +30,8 @@ IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS n
 IPFS Lite runs the minimal setup required to provide a DAG service. It is a port of the [Go IPFS Lite](https://github.com/hsanjuan/ipfs-lite) library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network (by getting and putting blocks). This saves having to deal with the complexities of using a full IPFS daemon, while maintaining the ability to share the underlying libp2p host and DHT with other components. It is also extremely lightweight, coming in at under 115KBs (when minified and gzipped). With that in mind, IPFS Lite is _not_ a batteries-included library; you need to provide your own data store and libp2p host. However, the library does come with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).
 
 ## Install
+
+*note*: @textile/ipfs-lite has not yet been 'officially' released, the following install directions will not work until the first official release. In the mean time, please feel free to git clone the repo until an official release is available.
 
 ### Node
 

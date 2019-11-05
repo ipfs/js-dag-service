@@ -20,6 +20,7 @@ describe('getting and putting files', () => {
   })
   afterAll(async () => {
     await lite.stop()
+    await fs.unlink('bar.txt')
   })
 
   it('read file from disc and put to "network"', async () => {
