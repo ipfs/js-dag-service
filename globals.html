@@ -71,6 +71,7 @@
 								<li class="tsd-kind-class"><a href="classes/block.html" class="tsd-kind-icon">Block</a></li>
 								<li class="tsd-kind-class"><a href="classes/blockservice.html" class="tsd-kind-icon">Block<wbr>Service</a></li>
 								<li class="tsd-kind-class"><a href="classes/blockstore.html" class="tsd-kind-icon">Block<wbr>Store</a></li>
+								<li class="tsd-kind-class"><a href="classes/node.html" class="tsd-kind-icon">Node</a></li>
 								<li class="tsd-kind-class"><a href="classes/peer.html" class="tsd-kind-icon">Peer</a></li>
 							</ul>
 						</section>
@@ -163,13 +164,13 @@
 					<a name="setuplibp2phost" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> setup<wbr>Lib<wbr>P2PHost</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">setup<wbr>Lib<wbr>P2PHost<span class="tsd-signature-symbol">(</span>hostKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span>, secret<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span>, listenAddrs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, opts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">setup<wbr>Lib<wbr>P2PHost<span class="tsd-signature-symbol">(</span>hostKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span>, secret<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Buffer</span>, listenAddrs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, opts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="classes/node.html" class="tsd-signature-type">Node</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/tests/utils.ts#L119">tests/utils.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/textileio/js-ipfs-lite/blob/master/src/utils.ts#L8">src/utils.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -181,13 +182,13 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> secret: <span class="tsd-signature-type">Buffer</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> listenAddrs: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;/ip4/0.0.0.0/tcp/0&#x27;]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> listenAddrs: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;/ip4/0.0.0.0/tcp/4005&#x27;, &#x27;/ip4/127.0.0.1/tcp/4006/ws&#x27;]</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> opts: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="classes/node.html" class="tsd-signature-type">Node</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -211,6 +212,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/blockstore.html" class="tsd-kind-icon">Block<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/node.html" class="tsd-kind-icon">Node</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/peer.html" class="tsd-kind-icon">Peer</a>
