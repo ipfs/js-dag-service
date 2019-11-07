@@ -57,7 +57,7 @@ declare module 'ipfs-unixfs-importer' {
     size?: number
   }
 
-  function importer(source: File[], ipld: Ipld, options: Options): AsyncIterable<Result>
+  function importer(source: Iterable<File>, ipld: Ipld, options: Options): AsyncIterable<Result>
   // eslint-disable-next-line import/no-default-export
   export default importer
 }
