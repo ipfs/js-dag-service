@@ -30,6 +30,9 @@
   "bugs": {
     "url": "https://github.com/textileio/js-ipfs-lite/issues"
   },
+  "browser": {
+    "./bundle": "./bundle/browser"
+  },
   "homepage": "https://github.com/textileio/js-ipfs-lite#readme",
   "devDependencies": {
     "@ipld/block": "^2.0.6",
