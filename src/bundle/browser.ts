@@ -49,10 +49,10 @@ export class Node extends LibP2p {
         dialTimeout: 20e3,
       },
       modules: {
-        transport: [WS, wrtcstar, wsstar],
+        transport: [WS, wsstar, wrtcstar],
         streamMuxer: [Multiplex],
         connEncryption: [SECIO],
-        peerDiscovery: [wrtcstar.discovery, wsstar.discovery, Bootstrap],
+        peerDiscovery: [wsstar.discovery, Bootstrap, wrtcstar.discovery],
         dht: KadDHT,
         pubsub: GossipSub,
       },
@@ -70,17 +70,28 @@ export class Node extends LibP2p {
             enabled: true,
           },
           mdns: {
-            enabled: false,
+            enabled: true,
             interval: 10,
           },
         },
+        relay: {
+          enabled: true,
+          hop: {
+            enabled: false,
+            active: false,
+          },
+        },
         dht: {
-          enabled: false,
+          enabled: true,
         },
         pubsub: {
           enabled: true,
           emitSelf: true,
         },
+      },
+      connectionManager: {
+        minPeers: 10,
+        maxPeers: 50,
       },
     }
 

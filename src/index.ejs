@@ -10,8 +10,25 @@
   <script>
     window.addEventListener('load', function () {
       async function main() {
-      // const node = await window.ipfsLite
-        console.log(window.ipfsLite)
+        var { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = window.ipfsLite
+        var store = new BlockStore(new MemoryDatastore())
+        var host = await setupLibP2PHost(undefined, undefined, [
+          `/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`
+        ])
+        var lite = new Peer(store, host)
+        await lite.start()
+        console.log('started!')
+        setTimeout(async function () {
+          var source = [{
+            path: 'bar',
+            content: Buffer.from('foo!'),
+          }]
+          var data = await lite.addFile(source)
+          console.log('added file with CID:')
+          console.log(data.cid.toString())
+          await lite.stop()
+          console.log('stopped')
+        }, 1000)
       }
       main()
     })
