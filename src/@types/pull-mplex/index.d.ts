@@ -3,5 +3,5 @@ declare module 'pull-mplex' {
   class PullMplex {}
 
   // eslint-disable-next-line import/no-default-export
-  export default PullMplex;
+  export default PullMplex
 }

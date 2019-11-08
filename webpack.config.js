@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
 const extensions = ['.tsx', '.ts', '.js', 'json']
-const filename = 'index.min.js'
+const filename = 'ipfs-lite.min.js'
 
 module.exports = {
   mode: 'production',
@@ -44,9 +44,11 @@ module.exports = {
   },
   stats: 'minimal',
   node: {
+    dgram: 'empty',
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+    dns: 'empty',
     child_process: 'empty',
     console: false,
     global: true,
@@ -66,7 +68,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'IPFS Lite App',
+      template: 'src/index.ejs',
+    }),
     new CompressionPlugin({
       test: /\.js$/i,
     })

@@ -5,6 +5,8 @@
     "outDir": "dist"
   },
   "exclude": [
-    "**/tests/*"
+    "tests",
+    "dist",
+    "node_modules"
   ]
 }
