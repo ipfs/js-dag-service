@@ -121,3 +121,14 @@ declare module 'libp2p' {
   // eslint-disable-next-line import/no-default-export
   export default LibP2p;
 }
+
+declare module 'libp2p/src/pnet' {
+  type Connection = any
+
+  class Protector {
+    constructor(keyBuffer: Buffer)
+    protect (connection: Connection, callback: Function): Connection
+  }
+  // eslint-disable-next-line import/no-default-export
+  export default Protector
+}

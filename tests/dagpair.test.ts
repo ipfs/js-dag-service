@@ -1,7 +1,5 @@
 import { MemoryDatastore } from 'interface-datastore'
-import { Peer } from '../src'
-import { BlockStore } from '../src/blockstore'
-import { setupLibP2PHost } from './utils'
+import { Peer, setupLibP2PHost, BlockStore } from '../src'
 
 const writeKey = require('libp2p/src/pnet').generate
 const DAG_CBOR = require('multicodec').DAG_CBOR
@@ -17,8 +15,14 @@ let p2: Peer
 describe('sync IPLD DAG between IPFS lite peers', () => {
   beforeAll(async () => {
     jest.setTimeout(20000)
-    p1 = new Peer(new BlockStore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
-    p2 = new Peer(new BlockStore(new MemoryDatastore()), await setupLibP2PHost(undefined, swarmKey))
+    p1 = new Peer(
+      new BlockStore(new MemoryDatastore()),
+      await setupLibP2PHost(undefined, swarmKey, ['/ip4/0.0.0.0/tcp/0']),
+    )
+    p2 = new Peer(
+      new BlockStore(new MemoryDatastore()),
+      await setupLibP2PHost(undefined, swarmKey, ['/ip4/0.0.0.0/tcp/0']),
+    )
     await p1.start()
     await p2.start()
     await sleep(500)
@@ -41,8 +45,8 @@ describe('sync IPLD DAG between IPFS lite peers', () => {
     expect(cid.toString()).toEqual('bafyreigzkampgfuhmld36ljrywwcxogf5zyjbkasehbggbmgpy5tmrygpe')
     expect(test).toEqual(data)
     await p1.remove(cid)
-    expect(await p1.store.has(cid)).toBeFalsy()
+    expect(await p1.hasBlock(cid)).toBeFalsy()
     await p2.remove(cid)
-    expect(await p2.store.has(cid)).toBeFalsy()
+    expect(await p2.hasBlock(cid)).toBeFalsy()
   })
 })

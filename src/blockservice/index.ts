@@ -10,7 +10,7 @@ import { BlockStore, Block } from '../blockstore'
  */
 export class BlockService {
   /**
-   * `constructor` creates a new block service.
+   * `BlockService` creates a new block service.
    * @param store The block store to use for local block storage.
    * @param exchange Add a "bitswap" instance that communicates with the network to retrieve blocks that are not in
    * the local store. If the node is online, all requests for blocks first check locally and then ask the network
