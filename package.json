@@ -65,7 +65,6 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
-    "browserify": "^16.5.0",
     "es6-promisify": "^6.0.2",
     "ipfs-bitswap": "^0.26.0",
     "ipfs-unixfs-exporter": "^0.38.0",
@@ -84,7 +83,6 @@
     "libp2p-websockets": "^0.12.4",
     "merge-options": "^2.0.0",
     "pull-mplex": "^0.1.2",
-    "tsify": "^4.0.1",
     "tslib": "^1.10.0"
   }
 }
