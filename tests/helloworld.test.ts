@@ -8,7 +8,7 @@ let lite: Peer
 describe.skip('fetching IPLD dag from network', () => {
   beforeAll(async () => {
     const bs = new BlockStore(new MemoryDatastore())
-    const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/4005'])
+    const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/0'])
     lite = new Peer(bs, host)
     await lite.start()
     await sleep(500)
