@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const { resolveTsAliases } = require("resolve-ts-aliases")
 
 const extensions = ['.tsx', '.ts', '.js', 'json']
 const filename = 'ipfs-lite.min.js'
@@ -27,8 +28,20 @@ module.exports = {
       new TerserPlugin({
         parallel: true,
         sourceMap: true,
+        cache: true,
         terserOptions: {
+          parse: {
+            ecma: 8
+          },
+          compress: {
+            ecma: 5,
+            warnings: false
+          },
+          mangle: {
+            safari10: true
+          },
           output: {
+            ecma: 5,
             comments: false,
           }
         },
@@ -38,6 +51,9 @@ module.exports = {
   target: 'web',
   resolve: {
     extensions,
+    alias: {
+      './bundle/node': './bundle/browser'
+    }
   },
   performance: {
     hints: false
