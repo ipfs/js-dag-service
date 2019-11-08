@@ -62,8 +62,8 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#js-ipfs-lite" id="js-ipfs-lite" style="color: inherit; text-decoration: none;">
-					<h1>js-ipfs-lite</h1>
+				<a href="#ipfs-lite-emjs-ipfs-liteem" id="ipfs-lite-emjs-ipfs-liteem" style="color: inherit; text-decoration: none;">
+					<h1>IPFS Lite <em>(js-ipfs-lite)</em></h1>
 				</a>
 				<p><a href="https://textile.io"><img src="https://img.shields.io/badge/made%20by-Textile-informational.svg?style=flat-square" alt="Made by Textile"></a>
 					<a href="https://slack.textile.io"><img src="https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=flat-square" alt="Chat on Slack"></a>
@@ -78,7 +78,7 @@
 				<blockquote>
 					<p>A lightweight, extensible IPFS peer for Nodejs and the browser.</p>
 				</blockquote>
-				<p>IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS network. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library.</p>
+				<p>IPFS Lite runs the minimal setup required to get and put data on the IPFS network.</p>
 				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
 					<h2>Table of Contents</h2>
 				</a>
@@ -94,11 +94,18 @@
 				<a href="#background" id="background" style="color: inherit; text-decoration: none;">
 					<h2>Background</h2>
 				</a>
-				<p>IPFS Lite runs the minimal setup required to provide a DAG service. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has the same requirements. The goal of IPFS Lite is to run the bare minimal functionality for any IPLD-based application to interact with the IPFS network (by getting and putting blocks). This saves having to deal with the complexities of using a full IPFS daemon, while maintaining the ability to share the underlying libp2p host and DHT with other components. It is also extremely lightweight, coming in at under 115KBs (when minified and gzipped). With that in mind, IPFS Lite is <em>not</em> a batteries-included library; you need to provide your own data store and libp2p host. However, the library does come with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration (comming soon :tm:).</p>
+				<p>The goal of IPFS Lite is to run the bare minimal functionality for any application to interact with the IPFS network (by getting and putting IPLD blocks). This saves having to deal with the complexities of using a full IPFS peer, while maintaining the ability to share the underlying libp2p host and DAG service with other components. It is also extremely lightweight, highly extensible, and easy to work with in both Nodejs and the browser. It supports async/await by default, and the library comes with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has most of the same requirements. </p>
+				<a href="#why" id="why" style="color: inherit; text-decoration: none;">
+					<h3>Why?</h3>
+				</a>
+				<p>Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package. It is also highly extensible, so developers need only include the features they <em>need</em>, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution that supports async/await patterns throughout, and we think others will find the type safety useful as well.</p>
+				<a href="#what" id="what" style="color: inherit; text-decoration: none;">
+					<h3>What?</h3>
+				</a>
+				<p>Our goal is to provide a highly extensible IPFS implementation that, when &#39;fully loaded&#39; supports <em>most</em> of the default <a href="https://github.com/ipfs/interface-js-ipfs-core"><code>js-ipfs</code></a> core APIs. Some APIs will likely never be added, and some APIs specific to Textile (like encryption) will likely be included as separate modules. If you have opinions about what should and should not be included, please <a href="https://github.com/textileio/js-ipfs-lite/issues">let us know</a>.</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
 				</a>
-				<p><em>note</em>: @textile/ipfs-lite has not yet been &#39;officially&#39; released, the following install directions will not work until the first official release. In the mean time, please feel free to git clone the repo until an official release is available.</p>
 				<a href="#node" id="node" style="color: inherit; text-decoration: none;">
 					<h3>Node</h3>
 				</a>
@@ -109,38 +116,92 @@
 				<pre><code><span class="hljs-attr">git</span> <span class="hljs-string">checkout https://github.com/textileio/js-ipfs-lite.git</span>
 <span class="hljs-attr">cd</span> <span class="hljs-string">js-ipfs-lite</span>
 <span class="hljs-attr">npm</span> <span class="hljs-string">i</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">run build:browser</span></code></pre><p>The above creates a minified + gzipped asset in <code>dist/browser</code>, which you can load using a <code>&lt;script&gt;</code> tag. This will make an <code>ipfsLite</code> object available in the global (<code>window</code>) namespace. You&#39;ll also get an example <code>index.html</code> file to help get you started, which contains the following:</p>
-				<pre><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>IPFS Lite App<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"index.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<span class="hljs-attr">npm</span> <span class="hljs-string">run browser:build</span></code></pre><p>The above creates a minified + gzipped asset in <code>dist/browser</code>, which you can load using a <code>&lt;script&gt;</code> tag. This will make an <code>ipfsLite</code> object available in the global (<code>window</code>) namespace. You&#39;ll also get an example <code>index.html</code> file to help get you started.</p>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Peer, Blockstore } <span class="hljs-keyword">from</span> <span class="hljs-string">'@textile/ipfs-lite'</span>
+				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+					<h3>Typescript</h3>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Peer, BlockStore, setupLibP2PHost } <span class="hljs-keyword">from</span> <span class="hljs-string">'@textile/ipfs-lite'</span>
 <span class="hljs-comment">// Use any interface-datastore compliant store</span>
 <span class="hljs-keyword">import</span> { MemoryDatastore } <span class="hljs-keyword">from</span> <span class="hljs-string">'interface-datastore'</span>
 <span class="hljs-keyword">import</span> Libp2p <span class="hljs-keyword">from</span> <span class="hljs-string">'libp2p'</span>
 
-<span class="hljs-keyword">const</span> settings = getLibp2pSettings(...)
-<span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Blockstore(<span class="hljs-keyword">new</span> MemoryDatastore())
-<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...settings })
+<span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> BlockStore(<span class="hljs-keyword">new</span> MemoryDatastore())
+<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...libp2Options })
+<span class="hljs-comment">// or, </span>
+<span class="hljs-comment">// const host = await setupLibP2PHost()</span>
 <span class="hljs-keyword">const</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
 
 <span class="hljs-keyword">await</span> lite.start()
 
-<span class="hljs-keyword">const</span> cid = <span class="hljs-keyword">new</span> CID(<span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>)
-<span class="hljs-keyword">const</span> block = <span class="hljs-keyword">await</span> lite.get(cid)
-<span class="hljs-built_in">console</span>.log(block.Data.toString())
+<span class="hljs-keyword">const</span> cid = <span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>
+<span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> lite.getFile(cid)
+<span class="hljs-built_in">console</span>.log(data.toString())
 <span class="hljs-comment">// Hello World</span>
-
 <span class="hljs-keyword">await</span> lite.stop()</code></pre>
-				<p>There are also several useful examples included in the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/tests"><code>tests</code> folder</a> of this repo, with tools for creating a default <code>libp2p</code> host.</p>
+				<a href="#nodejs" id="nodejs" style="color: inherit; text-decoration: none;">
+					<h3>Nodejs</h3>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">let</span> { Peer, BlockStore, setupLibP2PHost } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@textile/ipfs-lite'</span>)
+<span class="hljs-comment">// Use any interface-datastore compliant store</span>
+<span class="hljs-keyword">let</span> { MemoryDatastore } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'interface-datastore'</span>)
+<span class="hljs-keyword">let</span> Libp2p = <span class="hljs-built_in">require</span>(<span class="hljs-string">'libp2p'</span>)
+
+<span class="hljs-keyword">let</span> store = <span class="hljs-keyword">new</span> Blockstore(<span class="hljs-keyword">new</span> MemoryDatastore())
+<span class="hljs-keyword">let</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...libp2Options })
+<span class="hljs-comment">// or, </span>
+<span class="hljs-comment">// const host = await setupLibP2PHost()</span>
+<span class="hljs-keyword">let</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
+
+<span class="hljs-keyword">await</span> lite.start()
+
+<span class="hljs-keyword">let</span> cid = <span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>
+<span class="hljs-keyword">let</span> data = <span class="hljs-keyword">await</span> lite.getFile(cid)
+<span class="hljs-built_in">console</span>.log(data.toString())
+<span class="hljs-comment">// Hello World</span>
+<span class="hljs-keyword">await</span> lite.stop()</code></pre>
+				<a href="#browser-1" id="browser-1" style="color: inherit; text-decoration: none;">
+					<h3>Browser</h3>
+				</a>
+				<pre><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>IPFS Lite App<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">'load'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = <span class="hljs-built_in">window</span>.ipfsLite
+        <span class="hljs-keyword">var</span> store = <span class="hljs-keyword">new</span> BlockStore(<span class="hljs-keyword">new</span> MemoryDatastore())
+        <span class="hljs-keyword">var</span> host = <span class="hljs-keyword">await</span> setupLibP2PHost(<span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>, [
+          <span class="hljs-string">`/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`</span>
+        ])
+        <span class="hljs-keyword">var</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
+        <span class="hljs-keyword">await</span> lite.start()
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'started!'</span>)
+        setTimeout(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+          <span class="hljs-keyword">var</span> source = [{
+            <span class="hljs-attr">path</span>: <span class="hljs-string">'bar'</span>,
+            <span class="hljs-attr">content</span>: Buffer.from(<span class="hljs-string">'foo!'</span>),
+          }]
+          <span class="hljs-keyword">var</span> data = <span class="hljs-keyword">await</span> lite.addFile(source)
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'added file with CID:'</span>)
+          <span class="hljs-built_in">console</span>.log(data.cid.toString())
+          <span class="hljs-keyword">await</span> lite.stop()
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'stopped'</span>)
+        }, <span class="hljs-number">1000</span>)
+      }
+      main()
+    })
+  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ipfs-lite.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+				<p>There are also several useful examples included in the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/tests"><code>tests</code> folder</a> of this repo, with tools for creating a default <code>libp2p</code> host exported by default. We&#39;ve also thrown in some useful interfaces to use when building on IPFS Lite, as well as the Buffer API for use in the browser.</p>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h2>API</h2>
 				</a>
