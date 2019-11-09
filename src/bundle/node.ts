@@ -80,9 +80,6 @@ export class Node extends LibP2p {
           websocketStar: {
             enabled: true,
           },
-          webRTCStar: {
-            enabled: true,
-          },
         },
         dht: {
           kBucketSize: 20,

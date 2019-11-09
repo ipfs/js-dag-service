@@ -8,7 +8,7 @@ import CID from 'cids'
 import importer, { Options as AddOptions, File, Result } from 'ipfs-unixfs-importer'
 import exporter, { Options as GetOptions } from 'ipfs-unixfs-exporter'
 
-import { Node } from './bundle'
+import { Node } from './bundle/node'
 
 export const setupLibP2PHost = async (
   hostKey?: Buffer,

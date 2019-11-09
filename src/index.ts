@@ -9,6 +9,11 @@ import { addFile, getFile, AddOptions, GetOptions, File } from './utils'
 export { BlockService } from './blockservice'
 export { BlockStore, Block } from './blockstore'
 export { setupLibP2PHost, Result } from './utils'
+// Include MemoryDatastore for user convenience
+export { MemoryDatastore } from 'interface-datastore'
+
+const BufferImpl = Buffer
+export { BufferImpl as Buffer }
 
 /**
  * `Options` wraps configuration options for the IPFS Lite peer.

@@ -2,10 +2,15 @@
   "extends": "./tsconfig",
   "compilerOptions": {
     "sourceMap": true,
-    "rootDir": "src",
+    "baseUrl": "src",
     "outDir": "dist"
   },
+  "paths": {
+    "./bundle/node": ["./bundle/browser"]
+  },
   "exclude": [
-    "**/tests/*"
+    "tests",
+    "node_modules",
+    "dist"
   ]
 }
