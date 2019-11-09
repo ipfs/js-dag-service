@@ -46,21 +46,15 @@ jobs:
             - restore_cache:
                 key: node-v1-{{ checksum "package.json" }}-{{ arch }}
             - run: npm install
+            - attach_workspace:
+                at: ~/js-ipfs-lite
             - run:
                 name: build docs
                 command: npm run docs
-            - run:
-                name: prepare docs
-                command: |
-                  npm install -g --silent gh-pages@2.1.1
-                  git config --global user.email "circleci@tetile.io"
-                  git config --global user.name "circleci"
-            - add_ssh_keys:
-                fingerprints:
-                    - 9f:f4:f0:11:36:b4:d9:c4:d6:e8:9a:78:9a:be:57:73
-            - run:
-                name: deploy docs
-                command: gh-pages --message "[skip ci] docs update" --dist docs
+            - persist_to_workspace:
+                root: ~/js-ipfs-lite
+                paths:
+                  - docs
     deploy:
         docker:
             - image: node:10.13.0
@@ -68,10 +62,10 @@ jobs:
         steps:
             - checkout
             - restore_cache:
-                key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+                key: npm-v1-{{ checksum "package-lock.json" }}-{{ arch }}
             - restore_cache:
                 key: node-v1-{{ checksum "package.json" }}-{{ arch }}
-            - run: yarn install
+            - run: npm install
             - attach_workspace:
                 at: ~/js-ipfs-lite
             - run:
@@ -79,7 +73,19 @@ jobs:
                 command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/js-ipfs-lite/.npmrc
             - run:
                 name: Publish package
-                command: npm publish --access=public --unsafe-perm
+                command: npm publish --access=public
+            - run:
+                name: prepare docs
+                command: |
+                  npm install -g --silent gh-pages@2.1.1
+                  git config --global user.email "circleci@textile.io"
+                  git config --global user.name "circleci"
+            - add_ssh_keys:
+                fingerprints:
+                    - 9f:f4:f0:11:36:b4:d9:c4:d6:e8:9a:78:9a:be:57:73
+            - run:
+                name: deploy docs
+                command: gh-pages --message "[skip ci] docs update" --dist docs
 
 workflows:
     version: 2
