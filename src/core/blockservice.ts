@@ -1,6 +1,6 @@
 import Bitswap from 'ipfs-bitswap'
 import CID from 'cids'
-import { BlockStore, Block } from '../blockstore'
+import { BlockStore, Block } from './blockstore'
 
 /**
  * `BlockService` is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.

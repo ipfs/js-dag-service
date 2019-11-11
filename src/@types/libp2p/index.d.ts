@@ -54,10 +54,10 @@ declare module 'libp2p' {
 
   export interface OptionsModules {
     connEncryption?: Array<any>,
-    streamMuxer: Array<any>,
+    streamMuxer?: Array<any>,
     dht?: typeof LibP2pKadDht,
-    peerDiscovery: Array<typeof LibP2pBootstrap>,
-    transport: any[],
+    peerDiscovery?: Array<typeof LibP2pBootstrap>,
+    transport?: any[],
     pubsub?: any,
     connProtector?: any
   }
@@ -71,7 +71,7 @@ declare module 'libp2p' {
   }
 
   export interface Options {
-    modules: OptionsModules
+    modules?: OptionsModules
     peerInfo: PeerInfo
     peerBook?: PeerBook
     switch?: OptionsSwitch

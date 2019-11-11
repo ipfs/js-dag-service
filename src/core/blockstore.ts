@@ -14,28 +14,6 @@ export class Block {
 }
 
 /**
- * `cidToKey` transforms a CID to the appropriate block store key.
- *
- * @param cid The content identifier for an immutable block of data.
- */
-export const cidToKey = (cid: CID) => {
-  if (!CID.isCID(cid)) {
-    throw new Error('Not a valid CID')
-  }
-  // We'll only deal with CID version 1
-  return new Key('/' + cid.toV1().toString(), false)
-}
-
-/**
- * `keyToCid` transforms a block store key to a CID.
- *
- * @param key The key used to encode the CID.
- */
-export const keyToCid = (key: Key) => {
-  return new CID(key.toString().slice(1))
-}
-
-/**
  * `Blockstore` is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
  */
 export class BlockStore {
@@ -47,12 +25,34 @@ export class BlockStore {
   constructor(private store: Datastore) {}
 
   /**
+   * `cidToKey` transforms a CID to the appropriate block store key.
+   *
+   * @param cid The content identifier for an immutable block of data.
+   */
+  static cidToKey = (cid: CID) => {
+    if (!CID.isCID(cid)) {
+      throw new Error('Not a valid CID')
+    }
+    // We'll only deal with CID version 1
+    return new Key('/' + cid.toV1().toString(), false)
+  }
+
+  /**
+   * `keyToCid` transforms a block store key to a CID.
+   *
+   * @param key The key used to encode the CID.
+   */
+  static keyToCid = (key: Key) => {
+    return new CID(key.toString().slice(1))
+  }
+
+  /**
    * `put` adds a block to the block store.
    *
    * @param block An immutable block of data.
    */
   async put(block: Block) {
-    const k = cidToKey(block.cid)
+    const k = BlockStore.cidToKey(block.cid)
     if (await this.store.has(k)) {
       return
     }
@@ -65,7 +65,7 @@ export class BlockStore {
    * @param cid The content identifier for an immutable block of data.
    */
   async get(cid: CID) {
-    const k = cidToKey(cid)
+    const k = BlockStore.cidToKey(cid)
     return new Block(await this.store.get(k), cid)
   }
 
@@ -75,14 +75,14 @@ export class BlockStore {
    * @param cid The content identifier for an immutable block of data.
    */
   async delete(cid: CID) {
-    this.store.delete(cidToKey(cid))
+    this.store.delete(BlockStore.cidToKey(cid))
   }
 
   /**
    * `has` returns whether the store contains the block associated with the given CID.
    */
   async has(cid: CID) {
-    return this.store.has(cidToKey(cid))
+    return this.store.has(BlockStore.cidToKey(cid))
   }
 
   /**
@@ -93,7 +93,7 @@ export class BlockStore {
   async putMany(blocks: Iterable<Block>) {
     const batch = this.store.batch()
     for await (const block of blocks) {
-      const k = cidToKey(block.cid)
+      const k = BlockStore.cidToKey(block.cid)
       if (await this.store.has(k)) {
         continue
       }
