@@ -88,7 +88,7 @@ let { Peer, BlockStore, setupLibP2PHost } = require('@textile/ipfs-lite')
 let { MemoryDatastore } = require('interface-datastore')
 let Libp2p = require('libp2p')
 
-let store = new Blockstore(new MemoryDatastore())
+let store = new BlockStore(new MemoryDatastore())
 let host = new Libp2p({ ...libp2Options })
 // or, 
 // const host = await setupLibP2PHost()
