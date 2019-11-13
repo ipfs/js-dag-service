@@ -148,7 +148,7 @@ There are also several useful examples included in the [`tests` folder](https://
 
 ## API
 
-See https://textileio.github.io/js-ipfs-lite
+See [https://textileio.github.io/js-ipfs-lite](https://textileio.github.io/js-ipfs-lite)
 
 ## Maintainers
 

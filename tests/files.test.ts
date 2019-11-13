@@ -1,6 +1,7 @@
 import { createReadStream, promises as fs } from 'fs'
 import { MemoryDatastore } from 'interface-datastore'
-import { Peer, setupLibP2PHost, BlockStore } from '../src'
+import { Peer, BlockStore } from '../src'
+import { setupLibP2PHost } from '../src/setup'
 import '../src/files'
 import { Result } from '../src/files'
 
