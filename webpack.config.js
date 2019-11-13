@@ -7,11 +7,17 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const { resolveTsAliases } = require("resolve-ts-aliases")
 
 const extensions = ['.tsx', '.ts', '.js', 'json']
-const filename = 'ipfs-lite.min.js'
+const filename = 'ipfs-lite.[name].min.js'
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.ts',
+  entry: {
+    all: './src/index.ts',
+    core: './src/core/index.ts',
+    network: './src/network/index.ts',
+    setup: './src/setup/index.ts',
+    files: './src/files/index.ts',
+  },
   devtool: 'source-map',
   module: {
     rules: [
@@ -23,6 +29,10 @@ module.exports = {
     ],
   },
   optimization: {
+    @todo: Figure out how best to take advantage of this
+    splitChunks: {
+      chunks: 'all'
+    },
     minimize: true,
     minimizer: [
       new TerserPlugin({
