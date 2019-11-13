@@ -6,6 +6,7 @@ declare module 'libp2p' {
   import LibP2pBootstrap from 'libp2p-bootstrap'
   import LibP2pKadDht from 'libp2p-kad-dht'
   import CID from 'cids'
+  import PubSub from 'libp2p-pubsub'
 
   export interface OptionsConfig {
     contentRouting?: {},
@@ -80,11 +81,11 @@ declare module 'libp2p' {
 
   export type Events = 'peer:connect' | 'peer:disconnect' | 'peer:discovery' | 'start' | 'stop';
 
-  interface Connection {
+  export interface Connection {
     getPeerInfo (cb: (error: Error | null, peerInfo?: PeerInfo) => any): void;
   }
 
-  interface PeerRouting {
+  export interface PeerRouting {
     findPeer(id: PeerId, options?: { maxTimeout?: number }): Promise<any>
   }
 
@@ -102,11 +103,12 @@ declare module 'libp2p' {
     readonly peerBook: PeerBook
     readonly peerRouting: PeerRouting
     readonly contentRouting: ContentRouting
+    readonly pubsub?: PubSub
 
     dial(peerInfo: PeerInfo | PeerId | Multiaddr | string): Promise<Connection>
     dialProtocol(peerInfo: PeerInfo | Multiaddr, protocol: string): Promise<Connection>
     dialFSM (peer: PeerInfo | PeerId | Multiaddr | string, protocol: string): Promise<Connection>
-    hangUp(peerInfo: PeerInfo): Promise<void>
+    hangUp(peerInfo: PeerInfo | PeerId | Multiaddr | string): Promise<void>
     handle(protocol: string, handler: (protocol: string, conn: Connection) => any, matcher?: (protocol: string, requestedProtocol: string, cb: (error: Error | null, accept: boolean) => void) => any): void
     unhandle(protocol: string): void
     isStarted(): boolean

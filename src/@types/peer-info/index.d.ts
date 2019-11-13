@@ -6,7 +6,7 @@ declare module 'peer-info' {
     constructor (multiaddrs: string[])
     add (ma: string): void
     addSafe (ma: string): void
-    toArray (): string[]
+    toArray (): Multiaddr[]
     size: number
     forEach(fn: (...items: any[]) => any): void
     filterBy(maFmt: object): string[]

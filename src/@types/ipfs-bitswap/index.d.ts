@@ -24,18 +24,18 @@ declare module 'ipfs-bitswap' {
     enable(): void
     disable(): void
     stop(): void
-    readonly snapshot: object
-    readonly movingAverages: object
+    readonly snapshot: any
+    readonly movingAverages: any
     push(counter: number, inc: number): void
   }
   class Stats extends EventEmitter {
     // @todo: this is likely pretty wrong
-    constructor(initialCounters: string[], options: object)
+    constructor(initialCounters: string[], options: any)
     enable(): void
     disable(): void
     stop(): void
-    readonly snapshot: object
-    readonly movingAverages: object
+    readonly snapshot: any
+    readonly movingAverages: any
     forPeer(peerId: PeerId): Stat
     push(peer: PeerInfo, counter: number, inc: number): void
     disconnected(peer: PeerInfo): void
@@ -165,16 +165,16 @@ declare module 'ipfs-bitswap' {
     readonly peerInfo: PeerInfo
     enableStats(): void
     disableStats(): void
-    wantlistForPeer(peerId: PeerId): object
+    wantlistForPeer(peerId: PeerId): Iterable<WantListEntry>
     ledgerForPeer(peerId: PeerId): object
     get(cid: CID): Promise<Block>
-    getMany(cids: Iterable<CID>): AsyncIterator<Block>
+    getMany(cids: Iterable<CID>): AsyncIterable<Block>
     unwant(cids: Iterable<CID>): void
     cancelWants(cids: Iterable<CID>): void
     put(block: Block): Promise<void>
     putMany(blocks: (AsyncIterable<Block> | Iterable<Block>)): Promise<void>
-    getWantlist(): Iterator<WantListEntry>
-    peers(): Iterator<PeerId>
+    getWantlist(): Iterable<WantListEntry>
+    peers(): Iterable<PeerId>
     stat(): Stats
     start(): void
     stop(): void

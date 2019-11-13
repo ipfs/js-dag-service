@@ -9,6 +9,8 @@ declare module 'cids' {
     constructor(version: Version, codec: Codec, multhash: Multihash, multibaseName?:MultibaseName)
     constructor(cidStr: BaseEncodedString)
     constructor(cidBuf: Buffer)
+    constructor(cidMultihash: Multihash)
+    constructor(cid: CID)
 
     codec: Codec
     multihash: Multihash
