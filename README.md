@@ -53,21 +53,49 @@ npm i
 npm run browser:build
 ```
 
-The above creates a minified + gzipped asset in `dist/browser`, which you can load using a `<script>` tag. This will make an `ipfsLite` object available in the global (`window`) namespace. You'll also get an example `index.html` file to help get you started.
+The above creates minified + gzipped assets in `dist/browser`, which you can load using a `<script>` tag. This will make an `ipfsLite` object available in the global (`window`) namespace. You'll also get an example `index.html` file to help get you started. We use `webpack` to generate separate bundles for each sub-module, as well as a full-featured default setup. You can pick and choose to optimize load times, or use your own bundler to wrap the whole thing up with your app code.
 
 ## Usage
+
+### Modular
+
+Only import what you need, keeping your bundles small and your load times faster. You can grab a full-featured IPFS Lite peer from the top-level library, or grab specific sub-modules as needed:
+
+```typescript
+// Grab everything and the kitchen sink
+import { Peer, BlockStore, MemoryDatastore, setupLibP2PHost, Buffer } from '@textile/ipfs-lite'
+// Or just grab the things you need
+import { Peer, BlockStore } from '@textile/ipfs-lite/core'
+import { setupLibP2PHost } = from '@textile/ipfs-lite/setup'
+```
+Need more? How about pubsub, dht access, or peer swarm?
+
+```typescript
+import '@textile/ipfs-lite/network'
+// Now Peer has four new APIs (bitswap, dht, pubsub, and swarm)
+```
+
+How about adding and getting files?
+
+```typescript
+import '@textile/ipfs-lite/files'
+// Now Peer can addFile, getFile, and more
+```
+
+Plus more sub-modules to come!
 
 ### Typescript
 
 ```typescript
-import { Peer, BlockStore, setupLibP2PHost } from '@textile/ipfs-lite'
+import { Peer, BlockStore } from '@textile/ipfs-lite/core'
 // Use any interface-datastore compliant store
 import { MemoryDatastore } from 'interface-datastore'
 import Libp2p from 'libp2p'
 
 const store = new BlockStore(new MemoryDatastore())
+// Bring your own libp2p host....
 const host = new Libp2p({ ...libp2Options })
-// or, 
+// ...or, use a full-featured default host
 // const host = await setupLibP2PHost()
 const lite = new Peer(store, host)
 
@@ -83,15 +111,12 @@ await lite.stop()
 ### Nodejs
 
 ```javascript
-let { Peer, BlockStore, setupLibP2PHost } = require('@textile/ipfs-lite')
-// Use any interface-datastore compliant store
+let { Peer, BlockStore } = require('@textile/ipfs-lite/core')
+let { setupLibP2PHost } = require('@textile/ipfs-lite/setup')
 let { MemoryDatastore } = require('interface-datastore')
-let Libp2p = require('libp2p')
 
 let store = new BlockStore(new MemoryDatastore())
-let host = new Libp2p({ ...libp2Options })
-// or, 
-// const host = await setupLibP2PHost()
+const host = await setupLibP2PHost()
 let lite = new Peer(store, host)
 
 await lite.start()
@@ -106,42 +131,33 @@ await lite.stop()
 ### Browser
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>IPFS Lite App</title>
-</head>
-<body>
-  <script>
-    window.addEventListener('load', function () {
-      async function main() {
-        var { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = window.ipfsLite
-        var store = new BlockStore(new MemoryDatastore())
-        var host = await setupLibP2PHost(undefined, undefined, [
-          `/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`
-        ])
-        var lite = new Peer(store, host)
-        await lite.start()
-        console.log('started!')
-        setTimeout(async function () {
-          var source = [{
-            path: 'bar',
-            content: Buffer.from('foo!'),
-          }]
-          var data = await lite.addFile(source)
-          console.log('added file with CID:')
-          console.log(data.cid.toString())
-          await lite.stop()
-          console.log('stopped')
-        }, 1000)
-      }
-      main()
-    })
-  </script>
-  <script type="text/javascript" src="ipfs-lite.min.js"></script>
-</body>
-</html>
+<script>
+window.addEventListener('load', function () {
+    async function main() {
+    var { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = window.ipfsLite
+    var store = new BlockStore(new MemoryDatastore())
+    var host = await setupLibP2PHost(undefined, undefined, [
+        `/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`
+    ])
+    var lite = new Peer(store, host)
+    await lite.start()
+    console.log('started!')
+    setTimeout(async function () {
+        var source = [{
+        path: 'bar',
+        content: Buffer.from('foo!'),
+        }]
+        var data = await lite.addFile(source)
+        console.log('added file with CID:')
+        console.log(data.cid.toString())
+        await lite.stop()
+        console.log('stopped')
+    }, 1000)
+    }
+    main()
+})
+</script>
+<script type="text/javascript" src="ipfs-lite.all.min.js"></script>
 ```
 
 There are also several useful examples included in the [`tests` folder](https://github.com/textileio/js-ipfs-lite/tree/master/tests) of this repo, with tools for creating a default `libp2p` host exported by default. We've also thrown in some useful interfaces to use when building on IPFS Lite, as well as the Buffer API for use in the browser.

@@ -29,7 +29,7 @@ module.exports = {
     ],
   },
   optimization: {
-    @todo: Figure out how best to take advantage of this
+    // @todo: Figure out how best to take advantage of this
     splitChunks: {
       chunks: 'all'
     },
