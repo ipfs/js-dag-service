@@ -1,8 +1,11 @@
-export { Peer, Result } from './files'
-export { BlockService } from './core/blockservice'
-export { BlockStore, Block } from './core/blockstore'
-export { setupLibP2PHost } from './create'
-export { Options } from './core'
+import './files'
+import './setup'
+import './files'
+import './network'
+
+export { Result } from './files'
+export { BlockService, BlockStore, Block, Options, Peer } from './core'
+export { setupLibP2PHost } from './setup'
 
 // Include MemoryDatastore for user convenience
 export { MemoryDatastore } from 'interface-datastore'

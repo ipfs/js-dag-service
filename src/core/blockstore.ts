@@ -2,11 +2,13 @@ import CID from 'cids'
 import { Query, Key, Datastore, Result } from 'interface-datastore'
 
 /**
- * `Block` represents an immutable block of data that is uniquely referenced with a cid.
+ * Block represents an immutable block of data that is uniquely referenced with a cid.
+ *
+ * This is equivalent to https://github.com/ipld/js-ipld-block.
  */
 export class Block {
   /**
-   * `Block` creates an immutable block of data with the given content identifier (CID).
+   * Block creates an immutable block of data with the given content identifier (CID).
    * @param data The data to be stored in the block as a buffer.
    * @param cid The content identifier of the data.
    */
@@ -14,18 +16,20 @@ export class Block {
 }
 
 /**
- * `Blockstore` is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
+ * Blockstore is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
+ *
+ * This is equivalent to https://github.com/ipfs/js-ipfs-repo/blob/master/src/blockstore.js.
  */
 export class BlockStore {
   /**
-   * `BlockStore` creates a new block store.
+   * BlockStore creates a new block store.
    *
    * @param store The underlying datastore for locally caching immutable blocks of data.
    */
   constructor(private store: Datastore) {}
 
   /**
-   * `cidToKey` transforms a CID to the appropriate block store key.
+   * cidToKey transforms a CID to the appropriate block store key.
    *
    * @param cid The content identifier for an immutable block of data.
    */
@@ -38,7 +42,7 @@ export class BlockStore {
   }
 
   /**
-   * `keyToCid` transforms a block store key to a CID.
+   * keyToCid transforms a block store key to a CID.
    *
    * @param key The key used to encode the CID.
    */
@@ -47,7 +51,7 @@ export class BlockStore {
   }
 
   /**
-   * `put` adds a block to the block store.
+   * put adds a block to the block store.
    *
    * @param block An immutable block of data.
    */
@@ -60,7 +64,7 @@ export class BlockStore {
   }
 
   /**
-   * `get` returns a block by cid.
+   * get returns a block by cid.
    *
    * @param cid The content identifier for an immutable block of data.
    */
@@ -70,7 +74,7 @@ export class BlockStore {
   }
 
   /**
-   * `delete` removes a block from the store.
+   * delete removes a block from the store.
    *
    * @param cid The content identifier for an immutable block of data.
    */
@@ -79,14 +83,14 @@ export class BlockStore {
   }
 
   /**
-   * `has` returns whether the store contains the block associated with the given CID.
+   * has returns whether the store contains the block associated with the given CID.
    */
   async has(cid: CID) {
     return this.store.has(BlockStore.cidToKey(cid))
   }
 
   /**
-   * `putMany` adds multiple blocks to the store.
+   * putMany adds multiple blocks to the store.
    *
    * @param blocks An iterable of immutable blocks of data.
    */
@@ -103,7 +107,7 @@ export class BlockStore {
   }
 
   /**
-   * `query` searches the store for blocks matching the query parameters.
+   * query searches the store for blocks matching the query parameters.
    *
    * @param query
    */

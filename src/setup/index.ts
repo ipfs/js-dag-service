@@ -5,7 +5,6 @@ import PeerId from 'peer-id'
 import PeerInfo from 'peer-info'
 import { Options as Libp2pOptions } from 'libp2p'
 
-import { create } from 'istanbul-reports'
 import { Node } from './node'
 
 // Export the interfaces for use by callers
