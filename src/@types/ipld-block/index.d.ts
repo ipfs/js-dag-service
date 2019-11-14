@@ -1,5 +1,6 @@
 declare module 'ipld-block' {
   import CID from 'cids'
+  import Codec from '@ipld/codec-interface'
 
   export class Block {
     constructor (data: Buffer, cid: CID)
@@ -33,8 +34,13 @@ declare module '@ipld/block' {
     decode(): T
     reader(): Reader<T>
   }
+
+
   namespace Block {
-    export function getCodec<T>(codec: string): Codec<T>
+    function getCodec<T>(codec: string): Codec<T>
+    export namespace getCodec {
+      export function setCodec(codec: Codec): void
+    }
     export function encoder<T>(source: T, codec: string, algo?: string): Block<T>
     export function decoder<T = any>(data: Buffer, codec: string, algo: string): Block<T>
     export function create<T = any>(data: Buffer, cid: CID /*, validate: boolean */): Block<T>

@@ -16,17 +16,17 @@ declare module 'ipld' {
 
   class Ipld {
     constructor(opts: {})
-    put(node: object, format: string, options?: AddOptions): Promise<CID>
-    putMany(nodes: AsyncIterable<object>, format: string, options?: AddOptions): AsyncIterator<CID>
-    resolve(cid: CID, path: string): AsyncIterator<{ remainderPath: string, value: any}>
+    put(node: object, format: number, options?: AddOptions): Promise<CID>
+    putMany(nodes: Iterable<object>, format: number, options?: AddOptions): AsyncIterable<CID>
+    resolve(cid: CID, path: string): AsyncIterable<{ remainderPath?: string, value: any}>
     get(cid: CID): Promise<any>
-    getMany(cids: AsyncIterable<CID>): AsyncIterator<any>
-    remove(cid: CID): Promise<void>
-    removeMany(cids: AsyncIterable<CID>): Promise<void>
-    tree(cid: CID, path?: string, options?: { recursive: boolean }): AsyncIterator<string>
-    addFormat(ipldFormatImplementation: Function): Ipld
-    removeFormat(codec: any): Ipld
-    defaultOptions: AddOptions
+    getMany(cids: Iterable<CID>): AsyncIterable<any>
+    remove(cid: CID): Promise<CID>
+    removeMany(cids: Iterable<CID>): AsyncIterable<CID>
+    tree(cid: CID, path?: string, options?: { recursive: boolean }): AsyncIterable<string>
+    addFormat?(ipldFormatImplementation: Function): Ipld
+    removeFormat?(codec: any): Ipld
+    defaultOptions?: AddOptions
   }
   // eslint-disable-next-line import/no-default-export
   export default Ipld
