@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A lightweight minimal IPFS peer for typescript/javascript.",
   "main": "dist/index.js",
+  "browser": {
+    "dist/setup/node": "dist/setup/browser"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "prepare": "npm run build",

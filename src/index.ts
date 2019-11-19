@@ -4,7 +4,7 @@ import './files'
 import './network'
 
 export { Result } from './files'
-export { BlockService, BlockStore, Block, Options, Peer } from './core'
+export { BlockService, BlockStore, Block, PeerOptions, Peer } from './core'
 export { setupLibP2PHost } from './setup'
 
 // Include MemoryDatastore for user convenience
