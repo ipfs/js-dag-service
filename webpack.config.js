@@ -12,11 +12,11 @@ const filename = 'ipfs-lite.[name].min.js'
 module.exports = {
   mode: 'production',
   entry: {
-    all: './src/index.ts',
-    core: './src/core/index.ts',
-    network: './src/network/index.ts',
+    main: './src/index.ts',
+    // core: './src/core/index.ts',
+    // network: './src/network/index.ts',
     setup: './src/setup/index.ts',
-    files: './src/files/index.ts',
+    // files: './src/files/index.ts',
   },
   devtool: 'source-map',
   module: {
@@ -94,10 +94,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'IPFS Lite App',
-      template: 'src/index.ejs',
-    }),
+    // new HtmlWebpackPlugin({
+    //   title: 'IPFS Lite App',
+    //   template: 'src/index.ejs',
+    // }),
     new CompressionPlugin({
       test: /\.js$/i,
     })

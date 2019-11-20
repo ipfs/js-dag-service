@@ -10,13 +10,11 @@ import { Node } from './node'
 // Export the interfaces for use by callers
 export { Options as Libp2pOptions } from 'libp2p'
 
-// Module augmentation to add methods to Peer from core
-declare module '../core' {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Peer {
-    export function create(): Peer
-  }
-}
+// Include MemoryDatastore for user convenience
+export { MemoryDatastore } from 'interface-datastore'
+// Include Buffer for user convenience
+const BufferImpl = Buffer
+export { BufferImpl as Buffer }
 
 export const setupLibP2PHost = async (
   hostKey?: Buffer,
