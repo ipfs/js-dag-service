@@ -57,19 +57,19 @@ export interface ResolveResult {
  */
 export class DAGService {
   /**
-  * A set of default parameters to use when adding an IPLD Node via the DAG service.
-  */
+   * A set of default parameters to use when adding an IPLD Node via the DAG service.
+   */
   public defaultOptions: AddOptions
   /**
-  * The underlying block service for adding, deleting, and retrieving blocks.
-  */
+   * The underlying block service for adding, deleting, and retrieving blocks.
+   */
   public blockService: BlockService
 
   /**
-  * DAGService creates a new directed acyclic graph (DAG) service.
-  *
-  * @param {DAGOptions} options The set of parameters to use when initializing a DAG service. Must include a `blockService` entry.
-  */
+   * DAGService creates a new directed acyclic graph (DAG) service.
+   *
+   * @param {DAGOptions} options The set of parameters to use when initializing a DAG service. Must include a `blockService` entry.
+   */
   constructor(options: DAGOptions) {
     const { blockService, ...opts } = options
     this.blockService = blockService
@@ -77,11 +77,11 @@ export class DAGService {
   }
 
   /**
-  * resolve retrieves IPLD nodes along the path that is rooted at a given IPLD node.
-  *
-  * @param {CID} cid The content identifier at which to start resolving.
-  * @param {string} path The path that should be resolved.
-  */
+   * resolve retrieves IPLD nodes along the path that is rooted at a given IPLD node.
+   *
+   * @param {CID} cid The content identifier at which to start resolving.
+   * @param {string} path The path that should be resolved.
+   */
   async *resolve(cid: CID, path: string): AsyncIterableIterator<ResolveResult> {
     const data = await this.blockService.get(cid)
     const block = Block.create(data.data, data.cid)
@@ -96,13 +96,13 @@ export class DAGService {
   }
 
   /**
-  * tree returns all the paths that can be resolved into.
-  *
-  * @param {CID} cid The ID to get the paths from
-  * @param {string} offsetPath the path to start to retrieve the other paths from.
-  * @param {object} options Currently only whether to get the paths recursively or not. If `recursive` is
-  * `false`, it will only resolve the paths of the given CID.
-  */
+   * tree returns all the paths that can be resolved into.
+   *
+   * @param {CID} cid The ID to get the paths from
+   * @param {string} offsetPath the path to start to retrieve the other paths from.
+   * @param {object} options Currently only whether to get the paths recursively or not. If `recursive` is
+   * `false`, it will only resolve the paths of the given CID.
+   */
   async *tree(cid: CID, offsetPath = '', options = { recursive: false }): AsyncIterableIterator<string> {
     const data = await this.blockService.get(cid)
     const block = Block.create(data.data, data.cid)
@@ -134,10 +134,10 @@ export class DAGService {
   }
 
   /**
-  * get returns an IPLD node by its content identifier.
-  *
-  * @param {CID} cid The content identifier for the IPLD node that should be retrieved.
-  */
+   * get returns an IPLD node by its content identifier.
+   *
+   * @param {CID} cid The content identifier for the IPLD node that should be retrieved.
+   */
   async get(cid: CID) {
     const data = await this.blockService.get(cid)
     const block = Block.create(data.data, data.cid)
@@ -145,10 +145,10 @@ export class DAGService {
   }
 
   /**
-  * getMany returns multiple IPLD nodes from an iterable of content identifiers.
-  *
-  * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes that should be retrieved.
-  */
+   * getMany returns multiple IPLD nodes from an iterable of content identifiers.
+   *
+   * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes that should be retrieved.
+   */
   async *getMany(cids: Iterable<CID>): AsyncIterableIterator<any> {
     for await (const cid of cids) {
       yield this.get(cid)
@@ -156,22 +156,24 @@ export class DAGService {
   }
 
   /**
-  * put encodes and adds an IPLD node using the specified codec.
-  *
-  * @param {any} node The deserialized IPLD node that should be added. Can be any value, object, Buffer, JSON, etc.
-  * @param {string | number} codec A string representing the multicodec with which the IPLD node should be encoded.
-  * Can also be a numeric multicodec code for compatibility with js-ipld.
-  * @param {AddOptions} options The specific parameters to use when encoding the input node.
-  */
+   * put encodes and adds an IPLD node using the specified codec.
+   *
+   * @param {any} node The deserialized IPLD node that should be added. Can be any value, object, Buffer, JSON, etc.
+   * @param {string | number} codec A string representing the multicodec with which the IPLD node should be encoded.
+   * Can also be a numeric multicodec code for compatibility with js-ipld.
+   * @param {AddOptions} options The specific parameters to use when encoding the input node.
+   */
   async put(node: any, codec: string | number = 'dag-cbor', options?: AddOptions) {
     const opts = options || this.defaultOptions || {}
-    if (typeof codec === 'number') { // Compatibility with js-ipld
+    if (typeof codec === 'number') {
+      // Compatibility with js-ipld
       codec = getName(codec)
     }
     const block = Block.encoder(node, codec, opts.hashAlg)
     const data = block.encode()
     let cid = await block.cid()
-    if (opts.cidVersion === 0) { // Compatibility with js-ipld
+    if (opts.cidVersion === 0) {
+      // Compatibility with js-ipld
       cid = cid.toV0()
     }
     if (!opts.onlyHash) {
@@ -181,13 +183,13 @@ export class DAGService {
   }
 
   /**
-  * putMany encodes and adds multiple IPLD nodes using the specified codec.
-  *
-  * @param {Iterable<any>} nodes The deserialized IPLD nodes that should be added.
-  * @param {string | number} codec A string representing the multicodec with which the IPLD node should be encoded.
-  * Can also be a numeric multicodec code for compatibility with js-ipld.
-  * @param {AddOptions} options The specific parameters to use when encoding the input node.
-  */
+   * putMany encodes and adds multiple IPLD nodes using the specified codec.
+   *
+   * @param {Iterable<any>} nodes The deserialized IPLD nodes that should be added.
+   * @param {string | number} codec A string representing the multicodec with which the IPLD node should be encoded.
+   * Can also be a numeric multicodec code for compatibility with js-ipld.
+   * @param {AddOptions} options The specific parameters to use when encoding the input node.
+   */
   async *putMany(
     nodes: Iterable<any>,
     codec: string | number = 'dag-cbor',
@@ -203,22 +205,22 @@ export class DAGService {
   }
 
   /**
-  * remove deletes an IPLD node from the local store.
-  *
-  * @param {CID} cid The content identifier for the IPLD node to be removed.
-  */
+   * remove deletes an IPLD node from the local store.
+   *
+   * @param {CID} cid The content identifier for the IPLD node to be removed.
+   */
   async remove(cid: CID) {
     return this.blockService.delete(cid)
   }
 
   /**
-  * removeMany deletes multiple IPLD nodes from the local store.
-  *
-  * Throws an error if any of the Blocks can’t be removed. This operation is *not* atomic, some nodes might have
-  * already been removed.
-  *
-  * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes to be removed.
-  */
+   * removeMany deletes multiple IPLD nodes from the local store.
+   *
+   * Throws an error if any of the Blocks can’t be removed. This operation is *not* atomic, some nodes might have
+   * already been removed.
+   *
+   * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes to be removed.
+   */
   async *removeMany(cids: Iterable<CID>): AsyncIterableIterator<CID> {
     for await (const cid of cids) {
       yield this.remove(cid)
