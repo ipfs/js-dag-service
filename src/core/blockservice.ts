@@ -75,7 +75,7 @@ export class BlockService {
    *
    * @param {Iterable<CID>} cids Iterable of content identifiers for immutable blocks of data.
    */
-  async *getMany(cids: Iterable<CID>): AsyncIterable<Block> {
+  async *getMany(cids: Iterable<CID>): AsyncIterableIterator<Block> {
     if (this.exchange != null) {
       return this.exchange.getMany(cids)
     } else {

@@ -115,7 +115,7 @@ export class BlockStore {
    *
    * @param {Query} query A set of query options to use when querying the underlying datastore.
    */
-  async *query(query: Query): AsyncIterable<Result> {
+  async *query(query: Query): AsyncIterableIterator<Result> {
     for await (const result of this.store.query(query)) {
       yield result
     }
