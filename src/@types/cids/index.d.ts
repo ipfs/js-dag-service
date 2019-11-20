@@ -16,6 +16,7 @@ declare module 'cids' {
     multihash: Multihash
     buffer: Buffer
     prefix: Buffer
+    version: number
 
     toV0(): CID
     toV1(): CID

@@ -2,7 +2,7 @@ declare module '@ipld/codec-interface' {
   import CID from 'cids'
 
   export interface Reader<T> {
-    get(path: string): { value: T, remainderPath?: string }
+    get(path: string): { value: T, remaining?: string }
     links(): IterableIterator<[string, CID]>
     tree(): IterableIterator<string>
   }
