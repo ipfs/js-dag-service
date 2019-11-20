@@ -7,7 +7,17 @@ export interface Options {
   maxNumProviders: number
 }
 
-export class Dht {
+/**
+ * DhtAPI provides access to the libp2p distributed hash table module.
+ */
+export class DhtAPI {
+  /**
+   * @name dht
+   * @type DhtAPI
+   * @memberof Peer#
+   * @param parent {Peer}
+   * @description Access to the libp2p host's distributed hash table module.
+   */
   constructor(private parent: Peer) {}
 
   /**

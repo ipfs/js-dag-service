@@ -1,6 +1,16 @@
 import { Peer } from '../core'
 
-export class PubSub {
+/**
+ * PubSubAPI provides access to the libp2p host's pubsub module.
+ */
+export class PubSubAPI {
+  /**
+   * @name pubsub
+   * @type PubSubAPI
+   * @memberof Peer#
+   * @param parent {Peer}
+   * @description Access to the libp2p host's pubsub module.
+   */
   constructor(private parent: Peer) {}
 
   private checkOnlineAndEnabled() {

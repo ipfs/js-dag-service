@@ -12,7 +12,17 @@ export interface SwarmPeer {
   rawPeerInfo?: object
 }
 
-export class Swarm {
+/**
+ * SwarmAPI provides access to the libp2p host's peer swarm.
+ */
+export class SwarmAPI {
+  /**
+   * @name swarm
+   * @type SwarmAPI
+   * @memberof Peer#
+   * @param parent {Peer}
+   * @description Access to the libp2p host's peer swarm.
+   */
   constructor(private parent: Peer) {}
 
   async peers(options: { verbose?: boolean } = {}) {

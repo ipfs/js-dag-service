@@ -3,10 +3,19 @@ import Big from 'bignumber.js'
 import CID from 'cids'
 import { Peer } from '../core'
 
+/**
+ * Wantlist is an object representing a bitswap wantlist.
+ */
 export interface Wantlist {
+  /**
+   * Keys is an array of objects with a '/' key and a string multihash value.
+   */
   Keys: Record<'/', string>[]
 }
 
+/**
+ * Stat is object that contains information about the bitswap agent.
+ */
 export interface Stat {
   provideBufLen: number
   blocksReceived: Big
@@ -23,9 +32,24 @@ function formatWantlist(list: Iterable<any>, cidBase?: string) {
   return Array.from(list).map(e => ({ '/': e[1].cid.toBaseEncodedString(cidBase) }))
 }
 
-export class Bitswap {
+/**
+ * BitswapAPI provides access to the libp2p host's bitswap agent.
+ */
+export class BitswapAPI {
+  /**
+   * @name bitswap
+   * @type BitswapAPI
+   * @memberof Peer#
+   * @param parent {Peer}
+   * @description Access to the libp2p host's bitswap agent.
+   */
   constructor(private parent: Peer) {}
 
+  /**
+   * wantlist returns the list of wanted blocks, optionally filtered by peer ID.
+   *
+   * @param peerId The id of the peer to filter on.
+   */
   async wantlist(peerId: PeerId | string): Promise<Wantlist> {
     if (!this.parent.isOnline()) {
       throw new Error('peer is not online')
@@ -40,6 +64,10 @@ export class Bitswap {
     return { Keys: formatWantlist(list) }
   }
 
+  /**
+   * Show diagnostic information on the bitswap agent.
+   * @returns {Promise<Stat>}
+   */
   async stat() {
     if (!this.parent.isOnline()) {
       throw new Error('peer is not online')
