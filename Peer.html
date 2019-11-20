@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: Peer</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Block.html">Block</a></li><li><a href="BlockService.html">BlockService</a></li><li><a href="BlockStore.html">BlockStore</a></li><li><a href="DAGService.html">DAGService</a></li><li><a href="Peer.html">Peer</a></li></ul><h3>Interfaces</h3><ul><li><a href="AddOptions.html">AddOptions</a></li><li><a href="DAGOptions.html">DAGOptions</a></li><li><a href="PeerOptions.html">PeerOptions</a></li><li><a href="ResolveResult.html">ResolveResult</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Class</p>
+                        <h1>Peer</h1>
+                    </header>
+                    
+                    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>Peer<span class="signature">(store, host, config)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Peer is an IPFS Lite peer. It provides a DAG service that can fetch and put blocks from/to the IPFS network.
+
+It casually satisfies the original IPFS Lite interface: https://github.com/hsanjuan/ipfs-lite.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <h3 class="title"><span>Constructor</span></h3>
+                <div class="members">
+                    <div class="member">
+
+
+    
+    <h4 class="name" id="Peer">
+        <a class="href-link" href="#Peer">#</a>
+        
+        <span class="code-name">
+            
+                new Peer<span class="signature">(store, host, config)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Peer creates a new IPFS Lite peer.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>store</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type"><a href="BlockStore.html">BlockStore</a></span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The underlying block store for locally caching immutable blocks of data.</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>host</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Libp2p</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The Libp2p host to use for interacting with the network.</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type"><a href="PeerOptions.html">PeerOptions</a></span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">An optional set of configuration options. Currently only supports whether or not the
+peer should run in 'offline' mode.</td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line19">line 19</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Peer.html">Peer</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h3 class="title"><span>Members</span></h3>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Bitswap</span>
+
+
+    </span>
+
+<h4 class="name" id="blockExchange">
+    <a class="href-link" href="#blockExchange">#</a>
+    
+    <span class="code-name">
+        blockExchange
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    blockExchange is the "bitswap" instance that communicates with the network to retrieve blocks that are not in
+the local store.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line117">line 117</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type"><a href="BlockService.html">BlockService</a></span>
+
+
+    </span>
+
+<h4 class="name" id="blockService">
+    <a class="href-link" href="#blockService">#</a>
+    
+    <span class="code-name">
+        blockService
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    blockService is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line123">line 123</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type"><a href="PeerOptions.html">PeerOptions</a></span>
+
+
+    </span>
+
+<h4 class="name" id="config">
+    <a class="href-link" href="#config">#</a>
+    
+    <span class="code-name">
+        config
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    config is a set of options to configure the IPFS Lite peer.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line98">line 98</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Libp2p</span>
+
+
+    </span>
+
+<h4 class="name" id="host">
+    <a class="href-link" href="#host">#</a>
+    
+    <span class="code-name">
+        host
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    host is the Libp2p host used to interact with the network.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line104">line 104</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type"><a href="BlockStore.html">BlockStore</a></span>
+
+
+    </span>
+
+<h4 class="name" id="store">
+    <a class="href-link" href="#store">#</a>
+    
+    <span class="code-name">
+        store
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    store is the underlying block store for locally caching immutable blocks of data.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line110">line 110</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h3 class="title"><span>Methods</span></h3>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addFile">
+        <a class="href-link" href="#addFile">#</a>
+        
+        <span class="code-name">
+            
+                addFile<span class="signature">(source, options)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        addFile chunks and adds content to the DAG service.
+
+The content is stored as a UnixFS DAG (default for IPFS). It returns the root ipld DAG node.
+
+See https://github.com/ipfs/js-ipfs-unixfs-importer for further details.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>source</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">An iterable that yields file objects with `path` and `content` keys.</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">A set of options that control the layout and chunking mechanisms used by the underlying
+UnixFS library.</td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="files_index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="files_index.ts.html">files/index.ts</a>, <a href="files_index.ts.html#line30">line 30</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const peer = new Peer(...)
+await peer.start()
+const source = [
+  {
+    path: 'bar',
+    content: fs.createReadStream('bar.txt'),
+  },
+]
+const root = await peer.addFile(source)
+console.log(root.cid.toString())
+await peer.stop()</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getFile">
+        <a class="href-link" href="#getFile">#</a>
+        
+        <span class="code-name">
+            
+                getFile<span class="signature">(cid)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        getFile returns the content of a file as identified by its root CID.
+
+The file must have been added as a UnixFS DAG (default for IPFS).
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cid</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The target content identifier.</td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="files_index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="files_index.ts.html">files/index.ts</a>, <a href="files_index.ts.html#line50">line 50</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const peer = new Peer(...)
+await peer.start()
+const buf = await peer.getFile('bafk...uny')
+console.log(buf.toString())
+await peer.stop()</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="hasBlock">
+        <a class="href-link" href="#hasBlock">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                hasBlock<span class="signature">(cid)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        hasBlock returns whether a given block is available locally. This method is shorthand for .store.has().
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cid</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">CID</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The target content identifier.</td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line66">line 66</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const peer = new Peer(...)
+await peer.start()
+const has = await peer.hasBlock('bafk...uny')
+console.log(has)
+await peer.stop()</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="isOnline">
+        <a class="href-link" href="#isOnline">#</a>
+        
+        <span class="code-name">
+            
+                isOnline<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        isOnline returns whether the peer has a valid block exchange and its p2p host has been started.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line72">line 72</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="start">
+        <a class="href-link" href="#start">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                start<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        start starts the underlying host and block exchange.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line38">line 38</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const peer = new Peer(...)
+await peer.start()
+// do stuff with it...
+await peer.stop()</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="stop">
+        <a class="href-link" href="#stop">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                stop<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        stop stops the underlying block exchange and host.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="core_peer.ts.html" class="button">View Source</a>
+            <span>
+                <a href="core_peer.ts.html">core/peer.ts</a>, <a href="core_peer.ts.html#line51">line 51</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const peer = new Peer(...)
+await peer.start()
+// do stuff with it...
+await peer.stop()</code></pre>
+    
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Nov 20 2019 20:48:35 GMT+0000 (Coordinated Universal Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

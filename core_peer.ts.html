@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: core/peer.ts</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Block.html">Block</a></li><li><a href="BlockService.html">BlockService</a></li><li><a href="BlockStore.html">BlockStore</a></li><li><a href="DAGService.html">DAGService</a></li><li><a href="Peer.html">Peer</a></li></ul><h3>Interfaces</h3><ul><li><a href="AddOptions.html">AddOptions</a></li><li><a href="DAGOptions.html">DAGOptions</a></li><li><a href="PeerOptions.html">PeerOptions</a></li><li><a href="ResolveResult.html">ResolveResult</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>core/peer.ts</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Libp2p from 'libp2p'
+import Bitswap from 'ipfs-bitswap'
+import CID from 'cids'
+import { BlockService } from './blockservice'
+import { BlockStore } from './blockstore'
+import { DAGService } from './dagservice'
+
+/**
+ * PeerOptions wraps configuration options for the IPFS Lite peer.
+ */
+export interface PeerOptions {
+  /**
+   * offline controls whether or not the block service will announce or retrieve blocks from the network.
+   */
+  offline: boolean
+}
+
+/**
+ * Peer is an IPFS Lite peer. It provides a DAG service that can fetch and put blocks from/to the IPFS network.
+ *
+ * It casually satisfies the original IPFS Lite interface: https://github.com/hsanjuan/ipfs-lite.
+ */
+export class Peer extends DAGService {
+  /**
+   * config is a set of options to configure the IPFS Lite peer.
+   */
+  public config: PeerOptions
+  /**
+   * host is the Libp2p host used to interact with the network.
+   */
+  public host: Libp2p
+  /**
+   * store is the underlying block store for locally caching immutable blocks of data.
+   */
+  public store: BlockStore
+  /**
+   * blockExchange is the "bitswap" instance that communicates with the network to retrieve blocks that are not in
+   * the local store.
+   */
+  public blockExchange: Bitswap
+  /**
+   * blockService is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
+   */
+  public blockService: BlockService
+
+  /**
+   * Peer creates a new IPFS Lite peer.
+   *
+   * @param {BlockStore} store The underlying block store for locally caching immutable blocks of data.
+   * @param {Libp2p} host The Libp2p host to use for interacting with the network.
+   * @param {PeerOptions} config An optional set of configuration options. Currently only supports whether or not the
+   * peer should run in 'offline' mode.
+   */
+  constructor(store: BlockStore, host: Libp2p, config: PeerOptions = { offline: false }) {
+    const blockExchange = new Bitswap(host, store)
+    const blockService = new BlockService(store, config.offline ? undefined : blockExchange)
+    super({ blockService })
+    this.host = host
+    this.store = store
+    this.config = config
+    this.blockExchange = blockExchange
+    this.blockService = blockService
+  }
+
+  /**
+   * start starts the underlying host and block exchange.
+   *
+   * @example
+   * const peer = new Peer(...)
+   * await peer.start()
+   * // do stuff with it...
+   * await peer.stop()
+   */
+  async start() {
+    await this.host.start()
+    this.blockExchange.start()
+  }
+
+  /**
+   * stop stops the underlying block exchange and host.
+   *
+   * @example
+   * const peer = new Peer(...)
+   * await peer.start()
+   * // do stuff with it...
+   * await peer.stop()
+   */
+  async stop() {
+    this.blockExchange.stop()
+    await this.host.stop()
+  }
+
+  /**
+   * hasBlock returns whether a given block is available locally. This method is shorthand for .store.has().
+   *
+   * @param {CID} cid The target content identifier.
+   * @example
+   * const peer = new Peer(...)
+   * await peer.start()
+   * const has = await peer.hasBlock('bafk...uny')
+   * console.log(has)
+   * await peer.stop()
+   */
+  async hasBlock(cid: CID) {
+    return this.store.has(cid)
+  }
+
+  /**
+   * isOnline returns whether the peer has a valid block exchange and its p2p host has been started.
+   */
+  isOnline() {
+    return this.blockExchange &amp;&amp; this.host &amp;&amp; this.host.isStarted()
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Nov 20 2019 20:48:35 GMT+0000 (Coordinated Universal Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

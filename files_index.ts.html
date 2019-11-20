@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: files/index.ts</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Block.html">Block</a></li><li><a href="BlockService.html">BlockService</a></li><li><a href="BlockStore.html">BlockStore</a></li><li><a href="DAGService.html">DAGService</a></li><li><a href="Peer.html">Peer</a></li></ul><h3>Interfaces</h3><ul><li><a href="AddOptions.html">AddOptions</a></li><li><a href="DAGOptions.html">DAGOptions</a></li><li><a href="PeerOptions.html">PeerOptions</a></li><li><a href="ResolveResult.html">ResolveResult</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>files/index.ts</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import CID from 'cids'
+import importer, { Options as AddOptions, File, Result } from 'ipfs-unixfs-importer'
+import exporter, { Options as GetOptions } from 'ipfs-unixfs-exporter'
+import { Peer } from '../core'
+
+// Export the interfaces for use by callers
+export { Options as AddOptions, File, Result } from 'ipfs-unixfs-importer'
+export { Options as GetOptions } from 'ipfs-unixfs-exporter'
+
+// Module augmentation to add methods to Peer from core
+declare module '../core' {
+  interface Peer {
+    addFile(source: Iterable&lt;File>, options?: AddOptions): Promise&lt;Result | undefined>
+    getFile(cid: CID | Buffer | string, options?: GetOptions): Promise&lt;Buffer>
+  }
+}
+
+/**
+ * addFile chunks and adds content to the DAG service.
+ *
+ * The content is stored as a UnixFS DAG (default for IPFS). It returns the root ipld DAG node.
+ *
+ * See https://github.com/ipfs/js-ipfs-unixfs-importer for further details.
+ * @param source An iterable that yields file objects with `path` and `content` keys.
+ * @param options A set of options that control the layout and chunking mechanisms used by the underlying
+ * UnixFS library.
+ * @example
+ * const peer = new Peer(...)
+ * await peer.start()
+ * const source = [
+ *   {
+ *     path: 'bar',
+ *     content: fs.createReadStream('bar.txt'),
+ *   },
+ * ]
+ * const root = await peer.addFile(source)
+ * console.log(root.cid.toString())
+ * await peer.stop()
+ */
+Peer.prototype.addFile = async function(source: Iterable&lt;File>, options?: AddOptions) {
+  let result: Result | undefined
+  for await (const entry of importer(source, this, { cidVersion: 1, codec: 'dag-pb', ...options })) {
+    result = entry
+  }
+  return result
+}
+
+/**
+ * getFile returns the content of a file as identified by its root CID.
+ *
+ * The file must have been added as a UnixFS DAG (default for IPFS).
+ *
+ * @param cid The target content identifier.
+ * @example
+ * const peer = new Peer(...)
+ * await peer.start()
+ * const buf = await peer.getFile('bafk...uny')
+ * console.log(buf.toString())
+ * await peer.stop()
+ */
+Peer.prototype.getFile = async function(cid: CID | Buffer | string, options?: GetOptions) {
+  const file = await exporter(cid, this)
+  // File may not have unixfs prop if small &amp; imported with rawLeaves true
+  if (file.unixfs &amp;&amp; file.unixfs.type.includes('dir')) {
+    throw new Error('this dag node is a directory')
+  }
+  if (!file.content) {
+    throw new Error('this dag node has no content')
+  }
+  const arr: Buffer[] = []
+  for await (const entry of file.content(options)) {
+    arr.push(entry as Buffer)
+  }
+  return Buffer.concat(arr)
+}
+
+export { Peer }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Nov 20 2019 20:48:35 GMT+0000 (Coordinated Universal Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

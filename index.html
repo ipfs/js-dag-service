@@ -1,337 +1,249 @@
-<!doctype html>
-<html class="default no-js">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@textile/ipfs-lite</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+    
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
 </head>
+
 <body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@textile/ipfs-lite</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1> @textile/ipfs-lite</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#ipfs-lite-emjs-ipfs-liteem" id="ipfs-lite-emjs-ipfs-liteem" style="color: inherit; text-decoration: none;">
-					<h1>IPFS Lite <em>(js-ipfs-lite)</em></h1>
-				</a>
-				<p><a href="https://textile.io"><img src="https://img.shields.io/badge/made%20by-Textile-informational.svg?style=flat-square" alt="Made by Textile"></a>
-					<a href="https://slack.textile.io"><img src="https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=flat-square" alt="Chat on Slack"></a>
-					<a href="./LICENSE"><img src="https://img.shields.io/github/license/textileio/js-ipfs-lite.svg?style=flat-square" alt="GitHub license"></a>
-					<a href="./package.json"><img src="https://img.shields.io/github/package-json/v/textileio/js-ipfs-lite.svg?style=popout-square" alt="GitHub package.json version"></a>
-					<a href="https://www.npmjs.com/package/@textile/wallet"><img src="https://img.shields.io/npm/v/@textile/ipfs-lite.svg?style=popout-square" alt="npm (scoped)"></a>
-					<a href="https://www.npmjs.com/package/@textile/ipfs-lite"><img src="https://img.shields.io/node/v/@textile/ipfs-lite.svg?style=popout-square" alt="node (scoped)"></a>
-					<a href="https://github.com/textileio/js-ipfs-lite/releases/latest"><img src="https://img.shields.io/github/release/textileio/js-ipfs-lite.svg?style=flat-square" alt="Release"></a>
-					<a href="https://circleci.com/gh/textileio/js-ipfs-lite"><img src="https://img.shields.io/circleci/project/github/textileio/js-ipfs-lite/master.svg?style=flat-square" alt="CircleCI branch"></a>
-					<a href="https://textileio.github.io/js-ipfs-lite/"><img src="https://img.shields.io/badge/docs-master-success.svg?style=popout-square" alt="docs"></a>
-				<a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" alt="standard-readme compliant"></a></p>
-				<blockquote>
-					<p>A lightweight, extensible IPFS peer for Nodejs and the browser.</p>
-				</blockquote>
-				<p>IPFS Lite runs the minimal setup required to get and put data on the IPFS network.</p>
-				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
-					<h2>Table of Contents</h2>
-				</a>
-				<ul>
-					<li><a href="#background">Background</a></li>
-					<li><a href="#install">Install</a></li>
-					<li><a href="#usage">Usage</a></li>
-					<li><a href="#api">API</a></li>
-					<li><a href="#maintainers">Maintainers</a></li>
-					<li><a href="#contributing">Contributing</a></li>
-					<li><a href="#license">License</a></li>
-				</ul>
-				<a href="#background" id="background" style="color: inherit; text-decoration: none;">
-					<h2>Background</h2>
-				</a>
-				<p>The goal of IPFS Lite is to run the bare minimal functionality for any application to interact with the IPFS network (by getting and putting IPLD blocks). This saves having to deal with the complexities of using a full IPFS peer, while maintaining the ability to share the underlying libp2p host and DAG service with other components. It is also extremely lightweight, highly extensible, and easy to work with in both Nodejs and the browser. It supports async/await by default, and the library comes with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has most of the same requirements. </p>
-				<a href="#why" id="why" style="color: inherit; text-decoration: none;">
-					<h3>Why?</h3>
-				</a>
-				<p>Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package (currently less than 1/2 the size of <code>js-ipfs</code> without much optimization -- we will continue to optimize further). It is also highly extensible, so developers need only include the features they <em>need</em>, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution that supports async/await patterns throughout, and we think others will find the type safety useful as well. Feel free to use the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/src/@types">Typescript declarations</a> in your own projects.</p>
-				<a href="#what" id="what" style="color: inherit; text-decoration: none;">
-					<h3>What?</h3>
-				</a>
-				<p>Our goal is to provide a highly extensible IPFS implementation that, when &#39;fully loaded&#39; supports <em>most</em> of the default <a href="https://github.com/ipfs/interface-js-ipfs-core"><code>js-ipfs</code></a> core APIs. Some APIs will likely never be added, and some APIs specific to Textile (like encryption) will likely be included as separate modules. If you have opinions about what should and should not be included, please <a href="https://github.com/textileio/js-ipfs-lite/issues">let us know</a>.</p>
-				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h2>Install</h2>
-				</a>
-				<a href="#node" id="node" style="color: inherit; text-decoration: none;">
-					<h3>Node</h3>
-				</a>
-				<pre><code><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">i</span> @<span class="hljs-keyword">textile</span>/<span class="hljs-keyword">ipfs</span>-<span class="hljs-keyword">lite</span></code></pre>
-				<a href="#browser" id="browser" style="color: inherit; text-decoration: none;">
-					<h3>Browser</h3>
-				</a>
-				<pre><code><span class="hljs-attr">git</span> <span class="hljs-string">checkout https://github.com/textileio/js-ipfs-lite.git</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">js-ipfs-lite</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">i</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">run browser:build</span></code></pre><p>The above creates a minified + gzipped asset in <code>dist/browser</code>, which you can load using a <code>&lt;script&gt;</code> tag. This will make an <code>ipfsLite</code> object available in the global (<code>window</code>) namespace. You&#39;ll also get an example <code>index.html</code> file to help get you started.</p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
-					<h3>Typescript</h3>
-				</a>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Peer, BlockStore, setupLibP2PHost } <span class="hljs-keyword">from</span> <span class="hljs-string">'@textile/ipfs-lite'</span>
-<span class="hljs-comment">// Use any interface-datastore compliant store</span>
-<span class="hljs-keyword">import</span> { MemoryDatastore } <span class="hljs-keyword">from</span> <span class="hljs-string">'interface-datastore'</span>
-<span class="hljs-keyword">import</span> Libp2p <span class="hljs-keyword">from</span> <span class="hljs-string">'libp2p'</span>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Block.html">Block</a></li><li><a href="BlockService.html">BlockService</a></li><li><a href="BlockStore.html">BlockStore</a></li><li><a href="DAGService.html">DAGService</a></li><li><a href="Peer.html">Peer</a></li></ul><h3>Interfaces</h3><ul><li><a href="AddOptions.html">AddOptions</a></li><li><a href="DAGOptions.html">DAGOptions</a></li><li><a href="PeerOptions.html">PeerOptions</a></li><li><a href="ResolveResult.html">ResolveResult</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Title</p>
+                        <h1>Home</h1>
+                    </header>
+                    
+                    
 
-<span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> BlockStore(<span class="hljs-keyword">new</span> MemoryDatastore())
-<span class="hljs-keyword">const</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...libp2Options })
-<span class="hljs-comment">// or, </span>
-<span class="hljs-comment">// const host = await setupLibP2PHost()</span>
-<span class="hljs-keyword">const</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
 
-<span class="hljs-keyword">await</span> lite.start()
 
-<span class="hljs-keyword">const</span> cid = <span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>
-<span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> lite.getFile(cid)
-<span class="hljs-built_in">console</span>.log(data.toString())
-<span class="hljs-comment">// Hello World</span>
-<span class="hljs-keyword">await</span> lite.stop()</code></pre>
-				<a href="#nodejs" id="nodejs" style="color: inherit; text-decoration: none;">
-					<h3>Nodejs</h3>
-				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">let</span> { Peer, BlockStore, setupLibP2PHost } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@textile/ipfs-lite'</span>)
-<span class="hljs-comment">// Use any interface-datastore compliant store</span>
-<span class="hljs-keyword">let</span> { MemoryDatastore } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'interface-datastore'</span>)
-<span class="hljs-keyword">let</span> Libp2p = <span class="hljs-built_in">require</span>(<span class="hljs-string">'libp2p'</span>)
+    
 
-<span class="hljs-keyword">let</span> store = <span class="hljs-keyword">new</span> Blockstore(<span class="hljs-keyword">new</span> MemoryDatastore())
-<span class="hljs-keyword">let</span> host = <span class="hljs-keyword">new</span> Libp2p({ ...libp2Options })
-<span class="hljs-comment">// or, </span>
-<span class="hljs-comment">// const host = await setupLibP2PHost()</span>
-<span class="hljs-keyword">let</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
 
-<span class="hljs-keyword">await</span> lite.start()
+    <h3> </h3>
 
-<span class="hljs-keyword">let</span> cid = <span class="hljs-string">'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'</span>
-<span class="hljs-keyword">let</span> data = <span class="hljs-keyword">await</span> lite.getFile(cid)
-<span class="hljs-built_in">console</span>.log(data.toString())
-<span class="hljs-comment">// Hello World</span>
-<span class="hljs-keyword">await</span> lite.stop()</code></pre>
-				<a href="#browser-1" id="browser-1" style="color: inherit; text-decoration: none;">
-					<h3>Browser</h3>
-				</a>
-				<pre><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>IPFS Lite App<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">'load'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">var</span> { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = <span class="hljs-built_in">window</span>.ipfsLite
-        <span class="hljs-keyword">var</span> store = <span class="hljs-keyword">new</span> BlockStore(<span class="hljs-keyword">new</span> MemoryDatastore())
-        <span class="hljs-keyword">var</span> host = <span class="hljs-keyword">await</span> setupLibP2PHost(<span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>, [
-          <span class="hljs-string">`/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`</span>
-        ])
-        <span class="hljs-keyword">var</span> lite = <span class="hljs-keyword">new</span> Peer(store, host)
-        <span class="hljs-keyword">await</span> lite.start()
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'started!'</span>)
-        setTimeout(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          <span class="hljs-keyword">var</span> source = [{
-            <span class="hljs-attr">path</span>: <span class="hljs-string">'bar'</span>,
-            <span class="hljs-attr">content</span>: Buffer.from(<span class="hljs-string">'foo!'</span>),
-          }]
-          <span class="hljs-keyword">var</span> data = <span class="hljs-keyword">await</span> lite.addFile(source)
-          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'added file with CID:'</span>)
-          <span class="hljs-built_in">console</span>.log(data.cid.toString())
-          <span class="hljs-keyword">await</span> lite.stop()
-          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'stopped'</span>)
-        }, <span class="hljs-number">1000</span>)
-      }
-      main()
-    })
-  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ipfs-lite.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
-				<p>There are also several useful examples included in the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/tests"><code>tests</code> folder</a> of this repo, with tools for creating a default <code>libp2p</code> host exported by default. We&#39;ve also thrown in some useful interfaces to use when building on IPFS Lite, as well as the Buffer API for use in the browser.</p>
-				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-					<h2>API</h2>
-				</a>
-				<p>See <a href="https://textileio.github.io/js-ipfs-lite">https://textileio.github.io/js-ipfs-lite</a></p>
-				<a href="#maintainers" id="maintainers" style="color: inherit; text-decoration: none;">
-					<h2>Maintainers</h2>
-				</a>
-				<p><a href="https://github.com/carsonfarmer">Carson Farmer</a></p>
-				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
-					<h2>Contributing</h2>
-				</a>
-				<p>See <a href="CONTRIBUTING.md">the contributing file</a>!</p>
-				<p>PRs accepted.</p>
-				<p>Small note: If editing the README, please conform to the <a href="https://github.com/RichardLitt/standard-readme">standard-readme</a> specification.</p>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p><a href="LICENSE">MIT</a> (c) 2019 Textile</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/block.html" class="tsd-kind-icon">Block</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/blockservice.html" class="tsd-kind-icon">Block<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/blockstore.html" class="tsd-kind-icon">Block<wbr>Store</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/node.html" class="tsd-kind-icon">Node</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/peer.html" class="tsd-kind-icon">Peer</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/options.html" class="tsd-kind-icon">Options</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#addfile" class="tsd-kind-icon">add<wbr>File</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#cidtokey" class="tsd-kind-icon">cid<wbr>ToKey</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#getfile" class="tsd-kind-icon">get<wbr>File</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#keytocid" class="tsd-kind-icon">key<wbr>ToCid</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#setuplibp2phost" class="tsd-kind-icon">setup<wbr>Lib<wbr>P2PHost</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer>
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
-		</div>
-	</div>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>IPFS Lite <em>(js-ipfs-lite)</em></h1>
+<p><a href="https://textile.io"><img src="https://img.shields.io/badge/made%20by-Textile-informational.svg?style=flat-square" alt="Made by Textile"></a>
+<a href="https://slack.textile.io"><img src="https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=flat-square" alt="Chat on Slack"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/textileio/js-ipfs-lite.svg?style=flat-square" alt="GitHub license"></a>
+<a href="./package.json"><img src="https://img.shields.io/github/package-json/v/textileio/js-ipfs-lite.svg?style=popout-square" alt="GitHub package.json version"></a>
+<a href="https://www.npmjs.com/package/@textile/ipfs-lite"><img src="https://img.shields.io/npm/v/@textile/ipfs-lite.svg?style=popout-square" alt="npm (scoped)"></a>
+<a href="https://github.com/textileio/js-ipfs-lite/releases/latest"><img src="https://img.shields.io/github/release/textileio/js-ipfs-lite.svg?style=flat-square" alt="Release"></a>
+<a href="https://circleci.com/gh/textileio/js-ipfs-lite"><img src="https://img.shields.io/circleci/project/github/textileio/js-ipfs-lite/master.svg?style=flat-square" alt="CircleCI branch"></a>
+<a href="https://textileio.github.io/js-ipfs-lite/"><img src="https://img.shields.io/badge/docs-master-success.svg?style=popout-square" alt="docs"></a>
+<a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" alt="standard-readme compliant"></a></p>
+<blockquote>
+<p>A lightweight, extensible IPFS peer for Nodejs and the browser.</p>
+</blockquote>
+<p>IPFS Lite runs the minimal setup required to get and put data on the IPFS network.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#maintainers">Maintainers</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2>Background</h2>
+<p>The goal of IPFS Lite is to run the bare minimal functionality for any application to interact with the IPFS network (by getting and putting IPLD blocks). This saves having to deal with the complexities of using a full IPFS peer, while maintaining the ability to share the underlying libp2p host and DAG service with other components. It is also extremely lightweight, highly extensible, and easy to work with in both Nodejs and the browser. It supports async/await by default, and the library comes with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has most of the same requirements.</p>
+<h3>Why?</h3>
+<p>Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package (currently less than 1/2 the size of <code>js-ipfs</code> without much optimization -- we will continue to optimize further). It is also highly extensible, so developers need only include the features they <em>need</em>, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution that supports async/await patterns throughout, and we think others will find the type safety useful as well. Feel free to use the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/src/@types">Typescript declarations</a> in your own projects.</p>
+<h3>What?</h3>
+<p>Our goal is to provide a highly extensible IPFS implementation that, when 'fully loaded' supports <em>most</em> of the default <a href="https://github.com/ipfs/interface-js-ipfs-core"><code>js-ipfs</code></a> core APIs. Some APIs will likely never be added, and some APIs specific to Textile (like encryption) will likely be included as separate modules. If you have opinions about what should and should not be included, please <a href="https://github.com/textileio/js-ipfs-lite/issues">let us know</a>.</p>
+<h2>Install</h2>
+<h3>Node</h3>
+<pre class="prettyprint source"><code>npm i @textile/ipfs-lite
+</code></pre>
+<h3>Browser</h3>
+<pre class="prettyprint source"><code>git checkout https://github.com/textileio/js-ipfs-lite.git
+cd js-ipfs-lite
+npm i
+npm run browser:build
+</code></pre>
+<p>The above creates minified + gzipped assets in <code>dist/browser</code>, which you can load using a <code>&lt;script&gt;</code> tag. This will make an <code>ipfsLite</code> object available in the global (<code>window</code>) namespace. You'll also get an example <code>index.html</code> file to help get you started. We use <code>webpack</code> to generate separate bundles for each sub-module, as well as a full-featured default setup. You can pick and choose to optimize load times, or use your own bundler to wrap the whole thing up with your app code.</p>
+<h2>Usage</h2>
+<h3>Modular</h3>
+<p>Only import what you need, keeping your bundles small and your load times faster. You can grab a full-featured IPFS Lite peer from the top-level library, or grab specific sub-modules as needed:</p>
+<pre class="prettyprint source lang-typescript"><code>// Grab a fully-loaded Peer
+import { Peer, BlockStore } from '@textile/ipfs-lite'
+// Or just grab the things you need
+import { Peer, BlockStore } from '@textile/ipfs-lite/core'
+import { setupLibP2PHost, MemoryDatastore } = from '@textile/ipfs-lite/setup'
+</code></pre>
+<p>Need more? How about pubsub, dht access, or peer swarm?</p>
+<pre class="prettyprint source lang-typescript"><code>import '@textile/ipfs-lite/network'
+// Now Peer has four new APIs (bitswap, dht, pubsub, and swarm)
+// Or you can use the fully-loaded variant with this already included
+</code></pre>
+<p>How about adding and getting files?</p>
+<pre class="prettyprint source lang-typescript"><code>import '@textile/ipfs-lite/files'
+// Now Peer can addFile, getFile, and more
+// Or you can use the fully-loaded variant with this already included
+</code></pre>
+<p>Plus more sub-modules to come! Where possible, we try to mimic the <a href="https://github.com/ipfs/interface-js-ipfs-core">IPFS core interface</a> if adding a given API, but we don't restrict ourselves to this, so will depart where it makes sense.</p>
+<h3>Typescript</h3>
+<pre class="prettyprint source lang-typescript"><code>import { Peer, BlockStore } from '@textile/ipfs-lite/core'
+// Use any interface-datastore compliant store
+import { MemoryDatastore } from 'interface-datastore'
+import Libp2p from 'libp2p'
+
+const store = new BlockStore(new MemoryDatastore())
+// Bring your own libp2p host....
+const host = new Libp2p({ ...libp2Options })
+// ...or, use a full-featured default host
+// const host = await setupLibP2PHost()
+const lite = new Peer(store, host)
+
+await lite.start()
+
+const cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
+const data = await lite.getFile(cid)
+console.log(data.toString())
+// Hello World
+await lite.stop()
+</code></pre>
+<h3>Nodejs</h3>
+<pre class="prettyprint source lang-javascript"><code>let { Peer, BlockStore } = require('@textile/ipfs-lite/core')
+let { setupLibP2PHost } = require('@textile/ipfs-lite/setup')
+let { MemoryDatastore } = require('interface-datastore')
+
+let store = new BlockStore(new MemoryDatastore())
+let host = await setupLibP2PHost()
+let lite = new Peer(store, host)
+
+await lite.start()
+
+let cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
+let data = await lite.getFile(cid)
+console.log(data.toString())
+// Hello World
+await lite.stop()
+</code></pre>
+<h3>Browser</h3>
+<p><strong>Note</strong>: Packaging for browsers is currently highly experimental. If you have ideas or opinions here, please let us know. For now, we're using some reasonable Webpack settings to try to make for small bundles that are highly-modularized... But we can do a lot better.</p>
+<pre class="prettyprint source lang-html"><code>&lt;script>
+window.addEventListener('load', function () {
+    async function main() {
+    var { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = window.ipfsLite
+    var store = new BlockStore(new MemoryDatastore())
+    var host = await setupLibP2PHost(undefined, undefined, [
+        `/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`
+    ])
+    var lite = new Peer(store, host)
+    await lite.start()
+    console.log('started!')
+    setTimeout(async function () {
+        var source = [{
+        path: 'bar',
+        content: Buffer.from('foo!'),
+        }]
+        var data = await lite.addFile(source)
+        console.log('added file with CID:')
+        console.log(data.cid.toString())
+        await lite.stop()
+        console.log('stopped')
+    }, 1000)
+    }
+    main()
+})
+&lt;/script>
+&lt;script type=&quot;text/javascript&quot; src=&quot;ipfs-lite.all.min.js&quot;>&lt;/script>
+</code></pre>
+<p>There are also several useful examples included in the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/tests"><code>tests</code> folder</a> of this repo, with tools for creating a default <code>libp2p</code> host exported by default. We've also thrown in some useful interfaces to use when building on IPFS Lite, as well as the Buffer API for use in the browser.</p>
+<h2>API</h2>
+<p>See <a href="https://textileio.github.io/js-ipfs-lite">https://textileio.github.io/js-ipfs-lite</a></p>
+<h2>Maintainers</h2>
+<p><a href="https://github.com/carsonfarmer">Carson Farmer</a></p>
+<h2>Contributing</h2>
+<p>See <a href="CONTRIBUTING.md">the contributing file</a>!</p>
+<p>PRs accepted.</p>
+<p>Small note: If editing the README, please conform to the <a href="https://github.com/RichardLitt/standard-readme">standard-readme</a> specification.</p>
+<h2>License</h2>
+<p><a href="LICENSE">MIT</a> (c) 2019 Textile</p></article>
+    </section>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Nov 20 2019 20:48:35 GMT+0000 (Coordinated Universal Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
 </footer>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
 </body>
 </html>

@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: core/blockservice.ts</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Block.html">Block</a></li><li><a href="BlockService.html">BlockService</a></li><li><a href="BlockStore.html">BlockStore</a></li><li><a href="DAGService.html">DAGService</a></li><li><a href="Peer.html">Peer</a></li></ul><h3>Interfaces</h3><ul><li><a href="AddOptions.html">AddOptions</a></li><li><a href="DAGOptions.html">DAGOptions</a></li><li><a href="PeerOptions.html">PeerOptions</a></li><li><a href="ResolveResult.html">ResolveResult</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>core/blockservice.ts</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Bitswap from 'ipfs-bitswap'
+import CID from 'cids'
+import { BlockStore, Block } from './blockstore'
+
+/**
+ * BlockService is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
+ * A block service is backed by a block store as its datastore for blocks, and uses an "exchange" (bitswap) to fetch
+ * blocks from the network. This implementation is a simplified variant of the official IPFS block service, requiring
+ * only a simple block store (not a full IPFS repo), and reference to a bitwap exchange.
+ *
+ * It satisfies the default IPFS block service interface: https://github.com/ipfs/js-ipfs-block-service.
+ */
+export class BlockService {
+  /**
+   * BlockService creates a new block service.
+   *
+   * @param {BlockStore} store The block store to use for local block storage.
+   * @param {Bitswap} exchange Add a "bitswap" instance that communicates with the network to retrieve blocks that
+   * are not in the local store. If the node is online, all requests for blocks first check locally and then ask
+   * the network for the blocks. To 'go offline', simply set `exchange` to undefined or null.
+   */
+  constructor(public store: BlockStore, public exchange?: Bitswap) {}
+
+  /**
+   * online returns whether the block service is online or not. i.e. does it have a valid exchange?
+   */
+  online() {
+    return this.exchange != null
+  }
+
+  /**
+   * put adds a block to the underlying block store.
+   *
+   * @param {Block} block An immutable block of data.
+   */
+  async put(block: Block) {
+    if (this.exchange != null) {
+      return this.exchange.put(block)
+    } else {
+      return this.store.put(block)
+    }
+  }
+
+  /**
+   * putMany adds multiple blocks to the underlying block store.
+   *
+   * @param {Iterable&lt;Block>} blocks An iterable of immutable blocks of data.
+   */
+  async putMany(blocks: Iterable&lt;Block>) {
+    if (this.exchange != null) {
+      return this.exchange.putMany(blocks)
+    } else {
+      return this.store.putMany(blocks)
+    }
+  }
+
+  /**
+   * get returns a block by its content identifier.
+   * If the block is not available locally and the exchange is online, it will request the block from the network.
+   *
+   * @param {CID} cid The content identifier for an immutable block of data.
+   */
+  async get(cid: CID): Promise&lt;Block> {
+    if (this.exchange != null) {
+      return this.exchange.get(cid)
+    } else {
+      return this.store.get(cid)
+    }
+  }
+
+  /**
+   * getMany returns multiple blocks from an iterable of content identifiers.
+   * If any of the blocks are not available locally and the exchange is online, it will request the block(s) from the
+   * exchange/network.
+   *
+   * @param {Iterable&lt;CID>} cids Iterable of content identifiers for immutable blocks of data.
+   */
+  async *getMany(cids: Iterable&lt;CID>): AsyncIterableIterator&lt;Block> {
+    if (this.exchange != null) {
+      return this.exchange.getMany(cids)
+    } else {
+      for (const cid of cids) {
+        yield this.store.get(cid)
+      }
+    }
+  }
+
+  /**
+   * delete removes a block from the local block store.
+   *
+   * @param {CID} cid The content identifier for an immutable block of data.
+   */
+  async delete(cid: CID) {
+    await this.store.delete(cid)
+    return cid
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Nov 20 2019 20:48:35 GMT+0000 (Coordinated Universal Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
