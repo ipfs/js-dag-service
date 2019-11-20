@@ -1,6 +1,6 @@
 {
   "name": "@textile/ipfs-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight minimal IPFS peer for typescript/javascript.",
   "main": "dist/index.js",
   "browser": {
