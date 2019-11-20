@@ -111,4 +111,14 @@ export class Peer extends DAGService {
   isOnline() {
     return this.blockExchange && this.host && this.host.isStarted()
   }
+
+  /**
+   * dag provides access to the underlying DAG service.
+   *
+   * The dag API supports the creation and manipulation of dag-pb objects, as well as other IPLD formats
+   * (i.e dag-cbor, ethereum-block, git, etc). Use it to put, get, and walk IPLD DAG objects.
+   */
+  get dag() {
+    return this
+  }
 }
