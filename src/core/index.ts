@@ -97,4 +97,13 @@ export class Peer extends Ipld {
   isOnline() {
     return this.blockExchange && this.host && this.host.isStarted()
   }
+
+  /**
+  * dag is an alias to `this`, which is itself a DAG service.
+  * The dag API supports the creation and manipulation of dag-pb objects, as well as other IPLD formats
+  * (i.e dag-cbor, ethereum-block, git, etc). Use it to put, get, and walk IPLD DAG objects.
+  */
+  get dag() {
+    return this
+  }
 }
