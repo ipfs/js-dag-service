@@ -82,17 +82,17 @@ export class DAGService {
   * @param {CID} cid The content identifier at which to start resolving.
   * @param {string} path The path that should be resolved.
   */
-  async *resolve(cid: CID, path: string): AsyncIterable<ResolveResult> {
+  async *resolve(cid: CID, path: string): AsyncIterableIterator<ResolveResult> {
     const data = await this.blockService.get(cid)
     const block = Block.create(data.data, data.cid)
     const reader = block.reader()
     const node = reader.get(path)
-    if (node.remainderPath) {
-      for await (const res of this.resolve(node.value, node.remainderPath)) {
+    yield { value: node.value, remainderPath: node.remaining || '' }
+    if (CID.isCID(node.value)) {
+      for await (const res of this.resolve(node.value, node.remaining || '')) {
         yield res
       }
     }
-    yield node
   }
 
   /**
@@ -103,19 +103,11 @@ export class DAGService {
   * @param {object} options Currently only whether to get the paths recursively or not. If `recursive` is
   * `false`, it will only resolve the paths of the given CID.
   */
-  async *tree(cid: CID, offsetPath: string = '', options = { recursive: false }): AsyncIterable<string> {
+  async *tree(cid: CID, offsetPath = '', options = { recursive: false }): AsyncIterableIterator<string> {
     const data = await this.blockService.get(cid)
     const block = Block.create(data.data, data.cid)
     const reader = block.reader()
-    // Start with links
-    if (options.recursive) {
-      for await (const [, sub] of reader.links()) {
-        for await (const subPath of this.tree(sub, offsetPath, options)) {
-          yield subPath
-        }
-      }
-    }
-    // Finish with this block and sub-paths
+    // Start with this block and its sub-paths
     for await (let path of reader.tree()) {
       // Return it if it matches the given offset path, but is not the offset path itself
       if (path.startsWith(offsetPath) && path.length > offsetPath.length) {
@@ -123,6 +115,20 @@ export class DAGService {
           path = path.slice(offsetPath.length + 1)
         }
         yield path
+      }
+    }
+    // Finish with links if recursive
+    if (options.recursive) {
+      for await (const [path, sub] of reader.links()) {
+        for await (const subPath of this.tree(sub, undefined, options)) {
+          let fullPath = `${path}/${subPath}`
+          if (fullPath.startsWith(offsetPath) && fullPath.length > offsetPath.length) {
+            if (offsetPath.length > 0) {
+              fullPath = fullPath.slice(offsetPath.length + 1)
+            }
+            yield fullPath
+          }
+        }
       }
     }
   }
@@ -143,7 +149,7 @@ export class DAGService {
   *
   * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes that should be retrieved.
   */
-  async *getMany(cids: Iterable<CID>): AsyncIterable<any> {
+  async *getMany(cids: Iterable<CID>): AsyncIterableIterator<any> {
     for await (const cid of cids) {
       yield this.get(cid)
     }
@@ -159,13 +165,15 @@ export class DAGService {
   */
   async put(node: any, codec: string | number = 'dag-cbor', options?: AddOptions) {
     const opts = options || this.defaultOptions || {}
-    if (typeof codec === 'number') {
-      // Compatibility with js-ipld
+    if (typeof codec === 'number') { // Compatibility with js-ipld
       codec = getName(codec)
     }
     const block = Block.encoder(node, codec, opts.hashAlg)
     const data = block.encode()
-    const cid = await block.cid()
+    let cid = await block.cid()
+    if (opts.cidVersion === 0) { // Compatibility with js-ipld
+      cid = cid.toV0()
+    }
     if (!opts.onlyHash) {
       await this.blockService.put({ data, cid })
     }
@@ -180,7 +188,11 @@ export class DAGService {
   * Can also be a numeric multicodec code for compatibility with js-ipld.
   * @param {AddOptions} options The specific parameters to use when encoding the input node.
   */
-  async *putMany(nodes: Iterable<any>, codec: string | number = 'dag-cbor', options?: AddOptions): AsyncIterable<CID> {
+  async *putMany(
+    nodes: Iterable<any>,
+    codec: string | number = 'dag-cbor',
+    options?: AddOptions,
+  ): AsyncIterableIterator<CID> {
     const opts = options || this.defaultOptions || {}
     if (typeof codec === 'number') {
       codec = getName(codec) // Compatibility with js-ipld
@@ -207,7 +219,7 @@ export class DAGService {
   *
   * @param {Iterable<CID>} cids The content identifiers for the IPLD nodes to be removed.
   */
-  async *removeMany(cids: Iterable<CID>): AsyncIterable<CID> {
+  async *removeMany(cids: Iterable<CID>): AsyncIterableIterator<CID> {
     for await (const cid of cids) {
       yield this.remove(cid)
     }
