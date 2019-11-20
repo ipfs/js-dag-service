@@ -4,34 +4,35 @@ import { Query, Key, Datastore, Result } from 'interface-datastore'
 /**
  * Block represents an immutable block of data that is uniquely referenced with a cid.
  *
- * This is equivalent to https://github.com/ipld/js-ipld-block.
+ * It satisfies the default IPFS IPLD block interface: https://github.com/ipld/js-ipld-block.
  */
 export class Block {
   /**
    * Block creates an immutable block of data with the given content identifier (CID).
-   * @param data The data to be stored in the block as a buffer.
-   * @param cid The content identifier of the data.
+   *
+   * @param {Buffer} data The data to be stored in the block as a buffer.
+   * @param {CID} cid The content identifier of the data.
    */
   constructor(readonly data: Buffer, readonly cid: CID) {}
 }
 
 /**
- * Blockstore is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
+ * BlockStore is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
  *
- * This is equivalent to https://github.com/ipfs/js-ipfs-repo/blob/master/src/blockstore.js.
+ * It satisfies the default IPFS block store interface: https://github.com/ipfs/js-ipfs-repo.
  */
 export class BlockStore {
   /**
    * BlockStore creates a new block store.
    *
-   * @param store The underlying datastore for locally caching immutable blocks of data.
+   * @param {Datastore} store The underlying datastore for locally caching immutable blocks of data.
    */
   constructor(private store: Datastore) {}
 
   /**
    * cidToKey transforms a CID to the appropriate block store key.
    *
-   * @param cid The content identifier for an immutable block of data.
+   * @param {CID} cid The content identifier for an immutable block of data.
    */
   static cidToKey = (cid: CID) => {
     if (!CID.isCID(cid)) {
@@ -44,7 +45,7 @@ export class BlockStore {
   /**
    * keyToCid transforms a block store key to a CID.
    *
-   * @param key The key used to encode the CID.
+   * @param {Key} key The key used to encode the CID.
    */
   static keyToCid = (key: Key) => {
     return new CID(key.toString().slice(1))
@@ -53,7 +54,7 @@ export class BlockStore {
   /**
    * put adds a block to the block store.
    *
-   * @param block An immutable block of data.
+   * @param {Block} block An immutable block of data.
    */
   async put(block: Block) {
     const k = BlockStore.cidToKey(block.cid)
@@ -64,35 +65,9 @@ export class BlockStore {
   }
 
   /**
-   * get returns a block by cid.
-   *
-   * @param cid The content identifier for an immutable block of data.
-   */
-  async get(cid: CID) {
-    const k = BlockStore.cidToKey(cid)
-    return new Block(await this.store.get(k), cid)
-  }
-
-  /**
-   * delete removes a block from the store.
-   *
-   * @param cid The content identifier for an immutable block of data.
-   */
-  async delete(cid: CID) {
-    this.store.delete(BlockStore.cidToKey(cid))
-  }
-
-  /**
-   * has returns whether the store contains the block associated with the given CID.
-   */
-  async has(cid: CID) {
-    return this.store.has(BlockStore.cidToKey(cid))
-  }
-
-  /**
    * putMany adds multiple blocks to the store.
    *
-   * @param blocks An iterable of immutable blocks of data.
+   * @param {Iterable<Block>} blocks An iterable of immutable blocks of data.
    */
   async putMany(blocks: Iterable<Block>) {
     const batch = this.store.batch()
@@ -107,11 +82,40 @@ export class BlockStore {
   }
 
   /**
-   * query searches the store for blocks matching the query parameters.
+   * get returns a block by cid.
    *
-   * @param query
+   * @param {CID} cid The content identifier for an immutable block of data.
    */
-  async *query(query: Query): AsyncIterable<Result> {
+  async get(cid: CID) {
+    const k = BlockStore.cidToKey(cid)
+    return new Block(await this.store.get(k), cid)
+  }
+
+  /**
+   * delete removes a block from the store.
+   *
+   * @param {CID} cid The content identifier for an immutable block of data.
+   */
+  async delete(cid: CID) {
+    return this.store.delete(BlockStore.cidToKey(cid))
+  }
+
+  /**
+   * has returns whether the store contains the block associated with the given CID.
+   *
+   * @param {CID} cid The content identifier for an immutable block of data.
+   */
+  async has(cid: CID) {
+    return this.store.has(BlockStore.cidToKey(cid))
+  }
+
+  /**
+   * query searches the store for blocks matching the query parameters. It returns results from the underlying
+   * datastore (i.e., not Blocks).
+   *
+   * @param {Query} query A set of query options to use when querying the underlying datastore.
+   */
+  async *query(query: Query): AsyncIterableIterator<Result> {
     for await (const result of this.store.query(query)) {
       yield result
     }

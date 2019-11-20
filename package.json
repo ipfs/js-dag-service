@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A lightweight minimal IPFS peer for typescript/javascript.",
   "main": "dist/index.js",
+  "browser": {
+    "dist/setup/node": "dist/setup/browser"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "prepare": "npm run build",
@@ -50,7 +53,9 @@
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "ipfs-block-service": "^0.16.0",
+    "ipld": "^0.25.0",
     "ipld-block": "^0.9.0",
+    "ipld-dag-pb": "^0.18.1",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "jest-environment-node": "^24.9.0",
@@ -70,12 +75,12 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@ipld/block": "^2.0.6",
     "bignumber.js": "^9.0.0",
     "es6-promisify": "^6.0.2",
     "ipfs-bitswap": "^0.26.0",
     "ipfs-unixfs-exporter": "^0.38.0",
     "ipfs-unixfs-importer": "^0.40.0",
-    "ipld": "^0.25.0",
     "libp2p": "^0.26.2",
     "libp2p-bootstrap": "^0.9.7",
     "libp2p-gossipsub": "0.0.5",

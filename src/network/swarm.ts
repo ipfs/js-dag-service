@@ -1,4 +1,3 @@
-import PeerInfo from 'peer-info'
 import { Multiaddr } from 'multiaddr'
 import PeerId from 'peer-id'
 import { Peer } from '../core'

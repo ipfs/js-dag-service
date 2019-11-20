@@ -16,7 +16,7 @@ declare module '../core' {
 }
 
 /**
- * `addFile` chunks and adds content to the DAG service.
+ * addFile chunks and adds content to the DAG service.
  *
  * The content is stored as a UnixFS DAG (default for IPFS). It returns the root ipld DAG node.
  *
@@ -46,7 +46,7 @@ Peer.prototype.addFile = async function(source: Iterable<File>, options?: AddOpt
 }
 
 /**
- * `getFile` returns the content of a file as identified by its root CID.
+ * getFile returns the content of a file as identified by its root CID.
  *
  * The file must have been added as a UnixFS DAG (default for IPFS).
  *

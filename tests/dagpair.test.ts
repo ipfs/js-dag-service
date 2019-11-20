@@ -41,7 +41,7 @@ describe('sync IPLD DAG between IPFS lite peers', () => {
       akey: 'avalue',
     }
     const cid = await p1.put(data, DAG_CBOR)
-    console.log(`created node: ${cid}`)
+    // console.log(`created node: ${cid}`)
     const test = await p2.get(cid)
     expect(cid.toString()).toEqual('bafyreigzkampgfuhmld36ljrywwcxogf5zyjbkasehbggbmgpy5tmrygpe')
     expect(test).toEqual(data)
