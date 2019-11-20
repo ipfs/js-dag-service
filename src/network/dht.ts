@@ -9,6 +9,7 @@ export interface Options {
 
 /**
  * DhtAPI provides access to the libp2p distributed hash table module.
+ * @category Components
  */
 export class DhtAPI {
   /**

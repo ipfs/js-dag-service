@@ -14,6 +14,7 @@ export interface SwarmPeer {
 
 /**
  * SwarmAPI provides access to the libp2p host's peer swarm.
+ * @category Components
  */
 export class SwarmAPI {
   /**

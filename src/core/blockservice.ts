@@ -9,6 +9,7 @@ import { BlockStore, Block } from './blockstore'
  * only a simple block store (not a full IPFS repo), and reference to a bitwap exchange.
  *
  * It satisfies the default IPFS block service interface: https://github.com/ipfs/js-ipfs-block-service.
+ * @category Core
  */
 export class BlockService {
   /**

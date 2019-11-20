@@ -54,6 +54,7 @@ export interface ResolveResult {
  * integrate with the IPFS IPLD Merkle-forest.
  *
  * It satisfies the default IPLD interface: https://github.com/ipld/js-ipld.
+ * @category Core
  */
 export class DAGService {
   /**

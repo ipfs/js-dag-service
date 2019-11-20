@@ -2,6 +2,7 @@ import { Peer } from '../core'
 
 /**
  * PubSubAPI provides access to the libp2p host's pubsub module.
+ * @category Components
  */
 export class PubSubAPI {
   /**

@@ -17,14 +17,41 @@ export interface Wantlist {
  * Stat is object that contains information about the bitswap agent.
  */
 export interface Stat {
+  /**
+   * provideBufLen
+   */
   provideBufLen: number
+  /**
+   * blocksReceived
+   */
   blocksReceived: Big
-  wantlist: { '/': any }[]
+  /**
+   * wantlist
+   */
+  wantlist: Record<'/', string>[]
+  /**
+   * peers
+   */
   peers: string[]
+  /**
+   * dupBlksReceived
+   */
   dupBlksReceived: Big
+  /**
+   * dupDataReceived
+   */
   dupDataReceived: Big
+  /**
+   * dataReceived
+   */
   dataReceived: Big
+  /**
+   * blocksSent
+   */
   blocksSent: Big
+  /**
+   * dataSent
+   */
   dataSent: Big
 }
 
@@ -34,6 +61,7 @@ function formatWantlist(list: Iterable<any>, cidBase?: string) {
 
 /**
  * BitswapAPI provides access to the libp2p host's bitswap agent.
+ * @category Components
  */
 export class BitswapAPI {
   /**

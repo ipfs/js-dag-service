@@ -20,6 +20,7 @@ export class Block {
  * BlockStore is a simple key/value store for adding, deleting, and retrieving immutable blocks of data.
  *
  * It satisfies the default IPFS block store interface: https://github.com/ipfs/js-ipfs-repo.
+ * @category Core
  */
 export class BlockStore {
   /**

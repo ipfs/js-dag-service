@@ -19,6 +19,7 @@ export interface PeerOptions {
  * Peer is an IPFS Lite peer. It provides a DAG service that can fetch and put blocks from/to the IPFS network.
  *
  * It casually satisfies the original IPFS Lite interface: https://github.com/hsanjuan/ipfs-lite.
+ * @category Core
  */
 export class Peer extends DAGService {
   /**
