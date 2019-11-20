@@ -1,6 +1,7 @@
 declare module 'libp2p-gossipsub' {
   import Libp2p from 'libp2p'
   import PeerInfo from 'peer-info'
+  import PubSub from 'libp2p-pubsub'
 
   class Heartbeat {
     constructor(gossippub: GossipSub)
@@ -23,7 +24,7 @@ declare module 'libp2p-gossipsub' {
     shift(): void
   }
 
-  class GossipSub {
+  class GossipSub extends PubSub {
     constructor (libp2p: Libp2p, options?: { fallbackToFloodsub?: boolean, emitSelf?: boolean})
     mesh: Map<string, Set<PeerInfo>>
     fanout: Map<string, Set<PeerInfo>>
@@ -32,9 +33,11 @@ declare module 'libp2p-gossipsub' {
     control: Map<PeerInfo, any>
     messageCache: MessageCache
     heartbeat: Heartbeat
-    start(callback: Function): void
-    stop(callback: Function): void
-    join(...topics: string[]): void
-    leave(...topics: string[]): void
+    start(callback?: Function): Promise<void>
+    stop(callback?: Function): Promise<void>
+    join(...topics: string[]): Promise<void>
+    leave(...topics: string[]): Promise<void>
   }
+  // eslint-disable-next-line import/no-default-export
+  export default GossipSub
 }

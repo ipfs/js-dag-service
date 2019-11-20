@@ -1,5 +1,6 @@
 import { MemoryDatastore } from 'interface-datastore'
-import { Peer, setupLibP2PHost, BlockStore } from '../src'
+import { Peer, BlockStore } from '../src'
+import { setupLibP2PHost } from '../src/setup'
 
 const writeKey = require('libp2p/src/pnet').generate
 const DAG_CBOR = require('multicodec').DAG_CBOR

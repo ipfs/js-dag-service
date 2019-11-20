@@ -1,6 +1,9 @@
 import { createReadStream, promises as fs } from 'fs'
 import { MemoryDatastore } from 'interface-datastore'
-import { Peer, setupLibP2PHost, BlockStore, Result } from '../src'
+import { Peer, BlockStore } from '../src'
+import { setupLibP2PHost } from '../src/setup'
+import '../src/files'
+import { Result } from '../src/files'
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 let lite: Peer

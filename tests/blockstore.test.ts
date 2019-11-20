@@ -2,7 +2,7 @@ import CID from 'cids'
 import { Key, MemoryDatastore, Query } from 'interface-datastore'
 import multihashing from 'multihashing-async'
 import { collect } from 'streaming-iterables'
-import { cidToKey, keyToCid, Block, BlockStore } from '../src/blockstore'
+import { Block, BlockStore } from '../src/core/blockstore'
 
 let blocks: BlockStore
 
@@ -57,9 +57,9 @@ beforeAll(async () => {
 describe('BlockStore', () => {
   it('converts a CID to a datastore Key and back', () => {
     const originalCid = new CID('Qme6KJdKcp85TYbLxuLV7oQzMiLremD7HMoXLZEmgo6Rnh')
-    const key = cidToKey(originalCid)
+    const key = BlockStore.cidToKey(originalCid)
     expect(key instanceof Key).toBeTruthy()
-    const cid = keyToCid(key)
+    const cid = BlockStore.keyToCid(key)
     expect(cid instanceof CID).toBeTruthy()
     // We'll always get back a v1 CID, so use toV0 to compare
     expect(cid.toV0().toString()).toEqual(originalCid.toString())

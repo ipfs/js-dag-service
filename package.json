@@ -5,12 +5,15 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "browser:build": "NODE_ENV=production webpack --mode production",
-    "browser:serve": "npm run browser:build && http-server dist/browser --gzip",
     "prepare": "npm run build",
     "test": "jest --verbose --no-watchman",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src",
-    "docs": "typedoc"
+    "docs:build": "jsdoc -c jsdoc.json",
+    "docs:serve": "npm run docs:build && http-server docs/",
+    "docs": "npm run docs:build",
+    "browser:build": "NODE_ENV=production webpack --mode production",
+    "browser:serve": "npm run browser:build && http-server dist/browser --gzip",
+    "browser": "npm run browser:build"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,7 @@
     "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
+    "better-docs": "^1.4.2",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^3.0.0",
     "eslint": "^6.5.1",
@@ -50,6 +54,8 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "jest-environment-node": "^24.9.0",
+    "jsdoc": "^3.6.3",
+    "libp2p-pubsub": "^0.2.1",
     "multihashing-async": "^0.8.0",
     "peer-id": "^0.12.2",
     "peer-info": "^0.15.1",
@@ -59,12 +65,12 @@
     "terser-webpack-plugin": "^2.2.1",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.0",
-    "typedoc": "^0.15.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "bignumber.js": "^9.0.0",
     "es6-promisify": "^6.0.2",
     "ipfs-bitswap": "^0.26.0",
     "ipfs-unixfs-exporter": "^0.38.0",
