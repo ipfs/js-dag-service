@@ -4,7 +4,7 @@
 [![Chat on Slack](https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=flat-square)](https://slack.textile.io)
 [![GitHub license](https://img.shields.io/github/license/textileio/js-ipfs-lite.svg?style=flat-square)](./LICENSE)
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/textileio/js-ipfs-lite.svg?style=popout-square)](./package.json)
-[![npm (scoped)](https://img.shields.io/npm/v/@textile/ipfs-lite.svg?style=popout-square)](https://www.npmjs.com/package/@textile/wallet)
+[![npm (scoped)](https://img.shields.io/npm/v/@textile/ipfs-lite.svg?style=popout-square)](https://www.npmjs.com/package/@textile/ipfs-lite)
 [![Release](https://img.shields.io/github/release/textileio/js-ipfs-lite.svg?style=flat-square)](https://github.com/textileio/js-ipfs-lite/releases/latest)
 [![CircleCI branch](https://img.shields.io/circleci/project/github/textileio/js-ipfs-lite/master.svg?style=flat-square)](https://circleci.com/gh/textileio/js-ipfs-lite)
 [![docs](https://img.shields.io/badge/docs-master-success.svg?style=popout-square)](https://textileio.github.io/js-ipfs-lite/)
@@ -62,17 +62,18 @@ The above creates minified + gzipped assets in `dist/browser`, which you can loa
 Only import what you need, keeping your bundles small and your load times faster. You can grab a full-featured IPFS Lite peer from the top-level library, or grab specific sub-modules as needed:
 
 ```typescript
-// Grab everything and the kitchen sink
-import { Peer, BlockStore, MemoryDatastore, setupLibP2PHost, Buffer } from '@textile/ipfs-lite'
+// Grab a fully-loaded Peer
+import { Peer, BlockStore } from '@textile/ipfs-lite'
 // Or just grab the things you need
 import { Peer, BlockStore } from '@textile/ipfs-lite/core'
-import { setupLibP2PHost } = from '@textile/ipfs-lite/setup'
+import { setupLibP2PHost, MemoryDatastore } = from '@textile/ipfs-lite/setup'
 ```
 Need more? How about pubsub, dht access, or peer swarm?
 
 ```typescript
 import '@textile/ipfs-lite/network'
 // Now Peer has four new APIs (bitswap, dht, pubsub, and swarm)
+// Or you can use the fully-loaded variant with this already included
 ```
 
 How about adding and getting files?
@@ -80,9 +81,10 @@ How about adding and getting files?
 ```typescript
 import '@textile/ipfs-lite/files'
 // Now Peer can addFile, getFile, and more
+// Or you can use the fully-loaded variant with this already included
 ```
 
-Plus more sub-modules to come!
+Plus more sub-modules to come! Where possible, we try to mimic the [IPFS core interface](https://github.com/ipfs/interface-js-ipfs-core) if adding a given API, but we don't restrict ourselves to this, so will depart where it makes sense.
 
 ### Typescript
 
@@ -116,7 +118,7 @@ let { setupLibP2PHost } = require('@textile/ipfs-lite/setup')
 let { MemoryDatastore } = require('interface-datastore')
 
 let store = new BlockStore(new MemoryDatastore())
-const host = await setupLibP2PHost()
+let host = await setupLibP2PHost()
 let lite = new Peer(store, host)
 
 await lite.start()
@@ -129,6 +131,8 @@ await lite.stop()
 ```
 
 ### Browser
+
+**Note**: Packaging for browsers is currently highly experimental. If you have ideas or opinions here, please let us know. For now, we're using some reasonable Webpack settings to try to make for small bundles that are highly-modularized... But we can do a lot better.
 
 ```html
 <script>
