@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { resolveTsAliases } = require("resolve-ts-aliases")
 
-const extensions = ['.tsx', '.ts', '.js', 'json']
+const extensions = ['.ts', '.tsx', '.js', 'json']
 const filename = 'ipfs-lite.[name].min.js'
 
 module.exports = {

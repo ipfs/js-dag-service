@@ -6,7 +6,7 @@
     "outDir": "dist"
   },
   "paths": {
-    "./bundle/node": ["./bundle/browser"]
+    "./setup/node": ["./setup/browser"]
   },
   "exclude": [
     "tests",
