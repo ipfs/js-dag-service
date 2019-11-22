@@ -1,6 +1,8 @@
 import { Multiaddr } from 'multiaddr'
 import PeerId from 'peer-id'
+import PeerInfo from 'peer-info'
 import { Peer } from '../core'
+import { Connection } from 'libp2p'
 
 export interface SwarmPeer {
   addr: Multiaddr
@@ -37,7 +39,7 @@ export class Swarm {
     return peers
   }
 
-  async connect(addr: Multiaddr) {
+  async connect(addr: Multiaddr): Promise<Connection> {
     if (!this.parent.isOnline()) {
       throw new Error('peer is not online')
     }
@@ -58,7 +60,7 @@ export class Swarm {
     return this.parent.host.peerInfo.multiaddrs.toArray()
   }
 
-  async addrs() {
+  async addrs(): Promise<Array<PeerInfo>> {
     if (!this.parent.isOnline()) {
       throw new Error('peer is not online')
     }
