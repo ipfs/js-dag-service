@@ -1,4 +1,6 @@
 declare module 'peer-id' {
+  import { PrivateKey, PublicKey } from 'libp2p-crypto'
+
   namespace PeerId {
     type KeyTypes = 'ed25519' | 'rsa' | 'secp256k1';
     type CreateOptions = {
@@ -14,7 +16,7 @@ declare module 'peer-id' {
   }
 
   class PeerId {
-    constructor(id: Buffer, privKey?: LibP2pCrypto.PrivateKey, pubKey?: LibP2pCrypto.PublicKey);
+    constructor(id: Buffer, privKey?: PrivateKey, pubKey?: PublicKey);
 
     static create(optsOrCb: PeerId.CreateOptions): Promise<PeerId>;
     static createFromB58String(str: string): PeerId;

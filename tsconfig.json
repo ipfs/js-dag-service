@@ -62,7 +62,8 @@
   },
   "compileOnSave": true,
   "exclude": [
-    "node_modules",
-    "dist",
+    "./tests",
+    "./dist",
+    "./node_modules"
   ]
 }

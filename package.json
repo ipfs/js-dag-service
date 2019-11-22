@@ -2,12 +2,13 @@
   "name": "@textile/ipfs-lite",
   "version": "0.1.1",
   "description": "A lightweight minimal IPFS peer for typescript/javascript.",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "browser": {
     "./setup/node": "./setup/browser"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "tsc",
     "prepare": "npm run build",
     "test": "jest --verbose --no-watchman",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src",
