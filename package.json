@@ -76,7 +76,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
-    "@ipld/block": "^2.0.6",
+    "@ipld/block": "2.0.6",
     "bignumber.js": "^9.0.0",
     "es6-promisify": "^6.0.2",
     "ipfs-bitswap": "^0.26.0",

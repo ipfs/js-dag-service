@@ -89,50 +89,55 @@ Plus more sub-modules to come! Where possible, we try to mimic the [IPFS core in
 ### Typescript
 
 ```typescript
-import { Peer, BlockStore } from '@textile/ipfs-lite/core'
+import { Peer, BlockStore } from '@textile/ipfs-lite'
 // Use any interface-datastore compliant store
 import { MemoryDatastore } from 'interface-datastore'
 import Libp2p from 'libp2p'
 
 const store = new BlockStore(new MemoryDatastore())
-// Bring your own libp2p host....
-const host = new Libp2p({ ...libp2Options })
-// ...or, use a full-featured default host
-// const host = await setupLibP2PHost()
-const lite = new Peer(store, host)
 
-await lite.start()
+;(async function() {
+    // Bring your own libp2p host....
+    const host = new Libp2p({ ...libp2Options })
+    // ...or, use a full-featured default host
+    // const host = await setupLibP2PHost()
+    const lite = new Peer(store, host)
 
-const cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
-const data = await lite.getFile(cid)
-console.log(data.toString())
-// Hello World
-await lite.stop()
+    await lite.start()
+
+    const cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
+    const data = await lite.getFile(cid)
+    console.log(data.toString())
+    // Hello World
+    await lite.stop()
+}
 ```
 
 ### Nodejs
 
 ```javascript
-let { Peer, BlockStore } = require('@textile/ipfs-lite/core')
-let { setupLibP2PHost } = require('@textile/ipfs-lite/setup')
+let { Peer, BlockStore } = require('@textile/ipfs-lite')
+let { setupLibP2PHost } = require('@textile/ipfs-lite/dist/setup')
 let { MemoryDatastore } = require('interface-datastore')
 
 let store = new BlockStore(new MemoryDatastore())
-let host = await setupLibP2PHost()
-let lite = new Peer(store, host)
 
-await lite.start()
+;(async function() {
+  let host = await setupLibP2PHost()
+  let lite = new Peer(store, host)
+  await lite.start()
 
-let cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
-let data = await lite.getFile(cid)
-console.log(data.toString())
-// Hello World
-await lite.stop()
+  let cid = 'QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u'
+  let data = await lite.getFile(cid)
+  console.log(data.toString())
+  // Hello World
+  await lite.stop()
+})()
 ```
 
 ### Browser
 
-**Note**: Packaging for browsers is currently highly experimental. If you have ideas or opinions here, please let us know. For now, we're using some reasonable Webpack settings to try to make for small bundles that are highly-modularized... But we can do a lot better.
+**Note**: Packaging for browsers is currently highly experimental. If you have ideas or opinions here, please let us know. For now, we're using some reasonable Webpack settings to try to make for small bundles that are highly-modularized... but we can do a lot better!
 
 ```html
 <script>
