@@ -69,7 +69,7 @@ Peer.prototype.getFile = async function(cid: CID | Buffer | string, options?: Ge
   }
   const arr: Buffer[] = []
   for await (const entry of file.content(options)) {
-    arr.push(entry as Buffer)
+    arr.push(Buffer.from(entry as Uint8Array))
   }
   return Buffer.concat(arr)
 }
