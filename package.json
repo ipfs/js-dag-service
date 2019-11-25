@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "jest --verbose --no-watchman",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src",
     "docs:build": "jsdoc -c jsdoc.json",
