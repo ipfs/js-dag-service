@@ -73,7 +73,7 @@ jobs:
                 command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/js-ipfs-lite/.npmrc
             - run:
                 name: Publish package
-                command: npm publish --access=public
+                command: npm publish --access=public --unsafe-perm
             - run:
                 name: prepare docs
                 command: |
