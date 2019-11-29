@@ -1,0 +1,29 @@
+{
+  "name": "@textile/ipfs-lite-setup",
+  "version": "0.0.1",
+  "description": "IPFS Lite Networking",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "docs": "typedoc --out docs",
+    "test": "jest"
+  },
+  "author": "Carson Farmer <carson@textile.io>",
+  "license": "MIT",
+  "dependencies": {
+    "cids": "^0.7.1",
+    "@textile/ipfs-lite-core": "^0.0.1"
+  },
+  "devDependencies": {
+    "peer-id": "^0.13.5",
+    "bignumber.js": "^9.0.0",
+    "@textile/ipfs-lite-types": "^0.0.1",
+    "libp2p": "^0.26.2",
+    "multiaddr": "^7.2.1",
+    "peer-info": "^0.16.2",
+    "typedoc": "^0.15.3",
+    "typescript": "^3.7.2"
+  }
+}

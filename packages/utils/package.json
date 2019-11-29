@@ -1,0 +1,40 @@
+{
+  "name": "@textile/ipfs-lite-utils",
+  "version": "0.0.1",
+  "description": "IPFS Lite Utils",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "browser": "browser.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "docs": "typedoc --out docs",
+    "test": "jest"
+  },
+  "author": "Carson Farmer <carson@textile.io>",
+  "license": "MIT",
+  "dependencies": {
+    "libp2p": "^0.26.2",
+    "libp2p-bootstrap": "^0.9.7",
+    "libp2p-gossipsub": "0.0.5",
+    "libp2p-kad-dht": "^0.16.0",
+    "libp2p-mdns": "^0.12.3",
+    "libp2p-mplex": "^0.8.5",
+    "libp2p-secio": "^0.11.1",
+    "libp2p-tcp": "^0.13.2",
+    "libp2p-webrtc-star": "^0.16.1",
+    "libp2p-websocket-star-multi": "^0.4.4",
+    "libp2p-websockets": "^0.12.4",
+    "merge-options": "^2.0.0",
+    "pull-mplex": "^0.1.2",
+    "multiaddr": "^6.1.1",
+    "peer-id": "^0.12.2",
+    "peer-info": "^0.15.1",
+    "buffer": "^5.4.3"
+  },
+  "devDependencies": {
+    "@textile/ipfs-lite-types": "^0.0.1",
+    "typedoc": "^0.15.3",
+    "typescript": "^3.7.2"
+  }
+}

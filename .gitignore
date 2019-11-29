@@ -19,9 +19,9 @@ launch.json
 .cake_task_cache
 
 # Build Caches
-build/
+**/build/
 bower_components/
-node_modules/
+**/node_modules/
 .next/
 .pnp/
 .pnp.js

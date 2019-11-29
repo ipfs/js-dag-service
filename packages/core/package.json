@@ -1,0 +1,30 @@
+{
+  "name": "@textile/ipfs-lite-core",
+  "version": "0.0.1",
+  "description": "IPFS Lite Core",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "docs": "typedoc --out docs",
+    "test": "jest"
+  },
+  "author": "Carson Farmer <carson@textile.io>",
+  "license": "MIT",
+  "dependencies": {
+    "@ipld/block": "^2.1.1",
+    "cids": "^0.7.1",
+    "ipfs-bitswap": "^0.26.0",
+    "multicodec": "^0.5.5"
+  },
+  "devDependencies": {
+    "@textile/ipfs-lite-types": "^0.0.1",
+    "@types/node": "^12.12.14",
+    "interface-datastore": "^0.8.0",
+    "libp2p": "^0.26.2",
+    "multiaddr": "^7.2.1",
+    "typedoc": "^0.15.3",
+    "typescript": "^3.7.2"
+  }
+}

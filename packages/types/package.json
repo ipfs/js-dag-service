@@ -1,0 +1,17 @@
+{
+  "name": "@textile/ipfs-lite-types",
+  "version": "0.0.1",
+  "description": "IPFS Lite Types",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "docs": "typedoc --out docs",
+    "test": "jest"
+  },
+  "author": "Carson Farmer <carson@textile.io>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  }
+}
