@@ -61,7 +61,7 @@
     "jest-cli": "^24.9.0",
     "jest-environment-node": "^24.9.0",
     "jsdoc": "^3.6.3",
-    "libp2p-pubsub": "^0.2.1",
+    "libp2p-pubsub": "^0.4.0",
     "multihashing-async": "^0.8.0",
     "peer-id": "^0.12.2",
     "peer-info": "^0.15.1",
