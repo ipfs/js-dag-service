@@ -64,7 +64,7 @@
     "libp2p-pubsub": "^0.2.1",
     "multihashing-async": "^0.8.0",
     "peer-id": "^0.12.2",
-    "peer-info": "^0.15.1",
+    "peer-info": "^0.17.1",
     "prettier": "^1.18.2",
     "resolve-ts-aliases": "^1.0.0",
     "streaming-iterables": "^4.1.1",
