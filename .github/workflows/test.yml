@@ -45,7 +45,7 @@ jobs:
       run: mkdir -p test-results/jest
 
     - name: Test Node
-      run: npm run test
+      run: npm test
 
     - name: Results
       uses: actions/upload-artifact@v1
