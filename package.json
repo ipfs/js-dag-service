@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "jest --verbose --no-watchman",
+    "test": "jest --verbose --no-watchman --forceExit",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src",
     "docs:build": "jsdoc -c jsdoc.json",
     "docs:serve": "npm run docs:build && http-server docs/",
