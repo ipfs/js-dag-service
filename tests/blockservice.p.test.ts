@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import CID from 'cids'
 import multihashing from 'multihashing-async'
 import { collect } from 'streaming-iterables'
@@ -9,7 +10,7 @@ let bs: BlockService
 let testBlocks: Block[]
 const store = new BlockStore(new MemoryDatastore())
 
-beforeAll(async () => {
+before(async () => {
   bs = new BlockService(store)
 
   const datas = [Buffer.from('1'), Buffer.from('2'), Buffer.from('3'), Buffer.from('A random data block')]
@@ -29,8 +30,8 @@ describe('fetch only from local Repo', () => {
     await bs.put(b)
     const res = await bs.get(b.cid)
     if (res) {
-      expect(res.cid).toEqual(b.cid)
-      expect(res.data).toEqual(b.data)
+      expect(res.cid).to.eql(b.cid)
+      expect(res.data).to.eql(b.data)
     }
   })
 
@@ -40,28 +41,28 @@ describe('fetch only from local Repo', () => {
     try {
       await bs.get(b.cid)
     } catch (err) {
-      expect(err).toBeDefined()
+      expect(err).to.not.be.undefined
     }
   })
 
   it('store many blocks', async () => {
     bs.putMany(testBlocks)
     for (const block of testBlocks) {
-      expect(bs.store.has(block.cid)).toBeTruthy
+      expect(bs.store.has(block.cid)).to.be.ok
     }
   })
 
   it('get many blocks through .get', async () => {
     await bs.putMany(testBlocks)
     const blocks = await Promise.all(testBlocks.map(async b => bs.get(b.cid)))
-    expect(blocks).toEqual(testBlocks)
+    expect(blocks).to.eql(testBlocks)
   })
 
   it('get many blocks through .getMany', async () => {
     const cids = testBlocks.map(b => b.cid)
     await bs.putMany(testBlocks)
     const blocks = await collect(bs.getMany(cids) as any)
-    expect(blocks).toEqual(testBlocks)
+    expect(blocks).to.eql(testBlocks)
   })
 
   it('delete a block', async () => {
@@ -73,11 +74,10 @@ describe('fetch only from local Repo', () => {
     await bs.put(b)
     await bs.delete(b.cid)
     const res = await bs.store.has(b.cid)
-    expect(res).toEqual(false)
+    expect(res).to.eql(false)
   })
 
   it('stores and gets lots of blocks', async function() {
-    jest.setTimeout(8 * 1000)
 
     const datas = [...Array(1000)].map((_, i) => {
       return Buffer.from(`hello-${i}-${Math.random()}`)
@@ -93,26 +93,26 @@ describe('fetch only from local Repo', () => {
     await bs.putMany(blocks)
 
     const res = await Promise.all(blocks.map(async b => bs.get(b.cid)))
-    expect(res).toEqual(blocks)
+    expect(res).to.eql(blocks)
   })
 
   it('sets and unsets exchange', () => {
     bs = new BlockService(store)
     bs.exchange = {} as Bitswap
-    expect(bs.online()).toBeTruthy()
+    expect(bs.online()).to.be.true
     bs.exchange = undefined
-    expect(bs.online()).toBeFalsy()
+    expect(bs.online()).to.be.false
   })
 })
 
 describe('fetch through Bitswap (has exchange)', () => {
-  beforeEach(() => {
+  before(() => {
     bs = new BlockService(store)
   })
 
   it('online returns true when online', () => {
     bs.exchange = {} as Bitswap
-    expect(bs.online()).toBeTruthy()
+    expect(bs.online()).to.be.true
   })
 
   it('retrieves a block through bitswap', async () => {
@@ -129,9 +129,9 @@ describe('fetch through Bitswap (has exchange)', () => {
 
     const hash = await multihashing(data, 'sha2-256')
     const block = await bs.get(new CID(hash))
-    expect(block).toBeDefined()
+    expect(block).to.not.be.undefined
     if (block) {
-      expect(block.data).toEqual(data)
+      expect(block.data).to.eql(data)
     }
   })
 
@@ -149,6 +149,6 @@ describe('fetch through Bitswap (has exchange)', () => {
     const hash = await multihashing(data, 'sha2-256')
     await bs.put(new Block(data, new CID(hash)))
 
-    expect(puts).toHaveLength(1)
+    expect(puts).to.have.lengthOf(1)
   })
 })
