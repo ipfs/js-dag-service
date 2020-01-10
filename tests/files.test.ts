@@ -24,7 +24,7 @@ describe('getting and putting files', () => {
     await fs.unlink('bar.txt')
   })
 
-  it('read file from disc and put to "network"', async (done) => {
+  it('read file from disc and put to "network"', async () => {
     await fs.writeFile('bar.txt', 'Hello World')
     const source = [
       {
@@ -37,7 +37,6 @@ describe('getting and putting files', () => {
     const str = 'bafkreiffsgtnic7uebaeuaixgph3pmmq2ywglpylzwrswv5so7m23hyuny'
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     expect(root!.cid.toString()).to.eql(str)
-    done()
   })
 
   it('get block from "network" and recursively export', async () => {
