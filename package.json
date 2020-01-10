@@ -80,7 +80,7 @@
     "bignumber.js": "^9.0.0",
     "es6-promisify": "^6.0.2",
     "ipfs-bitswap": "^0.26.0",
-    "ipfs-unixfs-exporter": "^0.39.0",
+    "ipfs-unixfs-exporter": "^0.40.0",
     "ipfs-unixfs-importer": "^0.42.0",
     "libp2p": "^0.26.2",
     "libp2p-bootstrap": "^0.9.7",
