@@ -1,8 +1,8 @@
 import { Multiaddr } from 'multiaddr'
 import PeerId from 'peer-id'
 import PeerInfo from 'peer-info'
-import { Peer } from '../core'
 import { Connection } from 'libp2p'
+import { Peer } from '../core'
 
 export interface SwarmPeer {
   addr: Multiaddr

@@ -14,29 +14,6 @@ export { MemoryDatastore } from 'interface-datastore'
 const BufferImpl = Buffer
 export { BufferImpl as Buffer }
 
-
-export const setupLibP2PHost = async (
-  hostKey?: Buffer,
-  secret?: Buffer,
-  listenAddrs: string[] = ['/ip4/0.0.0.0/tcp/4005', '/ip4/127.0.0.1/tcp/4006/ws'],
-  opts?: Libp2pOptions,
-) => {
-  const peerId = await peerIdPromise(hostKey)
-  const peerInfo = await peerInfoPromise(peerId)
-  
-  for (const addr of listenAddrs) {
-    peerInfo.multiaddrs.add(addr)
-  }
-  const options: Libp2pOptions = { peerInfo, ...opts }
-  if (secret) {
-    if (!options.modules) {
-      options.modules = {}
-    }
-    options.modules.connProtector = new Protector(secret)
-  }
-  return new Node(options)
-}
-
 // @todo: Avoid depending on promisify once libp2p better supports async/await peer-id/-info
 const peerIdPromise = function(hostKey?: Buffer): Promise<PeerId> {
   return new Promise<PeerId>((resolve, reject) => {
@@ -68,4 +45,26 @@ const peerInfoPromise = function(peerId: PeerId): Promise<PeerInfo> {
       }
     })
   })
+}
+
+export const setupLibP2PHost = async (
+  hostKey?: Buffer,
+  secret?: Buffer,
+  listenAddrs: string[] = ['/ip4/0.0.0.0/tcp/4005', '/ip4/127.0.0.1/tcp/4006/ws'],
+  opts?: Libp2pOptions,
+) => {
+  const peerId = await peerIdPromise(hostKey)
+  const peerInfo = await peerInfoPromise(peerId)
+
+  for (const addr of listenAddrs) {
+    peerInfo.multiaddrs.add(addr)
+  }
+  const options: Libp2pOptions = { peerInfo, ...opts }
+  if (secret) {
+    if (!options.modules) {
+      options.modules = {}
+    }
+    options.modules.connProtector = new Protector(secret)
+  }
+  return new Node(options)
 }
