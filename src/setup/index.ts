@@ -34,19 +34,6 @@ const peerIdPromise = function(hostKey?: Buffer): Promise<PeerId> {
   })
 }
 
-const peerInfoPromise = function(peerId: PeerId): Promise<PeerInfo> {
-  return new Promise<PeerInfo>((resolve, reject) => {
-    // @ts-ignore
-    PeerInfo.create(peerId, function(err?: Error, info?: PeerInfo) {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(info)
-      }
-    })
-  })
-}
-
 export const setupLibP2PHost = async (
   hostKey?: Buffer,
   secret?: Buffer,
@@ -54,7 +41,7 @@ export const setupLibP2PHost = async (
   opts?: Libp2pOptions,
 ) => {
   const peerId = await peerIdPromise(hostKey)
-  const peerInfo = await peerInfoPromise(peerId)
+  const peerInfo = await PeerInfo.create(peerId)
 
   for (const addr of listenAddrs) {
     peerInfo.multiaddrs.add(addr)

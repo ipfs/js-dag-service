@@ -51,12 +51,12 @@ class ExplodingStore {
   }
 }
 
-before(async () => {
+before(async function() {
   blocks = new BlockStore(new MemoryDatastore())
 })
 
-describe('BlockStore', () => {
-  it('converts a CID to a datastore Key and back', () => {
+describe('BlockStore', function() {
+  it('converts a CID to a datastore Key and back', function() {
     const originalCid = new CID('Qme6KJdKcp85TYbLxuLV7oQzMiLremD7HMoXLZEmgo6Rnh')
     const key = BlockStore.cidToKey(originalCid)
     expect(key instanceof Key).to.be.true
@@ -70,23 +70,23 @@ describe('BlockStore', () => {
   const bData = Buffer.from('hello world')
   let b: Block
 
-  before(async () => {
+  before(async function() {
     const hash = await multihashing(bData, 'sha2-256')
     b = new Block(bData, new CID(hash))
   })
 
-  describe('.put', () => {
+  describe('.put', function() {
     let other: BlockStore
 
-    it('simple', async () => {
+    it('simple', async function() {
       await blocks.put(b)
     })
 
-    it('multi write (locks)', async () => {
+    it('multi write (locks)', async function() {
       await Promise.all([blocks.put(b), blocks.put(b)])
     })
 
-    it('empty value', async () => {
+    it('empty value', async function() {
       const d = Buffer.alloc(0)
       const multihash = await multihashing(d, 'sha2-256')
       const empty = new Block(d, new CID(multihash))
@@ -106,7 +106,7 @@ describe('BlockStore', () => {
     it('.putMany', async function() {
       // .map(i => Buffer.from(`hello-${i}-${Math.random()}`))
       const blks = await Promise.all(
-        [...Array(50).keys()].map(async () => {
+        [...Array(50).keys()].map(async function() {
           const d = Buffer.from('many' + Math.random())
           const hash = await multihashing(d, 'sha2-256')
           return new Block(d, new CID(hash))
@@ -119,7 +119,7 @@ describe('BlockStore', () => {
       }
     })
 
-    it('should not .putMany when block is already present', async () => {
+    it('should not .putMany when block is already present', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
@@ -137,7 +137,7 @@ describe('BlockStore', () => {
       expect(store.commitInvoked).to.be.true
     })
 
-    it('returns an error on invalid block', async () => {
+    it('returns an error on invalid block', async function() {
       try {
         await blocks.put('hello' as any)
         throw new Error('Shoudl have thrown error on invalid block')
@@ -147,10 +147,10 @@ describe('BlockStore', () => {
     })
   })
 
-  describe('.get', () => {
+  describe('.get', function() {
     let other: BlockStore
 
-    it('simple', async () => {
+    it('simple', async function() {
       const block = await blocks.get(b.cid)
       expect(block).to.eql(b)
     })
@@ -166,7 +166,7 @@ describe('BlockStore', () => {
       )
     })
 
-    it('returns an error on invalid block', async () => {
+    it('returns an error on invalid block', async function() {
       try {
         await blocks.get('woot' as any)
       } catch (err) {
@@ -176,7 +176,7 @@ describe('BlockStore', () => {
       throw new Error('Shoudl have thrown error on invalid block')
     })
 
-    it('should get block stored under v0 CID with a v1 CID', async () => {
+    it('should get block stored under v0 CID with a v1 CID', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
@@ -185,7 +185,7 @@ describe('BlockStore', () => {
       expect(block.data).to.eql(data)
     })
 
-    it('should get block stored under v1 CID with a v0 CID', async () => {
+    it('should get block stored under v1 CID with a v0 CID', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
 
       const hash = await multihashing(data, 'sha2-256')
@@ -195,7 +195,7 @@ describe('BlockStore', () => {
       expect(block.data).to.eql(data)
     })
 
-    it('throws when passed an invalid cid', async () => {
+    it('throws when passed an invalid cid', async function() {
       try {
         await blocks.get('foo' as any)
         throw new Error('Should have thrown')
@@ -204,7 +204,7 @@ describe('BlockStore', () => {
       }
     })
 
-    it('throws error when requesting CID that is not in the store', async () => {
+    it('throws error when requesting CID that is not in the store', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(1, 'dag-cbor', hash)
@@ -216,7 +216,7 @@ describe('BlockStore', () => {
       }
     })
 
-    it('throws unknown error encountered when getting a block', async () => {
+    it('throws unknown error encountered when getting a block', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
@@ -231,18 +231,18 @@ describe('BlockStore', () => {
     })
   })
 
-  describe('.has', () => {
-    it('existing block', async () => {
+  describe('.has', function() {
+    it('existing block', async function() {
       const exists = await blocks.has(b.cid)
       expect(exists).to.eql(true)
     })
 
-    it('non existent block', async () => {
+    it('non existent block', async function() {
       const exists = await blocks.has(new CID('QmbcpFjzamCj5ZZdduW32ctWUPvbGMwQZk2ghWK6PrKswE'))
       expect(exists).to.eql(false)
     })
 
-    it('should have block stored under v0 CID with a v1 CID', async () => {
+    it('should have block stored under v0 CID with a v1 CID', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(hash)
@@ -251,7 +251,7 @@ describe('BlockStore', () => {
       expect(exists).to.eql(true)
     })
 
-    it('should have block stored under v1 CID with a v0 CID', async () => {
+    it('should have block stored under v1 CID with a v0 CID', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
 
       const hash = await multihashing(data, 'sha2-256')
@@ -261,7 +261,7 @@ describe('BlockStore', () => {
       expect(exists).to.eql(true)
     })
 
-    it('throws when passed an invalid cid', async () => {
+    it('throws when passed an invalid cid', async function() {
       try {
         await blocks.has('foo' as any)
         expect(false).to.eql(true)
@@ -270,7 +270,7 @@ describe('BlockStore', () => {
       }
     })
 
-    it('returns false when requesting non-dag-pb CID that is not in the store', async () => {
+    it('returns false when requesting non-dag-pb CID that is not in the store', async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(1, 'dag-cbor', hash)
@@ -280,14 +280,14 @@ describe('BlockStore', () => {
     })
   })
 
-  describe('.delete', () => {
-    it('simple', async () => {
+  describe('.delete', function() {
+    it('simple', async function() {
       await blocks.delete(b.cid)
       const exists = await blocks.has(b.cid)
       expect(exists).to.eql(false)
     })
 
-    it('throws when passed an invalid cid', async () => {
+    it('throws when passed an invalid cid', async function() {
       try {
         await blocks.delete('foo' as any)
         expect(false).to.eql(true)
@@ -297,20 +297,20 @@ describe('BlockStore', () => {
     })
   })
 
-  describe('.query', () => {
-    before(async () => {
+  describe('.query', function() {
+    before(async function() {
       const data = Buffer.from(`TEST${Date.now()}`)
       const hash = await multihashing(data, 'sha2-256')
       const cid = new CID(1, 'dag-cbor', hash)
       blocks.put(new Block(data, cid))
     })
-    it('simple', async () => {
+    it('simple', async function() {
       const results = blocks.query({})
       expect(results).to.not.be.undefined
       expect((await collect(results)).length).to.be.greaterThan(100)
     })
 
-    it('empty when passed invalid filter', async () => {
+    it('empty when passed invalid filter', async function() {
       const results = blocks.query({
         filters: [() => false],
       })

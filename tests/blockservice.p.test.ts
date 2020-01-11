@@ -10,7 +10,7 @@ let bs: BlockService
 let testBlocks: Block[]
 const store = new BlockStore(new MemoryDatastore())
 
-before(async () => {
+before(async function() {
   bs = new BlockService(store)
 
   const datas = [Buffer.from('1'), Buffer.from('2'), Buffer.from('3'), Buffer.from('A random data block')]
@@ -23,8 +23,8 @@ before(async () => {
   )
 })
 
-describe('fetch only from local Repo', () => {
-  it('store and get a block', async () => {
+describe('fetch only from local Repo', function() {
+  it('store and get a block', async function() {
     const b = testBlocks[3]
 
     await bs.put(b)
@@ -35,7 +35,7 @@ describe('fetch only from local Repo', () => {
     }
   })
 
-  it('get a non stored yet block', async () => {
+  it('get a non stored yet block', async function() {
     const b = testBlocks[2]
 
     try {
@@ -45,27 +45,27 @@ describe('fetch only from local Repo', () => {
     }
   })
 
-  it('store many blocks', async () => {
+  it('store many blocks', async function() {
     bs.putMany(testBlocks)
     for (const block of testBlocks) {
       expect(bs.store.has(block.cid)).to.be.ok
     }
   })
 
-  it('get many blocks through .get', async () => {
+  it('get many blocks through .get', async function() {
     await bs.putMany(testBlocks)
     const blocks = await Promise.all(testBlocks.map(async b => bs.get(b.cid)))
     expect(blocks).to.eql(testBlocks)
   })
 
-  it('get many blocks through .getMany', async () => {
+  it('get many blocks through .getMany', async function() {
     const cids = testBlocks.map(b => b.cid)
     await bs.putMany(testBlocks)
     const blocks = await collect(bs.getMany(cids) as any)
     expect(blocks).to.eql(testBlocks)
   })
 
-  it('delete a block', async () => {
+  it('delete a block', async function() {
     const data = Buffer.from('Will not live that much')
 
     const hash = await multihashing(data, 'sha2-256')
@@ -96,7 +96,7 @@ describe('fetch only from local Repo', () => {
     expect(res).to.eql(blocks)
   })
 
-  it('sets and unsets exchange', () => {
+  it('sets and unsets exchange', function() {
     bs = new BlockService(store)
     bs.exchange = {} as Bitswap
     expect(bs.online()).to.be.true
@@ -105,17 +105,17 @@ describe('fetch only from local Repo', () => {
   })
 })
 
-describe('fetch through Bitswap (has exchange)', () => {
-  before(() => {
+describe('fetch through Bitswap (has exchange)', function() {
+  before(function() {
     bs = new BlockService(store)
   })
 
-  it('online returns true when online', () => {
+  it('online returns true when online', function() {
     bs.exchange = {} as Bitswap
     expect(bs.online()).to.be.true
   })
 
-  it('retrieves a block through bitswap', async () => {
+  it('retrieves a block through bitswap', async function() {
     // returns a block with a value equal to its key
     const bitswap = {
       get(cid: CID) {
@@ -135,7 +135,7 @@ describe('fetch through Bitswap (has exchange)', () => {
     }
   })
 
-  it('puts the block through bitswap', async () => {
+  it('puts the block through bitswap', async function() {
     const puts: Block[] = []
     const bitswap = {
       put(block: Block) {

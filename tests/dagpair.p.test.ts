@@ -15,8 +15,8 @@ let p1: Peer
 let p2: Peer
 
 describe('sync IPLD DAG between IPFS lite peers', async function() {
-  before(async () => {
-    this.timeout(5000)
+  before(async function() {
+    this.timeout(10000)
     p1 = new Peer(
       new BlockStore(new MemoryDatastore()),
       await setupLibP2PHost(undefined, swarmKey, ['/ip4/0.0.0.0/tcp/0']),
@@ -27,18 +27,17 @@ describe('sync IPLD DAG between IPFS lite peers', async function() {
     )
     await p1.start()
     await p2.start()
-    await sleep(1000)
+    await sleep(500)
     await p1.host.dial(p2.host.peerInfo)
     await p2.host.dial(p1.host.peerInfo)
   })
   after(async function() {
-    this.timeout(5000)
-    await sleep(1000)
     await p1.stop()
     await p2.stop()
   })
 
   it('add, sync, get, delete, test', async function() {
+    this.timeout(5000)
     const data = {
       akey: 'avalue',
     }
@@ -50,5 +49,5 @@ describe('sync IPLD DAG between IPFS lite peers', async function() {
     expect(await p1.hasBlock(cid)).to.be.false
     await p2.remove(cid)
     expect(await p2.hasBlock(cid)).to.be.false
-  }).timeout(10000)
-}).timeout(10000)
+  })
+})

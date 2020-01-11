@@ -10,21 +10,20 @@ const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 let lite: Peer
 let root: Result | undefined
 
-describe('getting and putting files', () => {
-  before(async () => {
+describe('getting and putting files', function() {
+  before(async function() {
     const bs = new BlockStore(new MemoryDatastore())
     const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/0'])
     lite = new Peer(bs, host)
     await lite.start()
     await sleep(500)
   })
-  after(async () => {
-    console.log(lite)
+  after(async function() {
     await lite.stop()
     await fs.unlink('bar.txt')
   })
 
-  it('read file from disc and put to "network"', async () => {
+  it('read file from disc and put to "network"', async function() {
     await fs.writeFile('bar.txt', 'Hello World')
     const source = [
       {
@@ -39,7 +38,7 @@ describe('getting and putting files', () => {
     expect(root!.cid.toString()).to.eql(str)
   })
 
-  it('get block from "network" and recursively export', async () => {
+  it('get block from "network" and recursively export', async function() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const content = await lite.getFile(root!.cid.toString())
     expect(content.toString()).to.eql('Hello World')

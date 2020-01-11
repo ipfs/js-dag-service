@@ -13,18 +13,18 @@ let bs: BlockService
 let resolver: DAGService
 const store = new BlockStore(new MemoryDatastore())
 
-before(async () => {
+before(async function() {
   bs = new BlockService(store)
 })
 
-describe('dag service basics...', () => {
-  it('creates an instance', () => {
+describe('dag service basics...', function() {
+  it('creates an instance', function() {
     resolver = new DAGService({ blockService: bs}) // Stick with defaults for now
     expect(resolver.blockService).to.not.be.undefined
   })
 
-  describe('validation', () => {
-    it('resolve - errors on unknown resolver', async () => {
+  describe('validation', function() {
+    it('resolve - errors on unknown resolver', async function() {
       resolver = new DAGService({ blockService: bs })
       // choosing a format that is not supported
       const cid = new CID(1, 'blake2b-8', await multihashing(Buffer.from('abcd', 'hex'), 'sha1'))
@@ -38,7 +38,7 @@ describe('dag service basics...', () => {
       }
     })
 
-    it('put - errors on unknown resolver', async () => {
+    it('put - errors on unknown resolver', async function() {
       resolver = new DAGService({ blockService: bs })
       // choosing a format that is not supported
       try {
@@ -49,7 +49,7 @@ describe('dag service basics...', () => {
       }
     })
 
-    it('put - errors on invalid/empty data', async () => {
+    it('put - errors on invalid/empty data', async function() {
       resolver = new DAGService({ blockService: bs })
       // choosing a format that is not supported
       try {
@@ -60,7 +60,7 @@ describe('dag service basics...', () => {
       }
     })
 
-    it('put - defaults to cbor if no format is provided', async () => {
+    it('put - defaults to cbor if no format is provided', async function() {
       resolver = new DAGService({ blockService: bs })
       try {
         await resolver.put( { empty: undefined }, undefined)
@@ -69,7 +69,7 @@ describe('dag service basics...', () => {
       }
     })
 
-    it('putMany - errors on unknown resolver', async () => {
+    it('putMany - errors on unknown resolver', async function() {
       resolver = new DAGService({ blockService: bs })
       // choosing a format that is not supported
       const result = resolver.putMany([{ empty: undefined }], 'blake2b_8')
@@ -81,12 +81,12 @@ describe('dag service basics...', () => {
       }
     })
 
-    it('putMany - defaults to cbor if no format is provided', async () => {
+    it('putMany - defaults to cbor if no format is provided', async function() {
       resolver = new DAGService({ blockService: bs })
       expect((await resolver.putMany([{ empty: undefined }], undefined).next()).value.codec).to.eql('dag-cbor')
     })
 
-    it('tree - errors on unknown resolver', async () => {
+    it('tree - errors on unknown resolver', async function() {
       resolver = new DAGService({ blockService: bs })
       // choosing a format that is not supported
       const cid = new CID(1, 'blake2b-8', await multihashing(Buffer.from('abcd', 'hex'), 'sha1')
@@ -102,7 +102,7 @@ describe('dag service basics...', () => {
   })
 })
 
-describe('dag service with dag-cbor', () => {
+describe('dag service with dag-cbor', function() {
   let node1: any
   let node2: any
   let node3: any
@@ -110,7 +110,7 @@ describe('dag service with dag-cbor', () => {
   let cid2: CID
   let cid3: CID
 
-  before(async () => {
+  before(async function() {
     resolver = new DAGService({ blockService: bs })
 
     node1 = { someData: 'I am 1' }
@@ -138,8 +138,8 @@ describe('dag service with dag-cbor', () => {
     cid3 = collected[2]
   })
 
-  describe('public api', () => {
-    it('resolver.put with format', async () => {
+  describe('public api', function() {
+    it('resolver.put with format', async function() {
       const cid = await resolver.put(node1, 'dag-cbor')
       expect(cid.version).to.eql(1)
       expect(cid.codec).to.equal('dag-cbor')
@@ -148,7 +148,7 @@ describe('dag service with dag-cbor', () => {
       expect(mh.name).to.equal('sha2-256')
     })
 
-    it('resolver.put with format + hashAlg', async () => {
+    it('resolver.put with format + hashAlg', async function() {
       const cid = await resolver.put(node1, 'dag-cbor', { hashAlg: 'sha3-512' })
       expect(cid).to.not.be.undefined
       expect(cid.version).to.eql(1)
@@ -158,14 +158,14 @@ describe('dag service with dag-cbor', () => {
       expect(mh.name).to.eql('sha3-512')
     })
 
-    it('resolves value within 1st node scope', async () => {
+    it('resolves value within 1st node scope', async function() {
       const result = resolver.resolve(cid1, 'someData')
       const node = (await result.next()).value
       expect(node.remainderPath).to.equal('')
       expect(node.value).to.eql('I am 1')
     })
 
-    it('resolves value within nested scope (0 level)', async () => {
+    it('resolves value within nested scope (0 level)', async function() {
       const result = resolver.resolve(cid2, 'one')
       const [node1, node2] = await collect(result)
 
@@ -176,7 +176,7 @@ describe('dag service with dag-cbor', () => {
       expect(node2.value).to.eql({ someData: 'I am 1' })
     })
 
-    it('resolves value within nested scope (1 level)', async () => {
+    it('resolves value within nested scope (1 level)', async function() {
       const result = resolver.resolve(cid2, 'one/someData')
       const [node1, node2] = await collect(result)
 
@@ -187,7 +187,7 @@ describe('dag service with dag-cbor', () => {
       expect(node2.value).to.eql('I am 1')
     })
 
-    it('resolves value within nested scope (2 levels)', async () => {
+    it('resolves value within nested scope (2 levels)', async function() {
       const result = resolver.resolve(cid3, 'two/one/someData')
       const [node1, node2, node3] = await collect(result)
 
@@ -201,7 +201,7 @@ describe('dag service with dag-cbor', () => {
       expect(node3.value).to.eql('I am 1')
     })
 
-    it('fails resolving unavailable path', async () => {
+    it('fails resolving unavailable path', async function() {
       const result = resolver.resolve(cid3, `foo/${Date.now()}`)
       try {
         await result.next()
@@ -211,43 +211,43 @@ describe('dag service with dag-cbor', () => {
       }
     })
 
-    it('resolver.get round-trip', async () => {
+    it('resolver.get round-trip', async function() {
       const cid = await resolver.put(node1, 'dag-cbor')
       const node = await resolver.get(cid)
       expect(node).to.eql(node1)
     })
 
-    it('resolver.tree', async () => {
+    it('resolver.tree', async function() {
       const result = resolver.tree(cid3)
       const paths = await collect(result)
       expect(paths).to.eql(['one', 'two', 'someData'])
     })
 
-    it('resolver.tree with exist()ent path', async () => {
+    it('resolver.tree with exist()ent path', async function() {
       const result = resolver.tree(cid3, 'one')
       const paths = await collect(result)
       expect(paths).to.eql([])
     })
 
-    it('resolver.tree with non exist()ent path', async () => {
+    it('resolver.tree with non exist()ent path', async function() {
       const result = resolver.tree(cid3, 'bananas')
       const paths = await collect(result)
       expect(paths).to.eql([])
     })
 
-    it('resolver.tree recursive', async () => {
+    it('resolver.tree recursive', async function() {
       const result = resolver.tree(cid3, undefined, { recursive: true })
       const paths = await collect(result)
       expect(paths).to.eql(['one', 'two', 'someData', 'one/someData', 'two/one', 'two/someData', 'two/one/someData'])
     })
 
-    it('resolver.tree with existent path recursive', async () => {
+    it('resolver.tree with existent path recursive', async function() {
       const result = resolver.tree(cid3, 'two', { recursive: true })
       const paths = await collect(result)
       expect(paths).to.eql(['one', 'someData', 'one/someData'])
     })
 
-    it('resolver.remove', async () => {
+    it('resolver.remove', async function() {
       const cid = await resolver.put(node1, 'dag-cbor')
       const sameAsNode1 = await resolver.get(cid)
       expect(sameAsNode1).to.eql(node1)
@@ -267,7 +267,7 @@ describe('dag service with dag-cbor', () => {
   })
 })
 
-describe('dag service with dag-pb', () => {
+describe('dag service with dag-pb', function() {
   let node1: any
   let node2: any
   let node3: any
@@ -275,7 +275,7 @@ describe('dag service with dag-pb', () => {
   let cid2: CID
   let cid3: CID
 
-  before(async () => {
+  before(async function() {
     resolver = new DAGService({ blockService: bs })
 
     node1 = new dagPB.DAGNode(Buffer.from('I am 1'))
@@ -307,8 +307,8 @@ describe('dag service with dag-pb', () => {
     [cid1, cid2, cid3] = await collect(result)
   })
 
-  describe('public api', () => {
-    it('resolver.put with format', async () => {
+  describe('public api', function() {
+    it('resolver.put with format', async function() {
       const cid = await resolver.put(node1, 'dag-pb')
       expect(cid.version).to.eql(1)
       expect(cid.codec).to.eql('dag-pb')
@@ -317,7 +317,7 @@ describe('dag service with dag-pb', () => {
       expect(mh.name).to.eql('sha2-256')
     })
 
-    it('resolver.put with format + hashAlg', async () => {
+    it('resolver.put with format + hashAlg', async function() {
       const cid = await resolver.put(node1, 'dag-pb', { hashAlg: 'sha3-512' })
       expect(cid.version).to.eql(1)
       expect(cid.codec).to.eql('dag-pb')
@@ -326,14 +326,14 @@ describe('dag service with dag-pb', () => {
       expect(mh.name).to.eql('sha3-512')
     })
 
-    it('resolves a value within 1st node scope', async () => {
+    it('resolves a value within 1st node scope', async function() {
       const result = resolver.resolve(cid1, 'Data')
       const node = (await result.next()).value
       expect(node.remainderPath).to.eql('')
       expect(node.value).to.eql(Buffer.from('I am 1'))
     })
 
-    it('resolves a value within nested scope (1 level)', async () => {
+    it('resolves a value within nested scope (1 level)', async function() {
       const result = resolver.resolve(cid2, 'Links/0/Hash/Data')
       const [node1, node2] = await collect(result)
 
@@ -344,7 +344,7 @@ describe('dag service with dag-pb', () => {
       expect(node2.value).to.eql(Buffer.from('I am 1'))
     })
 
-    it('resolves value within nested scope (2 levels)', async () => {
+    it('resolves value within nested scope (2 levels)', async function() {
       const result = resolver.resolve(cid3, 'Links/1/Hash/Links/0/Hash/Data')
       const [node1, node2, node3] = await collect(result)
 
@@ -358,7 +358,7 @@ describe('dag service with dag-pb', () => {
       expect(node3.value).to.eql(Buffer.from('I am 1'))
     })
 
-    it.skip('resolves value within nested scope (2 levels) with named links', async () => {
+    it.skip('resolves value within nested scope (2 levels) with named links', async function() {
       const result = resolver.resolve(cid3, '2/1/Data')
       const collected = await collect(result)
       expect(collected).to.have.length(3)
@@ -376,7 +376,7 @@ describe('dag service with dag-pb', () => {
       expect(node3.value).to.eql(Buffer.from('I am 1'))
     })
 
-    it.skip('resolver.get round-trip', async () => {
+    it.skip('resolver.get round-trip', async function() {
       const cid = await resolver.put(node1, 'dag-pb')
       const node = await resolver.get(cid)
       // `size` is lazy, without a call to it a deep equal check would fail
@@ -384,7 +384,7 @@ describe('dag service with dag-pb', () => {
       expect(node as any).to.eql(node1 as any)
     })
 
-    it('resolver.remove', async () => {
+    it('resolver.remove', async function() {
       const node = new dagPB.DAGNode(Buffer.from('a dag-pb node'))
       const cid = await resolver.put(node, 'dag-pb')
       const sameAsNode = await resolver.get(cid)
@@ -404,13 +404,13 @@ describe('dag service with dag-pb', () => {
       return remove()
     })
 
-    it('should return a v0 CID when specified', async () => {
+    it('should return a v0 CID when specified', async function() {
       const cid = await resolver.put(Buffer.from('a dag-pb node'), 'dag-pb', { cidVersion: 0 })
 
       expect(cid.version).to.eql(0)
     })
 
-    it('should return a v1 CID when specified', async () => {
+    it('should return a v1 CID when specified', async function() {
       const cid = await resolver.put(Buffer.from('a dag-pb node'), 'dag-pb', { cidVersion: 1 })
 
       expect(cid.version).to.eql(1)

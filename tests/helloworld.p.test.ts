@@ -7,19 +7,19 @@ import { setupLibP2PHost } from '../src/setup'
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 let lite: Peer
 
-describe.skip('fetching IPLD dag from network', () => {
-  before(async () => {
+describe.skip('fetching IPLD dag from network', function() {
+  before(async function() {
     const bs = new BlockStore(new MemoryDatastore())
     const host = await setupLibP2PHost(undefined, undefined, ['/ip4/0.0.0.0/tcp/0'])
     lite = new Peer(bs, host)
     await lite.start()
     await sleep(500)
   })
-  after(async () => {
+  after(async function() {
     await lite.stop()
   })
 
-  it.skip('request, fetch, and decode', async () => {
+  it.skip('request, fetch, and decode', async function() {
     const cid = new CID('QmWATWQ7fVPP2EFGu71UkfnqhYXDYH566qy47CnJDgvs8u')
     const block = await lite.get(cid)
     if (block && block.Data) {
