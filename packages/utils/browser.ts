@@ -7,7 +7,7 @@ import Bootstrap from 'libp2p-bootstrap'
 import KadDHT from 'libp2p-kad-dht'
 import GossipSub from 'libp2p-gossipsub'
 import LibP2p, { Options } from 'libp2p'
-import mergeOptions from 'merge-options'
+import merge from 'deepmerge'
 import multiaddr from 'multiaddr'
 // @note: Nice to have in the browser
 export { Buffer } from 'buffer'
@@ -97,6 +97,6 @@ export class Node extends LibP2p {
       },
     }
 
-    super(mergeOptions(defaults, _options))
+    super(merge(defaults, _options))
   }
 }

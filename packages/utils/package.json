@@ -25,7 +25,6 @@
     "libp2p-webrtc-star": "^0.16.1",
     "libp2p-websocket-star-multi": "^0.4.4",
     "libp2p-websockets": "^0.12.4",
-    "merge-options": "^2.0.0",
     "pull-mplex": "^0.1.2",
     "multiaddr": "^6.1.1",
     "peer-id": "^0.12.2",

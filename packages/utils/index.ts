@@ -8,7 +8,7 @@ import GossipSub from 'libp2p-gossipsub'
 import Multiplex from 'pull-mplex'
 import SECIO from 'libp2p-secio'
 import LibP2p, { Options } from 'libp2p'
-import mergeOptions from 'merge-options'
+import merge from 'deepmerge'
 import multiaddr from 'multiaddr'
 // @note: To match the browser exports
 const LocalBuffer = Buffer
@@ -110,6 +110,6 @@ export class Node extends LibP2p {
       },
     }
 
-    super(mergeOptions(defaults, _options))
+    super(merge(defaults, _options))
   }
 }
