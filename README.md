@@ -32,11 +32,11 @@ The goal of IPFS Lite is to run the bare minimal functionality for any applicati
 
 > The following includes information about support for ipfs-lite.
 
-| Name | Build | Language | Description |
+| Name | Build | Target | Description |
 |:---------|:---------|:---------|:---------|
 | [`ipfs-lite`](https://github.com/hsanjuan/ipfs-lite) | [![Build Status](https://img.shields.io/travis/hsanjuan/ipfs-lite.svg?branch=master&style=flat-square)](https://travis-ci.org/hsanjuan/ipfs-lite) | [![golang](https://img.shields.io/badge/golang-blueviolet.svg?style=popout-square)](https://github.com/hsanjuan/ipfs-lite) | The reference implementaiton of ipfs-lite, written in Go. |
-| [`js-ipfs-lite`](//github.com/textileio/js-ipfs-lite) | [![Build status](https://img.shields.io/github/workflow/status/textileio/js-ipfs-lite/Test/master.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite/actions?query=branch%3Amaster) | [![javascript](https://img.shields.io/badge/javascript-blueviolet.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite)| The Javascript version of ipfs-lite available for web, nodejs, and React Native applications. |
-| [`ios-ipfs-lite`](//github.com/textileio/ios-ipfs-lite) | [![Build status](https://img.shields.io/circleci/project/github/textileio/ios-ipfs-lite/master.svg?style=flat-square)](https://github.com/textileio/ios-ipfs-lite/actions?query=branch%3Amaster) | [![objc](https://img.shields.io/badge/objc-blueviolet.svg?style=popout-square)](https://github.com/textileio/ios-ipfs-lite)| The iOS ipfs-lite library for use in Objc and Swift apps |
+| [`js-ipfs-lite`](//github.com/textileio/js-ipfs-lite) | [![Build status](https://img.shields.io/github/workflow/status/textileio/js-ipfs-lite/Test/master.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite/actions?query=branch%3Amaster) | [![nodejs](https://img.shields.io/badge/nodejs-blueviolet.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite) [![web](https://img.shields.io/badge/web-blueviolet.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite) [![react-native](https://img.shields.io/badge/react--native-blueviolet.svg?style=popout-square)](https://github.com/textileio/js-ipfs-lite) | The Javascript version of ipfs-lite available for web, nodejs, and React Native applications. |
+| [`ios-ipfs-lite`](//github.com/textileio/ios-ipfs-lite) | [![Build status](https://img.shields.io/circleci/project/github/textileio/ios-ipfs-lite/master.svg?style=flat-square)](https://github.com/textileio/ios-ipfs-lite/actions?query=branch%3Amaster) | [![objc](https://img.shields.io/badge/objc-blueviolet.svg?style=popout-square)](https://github.com/textileio/ios-ipfs-lite) [![swift](https://img.shields.io/badge/swift-blueviolet.svg?style=popout-square)](https://github.com/textileio/ios-ipfs-lite) | The iOS ipfs-lite library for use in Objc and Swift apps |
 | [`android-ipfs-lite`](//github.com/textileio/android-ipfs-lite) | [![Build status](https://img.shields.io/circleci/project/github/textileio/android-ipfs-lite/master.svg?style=flat-square)](https://github.com/textileio/android-ipfs-lite/actions?query=branch%3Amaster) | [![java](https://img.shields.io/badge/java-blueviolet.svg?style=popout-square)](https://github.com/textileio/android-ipfs-lite)| The Java ipfs-lite library for us in Android apps |
 | [`grpc-ipfs-lite`](//github.com/textileio/grpc-ipfs-lite) | [![Build status](https://img.shields.io/circleci/project/github/textileio/grpc-ipfs-lite/master.svg?style=flat-square)](https://github.com/textileio/grpc-ipfs-lite/actions?query=branch%3Amaster) | [![java](https://img.shields.io/badge/grpc--api-blueviolet.svg?style=popout-square)](https://github.com/textileio/grpc-ipfs-lite)| A common gRPC API interface that runs on the Go ipfs-lite node. |
 
@@ -49,6 +49,8 @@ Because 99% of the time, a browser or mobile (d)App only needs to be able to add
 Our goal is to provide a highly extensible IPFS implementation that, when 'fully loaded' supports _most_ of the default [`js-ipfs`](https://github.com/ipfs/interface-js-ipfs-core) core APIs. Some APIs will likely never be added, and some APIs specific to Textile (like encryption) will likely be included as separate modules. If you have opinions about what should and should not be included, please [let us know](https://github.com/textileio/js-ipfs-lite/issues).
 
 ## Install
+
+> Note: `js-ipfs-lite` includes TypeScript type definitions.
 
 ### Node
 
@@ -66,6 +68,12 @@ npm run browser:build
 ```
 
 The above creates minified + gzipped assets in `dist/browser`, which you can load using a `<script>` tag. This will make an `ipfsLite` object available in the global (`window`) namespace. You'll also get an example `index.html` file to help get you started. We use `webpack` to generate separate bundles for each sub-module, as well as a full-featured default setup. You can pick and choose to optimize load times, or use your own bundler to wrap the whole thing up with your app code.
+
+### React Native
+
+```
+npm i @textile/ipfs-lite
+```
 
 ## Usage
 
