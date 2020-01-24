@@ -14,7 +14,7 @@ export { MemoryDatastore } from 'interface-datastore'
 const BufferImpl = Buffer
 export { BufferImpl as Buffer }
 
-// @todo: Avoid depending on promisify once libp2p better supports async/await peer-id/-info
+// @todo: Avoid depending on promises once libp2p better supports async/await peer-id/-info
 const peerIdPromise = function(hostKey?: Buffer): Promise<PeerId> {
   return new Promise<PeerId>((resolve, reject) => {
     const callback = function(err?: Error, peerid?: PeerId) {
