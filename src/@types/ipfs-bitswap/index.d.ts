@@ -1,5 +1,5 @@
 declare module 'ipfs-bitswap' {
-  import EventEmitter from 'events'
+  import { EventEmitter } from 'events'
   import CID from 'cids'
   import Block from 'ipld-block'
   import PeerId from 'peer-id'
