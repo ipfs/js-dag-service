@@ -44,6 +44,9 @@ jobs:
     - name: Build
       run: npm run build
 
+    - name: Build Browser
+      run: npm run browser:build
+
     - name: Test Setup
       run: mkdir -p test-results
 
