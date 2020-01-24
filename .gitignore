@@ -40,6 +40,7 @@ es5/
 es2015/
 esnext/
 docs/
+tsconfig.tsbuildinfo
 
 # Caches
 .glide/
@@ -142,6 +143,7 @@ sourcemap.js
 # Jest
 .jest/
 coverage/
+junit/
 
 # Dependency directories (remove the comment below to include it)
 # vendor/

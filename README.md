@@ -66,7 +66,7 @@ Only import what you need, keeping your bundles small and your load times faster
 import { Peer, BlockStore } from '@textile/ipfs-lite'
 // Or just grab the things you need
 import { Peer, BlockStore } from '@textile/ipfs-lite/core'
-import { setupLibP2PHost, MemoryDatastore } = from '@textile/ipfs-lite/setup'
+import { createHost, MemoryDatastore } = from '@textile/ipfs-lite/setup'
 ```
 Need more? How about pubsub, dht access, or peer swarm?
 
@@ -100,7 +100,7 @@ const store = new BlockStore(new MemoryDatastore())
     // Bring your own libp2p host....
     const host = new Libp2p({ ...libp2Options })
     // ...or, use a full-featured default host
-    // const host = await setupLibP2PHost()
+    // const host = await createHost()
     const lite = new Peer(store, host)
 
     await lite.start()
@@ -117,13 +117,13 @@ const store = new BlockStore(new MemoryDatastore())
 
 ```javascript
 let { Peer, BlockStore } = require('@textile/ipfs-lite')
-let { setupLibP2PHost } = require('@textile/ipfs-lite/dist/setup')
+let { createHost } = require('@textile/ipfs-lite/dist/setup')
 let { MemoryDatastore } = require('interface-datastore')
 
 let store = new BlockStore(new MemoryDatastore())
 
 ;(async function() {
-  let host = await setupLibP2PHost()
+  let host = await createHost()
   let lite = new Peer(store, host)
   await lite.start()
 
@@ -143,9 +143,9 @@ let store = new BlockStore(new MemoryDatastore())
 <script>
 window.addEventListener('load', function () {
     async function main() {
-    var { BlockStore, MemoryDatastore, setupLibP2PHost, Peer, Buffer } = window.ipfsLite
+    var { BlockStore, MemoryDatastore, createHost, Peer, Buffer } = window.ipfsLite
     var store = new BlockStore(new MemoryDatastore())
-    var host = await setupLibP2PHost(undefined, undefined, [
+    var host = await createHost(undefined, undefined, [
         `/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star`
     ])
     var lite = new Peer(store, host)

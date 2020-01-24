@@ -1,0 +1,12 @@
+{
+  "diff": true,
+  "spec": "packages/*/src/**/*.spec.ts",
+  "reporter": "spec",
+  "recursive": true,
+  "timeout": 8000,
+  "exit": true,
+  "require": [
+    "ts-node/register",
+    "source-map-support/register"
+  ]
+}

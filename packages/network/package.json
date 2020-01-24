@@ -1,0 +1,32 @@
+{
+  "name": "@textile/ipfs-lite-network",
+  "version": "0.0.1",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "npm run clean",
+    "clean": "rimraf ./dist",
+    "build": "npm run build:node && npm run build:browser",
+    "build:node": "tsc -p tsconfig.json",
+    "build:browser": "NODE_ENV=production webpack --mode production --config ../../webpack.config.js"
+  },
+  "devDependencies": {
+    "@types/multiaddr": "^7.2.0",
+    "bignumber.js": "^9.0.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@textile/ipfs-lite-core": "^0.0.1",
+    "@types/node": "^13.1.7",
+    "cids": "0.7.2",
+    "loglevel": "^1.6.6",
+    "multiaddr": "^7.2.1",
+    "peer-id": "^0.13.6",
+    "typescript": "^3.7.4"
+  }
+}

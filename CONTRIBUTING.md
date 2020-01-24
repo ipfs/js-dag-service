@@ -1,8 +1,8 @@
-# Contributing to Textile
+# Contributing
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to Textile and its libraries, which are hosted in the [textileio](https://github.com/textileio) organization on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to this project. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 #### Table Of Contents
 
@@ -29,46 +29,26 @@ This project and everyone participating in it is governed by the [Contributor Co
 
 ## I don't want to read this whole thing I just have a question!!!
 
-> **Note:** [Please don't file an issue to ask a question.](#managing-issues) You'll get faster results by using the resources below.
-
-We have an official community message board where the community chimes in with helpful advice if you have questions.
-
-* [The official community message board](https://community.textile.io)
-
-If chat is more your speed, you can join the Community Slack channel:
-
-* [Join the Community Slack channel](https://slack.textile.io/)
-    * Even though Slack is a chat service, sometimes it takes several hours for community members to respond &mdash; please be patient!
-    * Use the `#general` channel for general questions or discussion related to Textile
-    * Use the `#support` channel for specific questions about developing with Textile tools
-    * Use the `#introductions` and `#events`channels for those things
-    * Follow the `#releases` channel for automated release information for all Textile GitHub repos
-    * There are many other channels available, check the channel list
+> **Note:** [Please don't file an issue to ask a question.](#managing-issues) You'll get faster results by [connecting with me on Twitter](https://twitter.com/carsonfarmer).
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for Textile. Following these guidelines helps maintainers and the community understand your report :pencil:, reproduce the behavior :computer: :computer:, and find related reports :mag_right:.
+This section guides you through submitting a bug report for this project. Following these guidelines helps others understand your report :pencil:, reproduce the behavior :computer: :computer:, and find related reports :mag_right:.
 
-Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](./.github/ISSUE_TEMPLATE/bug_report.md), the information it asks for helps us resolve issues faster.
+Before creating bug reports, please **perform a [cursory search](./issues)** to see if the problem has already been reported. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one. You might just find out that you don't need to create a new ticket at all. When you _are_ creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report).
 
 > **Note:** If you find a **Closed** issue that seems like it is the same thing that you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
 
-#### Before Submitting A Bug Report
-
-* **Check the [community forum](https://community.textile.io)** for some common questions and problems.
-* **Determine [which repository the problem should be reported in](https://github.com/textileio)**.
-* **Perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Atextile)** to see if the problem has already been reported. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one.
-
 #### How Do I Submit A (Good) Bug Report?
 
-Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). After you've determined [which repository](https://github.com/textileio) your bug is related to, create an issue on that repository and provide the following information by filling in [the template](./.github/ISSUE_TEMPLATE/bug_report.md).
+Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). After you've determined you need to create an issue, create one by filling in [the template](./.github/ISSUE_TEMPLATE/bug_report.md).
 
-Explain the problem and include additional details to help maintainers reproduce the problem:
+Explain the problem and include additional details to help others reproduce the problem:
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started the application, e.g. which command exactly you used in the terminal, or how you started Textile otherwise. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you used a command line tool, make sure you provide the sequence of steps you performed to create the bug in the first place.
+* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started the application, e.g. which command exactly you used in the terminal, or how you installed the library. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you used a command line tool, make sure you provide the sequence of steps you performed to create the bug in the first place.
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
@@ -90,53 +70,46 @@ Include details about your configuration and environment:
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Textile, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion :pencil: and find related suggestions :mag_right:.
+This section guides you through submitting an enhancement suggestion for this project, including completely new features and minor improvements to existing functionality. Following these guidelines helps others understand your suggestion :pencil: and find related suggestions :mag_right:.
 
-Before creating enhancement suggestions, please check [this list](#before-submitting-an-enhancement-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](./.github/blob/master/.github/ISSUE_TEMPLATE/feature_request.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
-#### Before Submitting An Enhancement Suggestion
-
-* **Check the [community forum](https://community.textile.io)** for some common questions and problems.
-* **Determine [which repository the enhancement should be reported in](https://github.com/textileio)**.
-* **Perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Atextile)** to see if the enhancement has already been suggested. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one.
+Before creating enhancement suggestions, please **perform a [cursory search](./issues)** to see if the enhancement has already been suggested. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one. In the end, you might find out that you don't need to create one at all! When you _are_ creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](./.github/blob/master/.github/ISSUE_TEMPLATE/feature_request.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
 #### How Do I Submit A (Good) Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com/features/issues/). After you've determined [which repository](https://github.com/textileio) your enhancement suggestion is related to, create an issue on that repository and provide the following information:
+Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com/features/issues/). After you've determined you need to create an issue, create one by providing the following information:
 
 * **Use a clear and descriptive title** for the issue to identify the suggestion.
 * **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 * **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
 * **Include screenshots and animated GIFs** which help you demonstrate the steps or point out what the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
-* **Explain why this enhancement would be useful** to most Textile users and isn't something that can or should be implemented elsewhere.
+* **Explain why this enhancement would be useful** to others and isn't something that can or should be implemented elsewhere.
 * **List some other tools or applications where this enhancement exists.**
 * **Specify which version you're using.**
 * **Specify the name and version of the OS you're using.**
 
 ### Your First Code Contribution
 
-Unsure where to begin contributing to Textile? You can start by looking through these `beginner` and `help-wanted` issues:
+Unsure where to begin contributing? You can start by looking through these `beginner` and `help-wanted` issues:
 
 * [Beginner issues][beginner] - issues which should only require a few lines of code, and a test or two.
 * [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
 
 Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
 
-If you want to read about using Textile or developing on top of Textile, the [Textile Docs](https://docs.textile.io) are a great place to start. You can find the source for the docs in [textileio/docs](https://github.com/textileio/docs).
-
 ### Pull Requests
 
 The process described here has several goals:
 
-- Maintain Textile's quality
+- Maintain the projects existing quality
 - Fix problems that are important to users
 - Engage the community in working toward the best possible software
-- Enable a sustainable system for Textile's maintainers to review contributions
+- Enable a sustainable system for others to review contributions
 
-Please follow these steps to have your contribution considered by the maintainers:
+Please follow these steps to have your contribution considered others:
 
-1. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
+1. Follow all instructions in listed here
 2. Follow the [styleguides](#styleguides)
 3. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you. If we conclude that the failure was a false positive, then we will open an issue to track that problem with our status check suite.</details>
 
@@ -146,11 +119,9 @@ While the prerequisites above must be satisfied prior to having your pull reques
 
 ### Discussions, Bugs, and Enhancements
 
-A lot of items that come in on Issues are not bugs or feature requests, they’re questions or discussions. A lot of these questions can be answered by anyone in the community; they’re not exclusive to a Textile maintainer. For feedback like this we set up our [official Textile Community Forums](https://community.textile.io). It’s a great place where people can get all kinds of help, whether it is about using Textile or just about any IPFS-related topics. For those that like more real-time discussions, there is also the [Community Slack channel](https://slack.textile.io).
+A lot of items that come in on Issues are not bugs or feature requests, they’re questions or discussions. A lot of these questions can be answered by anyone on the internet; they’re not exclusive to this project. For feedback like this we recommend [Stack Overflow](https://stackoverflow.com). It’s a great place where people can get all kinds of help, whether it is about using this project or just about any software-related topics.
 
-The general guide is that GitHub Issues is best for things that have a definition of "done": they can be fixed, added, resolved, have a stake driven through its heart or otherwise laid to rest. For things where there isn't a clear goal or end state, where you want to debate theory, or ask questions, the Focums and Slack are the way to go.
-
-We encouraging people to use the best channel for their required feedback. If you ask a question on Issues and get a simple answer and reminder to check the Forums, it’s because we want you to get the help you need as quickly as possible.
+The general guide is that GitHub Issues is best for things that have a definition of "done": they can be fixed, added, resolved, have a stake driven through its heart or otherwise laid to rest. For things where there isn't a clear goal or end state, where you want to debate theory, or ask questions, forums, Twitter, and other platforms are the way to go. We encourage people to use the best channel for their required feedback.
 
 ### Ambiguous Issues
 
@@ -190,35 +161,52 @@ In order to focus the maintainers' attention on making progress, we will mark Is
     * :arrow_down: `:arrow_down:` when downgrading dependencies
     * :shirt: `:shirt:` when removing linter warnings
 
-### GoDoc
+### JavaScript Styleguide
 
-It is a good idea to use `godoc` when developing documentation for your Go code. Godoc is the way users will consume a package, so it is ok to tweak things to make them more accessible. Run `godoc -http=<hostport>` to start a `godoc` server when developing locally.
+We use [Prettier](https://github.com/prettier/prettier), [ESLint](https://eslint.org), and other tools to help keep code consistent. If in doubt, stick with [JavaScript Standard Style](https://standardjs.com/), and let the linter and prettier fix things for you!
 
-Godoc documentation is converted to HTML or to text using the go/doc package, and is based on [this set of rules](https://golang.org/pkg/go/doc/#ToHTML). Godoc also shows example code that is runnable by the testing package, to give you an idea of [the conventions](https://golang.org/pkg/testing/#hdr-Examples). See ["Godoc: documenting Go code"](https://golang.org/doc/articles/godoc_documenting_go_code.html) for how to write good comments for godoc.
+* Prefer the object spread operator (`{...anotherObj}`) to `Object.assign()`
+* Inline `export`s with expressions whenever possible
+  ```js
+  // Use this:
+  export default class ClassName {
 
-### Go Code
+  }
 
-[Effective Go](https://golang.org/doc/effective_go.html) is a very good style guide, and all around good resource for writing effective Go code. The Go maintainers also collect [common comments made during reviews of Go code](https://github.com/golang/go/wiki/CodeReviewComments), so that a single detailed explanation can be referred to by shorthands.
+  // Instead of:
+  class ClassName {
 
-* Avoid global variables, even in packages. By doing so you will introduce side effects if the package is included multiple times.
-* Use `go fmt` before committing ([Gofmt](https://golang.org/cmd/gofmt/) is a tool that automatically formats Go source code).
-* Use `go lint` to lint source code. Golint differs from `gofmt` in that `gofmt` reformats Go source code, whereas `golint` prints out style mistakes.
-* Dependencies should be kept to the minimum. The introduction of a new dependency should be argued in any pull request.
-* Since Go 1.11, a standard dependency system is available behind the name [Go Modules](https://github.com/golang/go/wiki/Modules). It provides a way to define and lock dependencies for reproducible builds. It should be used whenever possible.
-* We should not use any specific library or framework for testing, as the [standard library](https://golang.org/pkg/) provides already everything to get started.
+  }
+  export default ClassName
+  ```
+* [Avoid platform-dependent code](https://flight-manual.atom.io/hacking-atom/sections/cross-platform-compatibility/)
+* No default exports!
 
+### Specs Styleguide
 
+- Include thoughtfully-worded, well-structured [Jasmine](https://jasmine.github.io/) specs.
+- Treat `describe` as a noun or situation.
+- Treat `it` as a statement about state or how an operation changes state.
 
+#### Example
 
-## Additional Notes
+```js
+describe('a dog', () => {
+  it('barks', () => {
+    # spec here
+    describe('when the dog is happy', () => {
+      it('wags its tail', () => {
+        # spec here
+      })
+    })
+  })
+})
+```
 
-### Issue and Pull Request Labels
+### Documentation Styleguide
 
-This section lists the labels we use to help us track and manage issues and pull requests. Most labels are used across all Textile repositories, but some are specific to this one.
-
-[GitHub search](https://help.github.com/articles/searching-issues/) makes it easy to use labels for finding groups of issues or pull requests you're interested in. For example, you might be interested in [open issues across all Textile-owned packages which are labeled as bugs, but still need to be reliably reproduced](https://github.com/search?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+user%3Atextileio+label%3Abug+label%3Aneeds-reproduction) or perhaps [open pull requests which haven't been reviewed yet](https://github.com/search?q=is%3Aopen+is%3Apr+user%3Atextileio+comments%3A0). We  encourage you to read about [other search filters](https://help.github.com/articles/searching-issues/) which will help you write more focused queries.
-
-Please open an issue in this repo if you have suggestions for new labels, and if you notice some labels are missing on some repositories, then please open an issue on that repository.
+* Use [TypeDoc](https://typedoc.org) or [JSDoc](https://jsdoc.app).
+* Use [Markdown](https://daringfireball.net/projects/markdown).
 
 ## Thanks
 

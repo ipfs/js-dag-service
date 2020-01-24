@@ -1,5 +1,5 @@
-node_modules
-docs
-examples
-jest.config.js
-webpack.config.js
+**/node_modules
+**/docs
+**/examples
+**/dist
+karma.conf.js
