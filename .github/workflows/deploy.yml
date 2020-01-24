@@ -38,6 +38,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           json -I -f package.json -e 'this.version=("${{ steps.latesttag.outputs.tag }}").replace("v", "")'
+          npm run build
+          npm run browser:build
           npm publish --access=public
 
       - name: Docs
