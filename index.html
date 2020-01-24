@@ -105,11 +105,60 @@
 </ul>
 <h2>Background</h2>
 <p>The goal of IPFS Lite is to run the bare minimal functionality for any application to interact with the IPFS network (by getting and putting IPLD blocks). This saves having to deal with the complexities of using a full IPFS peer, while maintaining the ability to share the underlying libp2p host and DAG service with other components. It is also extremely lightweight, highly extensible, and easy to work with in both Nodejs and the browser. It supports async/await by default, and the library comes with additional tools to help bootstrap a default IPFS Lite instance with minimal configuration. It is a port of the <a href="https://github.com/hsanjuan/ipfs-lite">Go IPFS Lite</a> library, and as such, has most of the same requirements.</p>
+<h3>IPFS-lite Libraries</h3>
+<blockquote>
+<p>The following includes information about support for ipfs-lite.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Build</th>
+<th style="text-align:left">Target</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/hsanjuan/ipfs-lite"><code>ipfs-lite</code></a></td>
+<td style="text-align:left"><a href="https://travis-ci.org/hsanjuan/ipfs-lite"><img src="https://img.shields.io/travis/hsanjuan/ipfs-lite.svg?branch=master&amp;style=flat-square" alt="Build Status"></a></td>
+<td style="text-align:left"><a href="https://github.com/hsanjuan/ipfs-lite"><img src="https://img.shields.io/badge/golang-blueviolet.svg?style=popout-square" alt="golang"></a></td>
+<td style="text-align:left">The reference implementation of ipfs-lite, written in Go.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="//github.com/textileio/js-ipfs-lite"><code>js-ipfs-lite</code></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/js-ipfs-lite/actions?query=branch%3Amaster"><img src="https://img.shields.io/github/workflow/status/textileio/js-ipfs-lite/Test/master.svg?style=popout-square" alt="Build status"></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/js-ipfs-lite"><img src="https://img.shields.io/badge/nodejs-blueviolet.svg?style=popout-square" alt="nodejs"></a> <a href="https://github.com/textileio/js-ipfs-lite"><img src="https://img.shields.io/badge/web-blueviolet.svg?style=popout-square" alt="web"></a> <a href="https://github.com/textileio/js-ipfs-lite"><img src="https://img.shields.io/badge/react--native-blueviolet.svg?style=popout-square" alt="react-native"></a></td>
+<td style="text-align:left">The Javascript version of ipfs-lite available for web, nodejs, and React Native applications.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="//github.com/textileio/ios-ipfs-lite"><code>ios-ipfs-lite</code></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/ios-ipfs-lite/actions?query=branch%3Amaster"><img src="https://img.shields.io/circleci/project/github/textileio/ios-ipfs-lite/master.svg?style=flat-square" alt="Build status"></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/ios-ipfs-lite"><img src="https://img.shields.io/badge/objc-blueviolet.svg?style=popout-square" alt="objc"></a> <a href="https://github.com/textileio/ios-ipfs-lite"><img src="https://img.shields.io/badge/swift-blueviolet.svg?style=popout-square" alt="swift"></a></td>
+<td style="text-align:left">The iOS ipfs-lite library for use in Objc and Swift apps</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="//github.com/textileio/android-ipfs-lite"><code>android-ipfs-lite</code></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/android-ipfs-lite/actions?query=branch%3Amaster"><img src="https://img.shields.io/circleci/project/github/textileio/android-ipfs-lite/master.svg?style=flat-square" alt="Build status"></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/android-ipfs-lite"><img src="https://img.shields.io/badge/java-blueviolet.svg?style=popout-square" alt="java"></a></td>
+<td style="text-align:left">The Java ipfs-lite library for us in Android apps</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="//github.com/textileio/grpc-ipfs-lite"><code>grpc-ipfs-lite</code></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/grpc-ipfs-lite/actions?query=branch%3Amaster"><img src="https://img.shields.io/circleci/project/github/textileio/grpc-ipfs-lite/master.svg?style=flat-square" alt="Build status"></a></td>
+<td style="text-align:left"><a href="https://github.com/textileio/grpc-ipfs-lite"><img src="https://img.shields.io/badge/grpc--api-blueviolet.svg?style=popout-square" alt="java"></a></td>
+<td style="text-align:left">A common gRPC API interface that runs on the Go ipfs-lite node.</td>
+</tr>
+</tbody>
+</table>
 <h3>Why?</h3>
 <p>Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package (currently less than 1/2 the size of <code>js-ipfs</code> without much optimization -- we will continue to optimize further). It is also highly extensible, so developers need only include the features they <em>need</em>, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution that supports async/await patterns throughout, and we think others will find the type safety useful as well. Feel free to use the <a href="https://github.com/textileio/js-ipfs-lite/tree/master/src/@types">Typescript declarations</a> in your own projects.</p>
 <h3>What?</h3>
 <p>Our goal is to provide a highly extensible IPFS implementation that, when 'fully loaded' supports <em>most</em> of the default <a href="https://github.com/ipfs/interface-js-ipfs-core"><code>js-ipfs</code></a> core APIs. Some APIs will likely never be added, and some APIs specific to Textile (like encryption) will likely be included as separate modules. If you have opinions about what should and should not be included, please <a href="https://github.com/textileio/js-ipfs-lite/issues">let us know</a>.</p>
 <h2>Install</h2>
+<blockquote>
+<p>Note: <code>js-ipfs-lite</code> includes TypeScript type definitions.</p>
+</blockquote>
 <h3>Node</h3>
 <pre class="prettyprint source"><code>npm i @textile/ipfs-lite
 </code></pre>
@@ -120,6 +169,9 @@ npm i
 npm run browser:build
 </code></pre>
 <p>The above creates minified + gzipped assets in <code>dist/browser</code>, which you can load using a <code>&lt;script&gt;</code> tag. This will make an <code>ipfsLite</code> object available in the global (<code>window</code>) namespace. You'll also get an example <code>index.html</code> file to help get you started. We use <code>webpack</code> to generate separate bundles for each sub-module, as well as a full-featured default setup. You can pick and choose to optimize load times, or use your own bundler to wrap the whole thing up with your app code.</p>
+<h3>React Native</h3>
+<pre class="prettyprint source"><code>npm i @textile/ipfs-lite
+</code></pre>
 <h2>Usage</h2>
 <h3>Modular</h3>
 <p>Only import what you need, keeping your bundles small and your load times faster. You can grab a full-featured IPFS Lite peer from the top-level library, or grab specific sub-modules as needed:</p>
@@ -239,7 +291,7 @@ window.addEventListener('load', function () {
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Nov 25 2019 23:14:28 GMT+0000 (Coordinated Universal Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Jan 24 2020 18:32:26 GMT+0000 (Coordinated Universal Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
