@@ -14,7 +14,7 @@ class ExplodingStore {
     this.commitInvoked = false
     this.putInvoked = false
   }
-  close() {
+  async close() {
     return
   }
   async has(_key: Key) {
@@ -37,7 +37,7 @@ class ExplodingStore {
       },
     }
   }
-  open() {
+  async open() {
     return
   }
   async put(_key: Key, _value: Buffer) {
