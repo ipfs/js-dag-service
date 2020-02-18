@@ -90,7 +90,7 @@
     "libp2p": "^0.26.2",
     "libp2p-bootstrap": "^0.9.7",
     "libp2p-gossipsub": "0.0.5",
-    "libp2p-kad-dht": "^0.16.0",
+    "libp2p-kad-dht": "^0.18.5",
     "libp2p-mdns": "^0.12.3",
     "libp2p-mplex": "^0.8.5",
     "libp2p-secio": "^0.11.1",
