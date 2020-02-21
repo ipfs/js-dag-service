@@ -97,7 +97,7 @@
     "libp2p-tcp": "^0.13.2",
     "libp2p-webrtc-star": "^0.17.7",
     "libp2p-websocket-star-multi": "^0.4.4",
-    "libp2p-websockets": "^0.12.4",
+    "libp2p-websockets": "^0.13.4",
     "merge-options": "^2.0.0",
     "pull-mplex": "^0.1.2",
     "tslib": "^1.10.0"
