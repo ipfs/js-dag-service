@@ -85,7 +85,7 @@
     "@ipld/block": "^2.1.1",
     "bignumber.js": "^9.0.0",
     "ipfs-bitswap": "^0.26.0",
-    "ipfs-unixfs-exporter": "^0.41.0",
+    "ipfs-unixfs-exporter": "^1.0.0",
     "ipfs-unixfs-importer": "^0.44.0",
     "libp2p": "^0.26.2",
     "libp2p-bootstrap": "^0.9.7",
