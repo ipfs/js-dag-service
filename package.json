@@ -86,7 +86,7 @@
     "bignumber.js": "^9.0.0",
     "ipfs-bitswap": "^0.26.0",
     "ipfs-unixfs-exporter": "^0.41.0",
-    "ipfs-unixfs-importer": "^0.44.0",
+    "ipfs-unixfs-importer": "^1.0.1",
     "libp2p": "^0.26.2",
     "libp2p-bootstrap": "^0.9.7",
     "libp2p-gossipsub": "0.0.5",
