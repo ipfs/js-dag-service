@@ -87,7 +87,7 @@
     "ipfs-bitswap": "^0.26.0",
     "ipfs-unixfs-exporter": "^1.0.3",
     "ipfs-unixfs-importer": "^1.0.3",
-    "libp2p": "^0.26.2",
+    "libp2p": "^0.27.4",
     "libp2p-bootstrap": "^0.9.7",
     "libp2p-gossipsub": "0.0.5",
     "libp2p-kad-dht": "^0.16.0",
