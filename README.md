@@ -14,6 +14,8 @@
 
 IPFS Lite runs the minimal setup required to get and put data on the IPFS network.
 
+For now, this is a highly experimental library. Use with caution. Ask for help on https://slack.textile.io. 
+
 ## Table of Contents
 
 - [Background](#background)
