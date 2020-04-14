@@ -68,7 +68,7 @@
     "peer-id": "^0.12.2",
     "peer-info": "^0.17.1",
     "polendina": "^1.0.0",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.4",
     "resolve-ts-aliases": "^1.0.0",
     "streaming-iterables": "^4.1.1",
     "terser-webpack-plugin": "^2.2.1",
