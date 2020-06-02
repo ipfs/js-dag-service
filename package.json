@@ -65,7 +65,7 @@
     "jsdoc": "^3.6.3",
     "libp2p-pubsub": "^0.4.3",
     "multihashing-async": "^0.8.0",
-    "peer-id": "^0.12.2",
+    "peer-id": "^0.13.12",
     "peer-info": "^0.17.1",
     "polendina": "^1.0.0",
     "prettier": "^1.18.2",
