@@ -100,6 +100,6 @@
     "libp2p-websockets": "^0.12.4",
     "merge-options": "^2.0.0",
     "pull-mplex": "^0.1.2",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   }
 }
