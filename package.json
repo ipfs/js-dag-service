@@ -84,7 +84,7 @@
   "dependencies": {
     "@ipld/block": "^4.0.2",
     "bignumber.js": "^9.0.0",
-    "ipfs-bitswap": "^0.26.0",
+    "ipfs-bitswap": "^2.0.1",
     "ipfs-unixfs-exporter": "^2.0.1",
     "ipfs-unixfs-importer": "^1.0.3",
     "libp2p": "^0.26.2",
