@@ -59,7 +59,7 @@
     "html-webpack-plugin": "^4.0.3",
     "http-server": "^0.12.0",
     "ipfs-block-service": "^0.17.1",
-    "ipld": "^0.25.0",
+    "ipld": "^0.26.4",
     "ipld-block": "^0.9.0",
     "ipld-dag-pb": "^0.18.1",
     "jsdoc": "^3.6.3",
