@@ -71,7 +71,7 @@
     "prettier": "^1.18.2",
     "resolve-ts-aliases": "^1.0.0",
     "streaming-iterables": "^4.1.1",
-    "terser-webpack-plugin": "^2.2.1",
+    "terser-webpack-plugin": "^3.0.8",
     "ts-loader": "^7.0.5",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
