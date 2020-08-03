@@ -404,25 +404,7 @@ describe("dag service with dag-pb", function () {
       expect(node3.value).to.eql(Buffer.from("I am 1"));
     });
 
-    it.skip("resolves value within nested scope (2 levels) with named links", async function () {
-      const result = resolver.resolve(cid3, "2/1/Data");
-      const collected = await collect(result);
-      expect(collected).to.have.length(3);
-      const node1 = collected[0];
-      const node2 = collected[1];
-      const node3 = collected[2];
-
-      expect(node1.remainderPath).to.eql("1/Data");
-      expect(node1.value).to.eql(cid2);
-
-      expect(node2.remainderPath).to.eql("Data");
-      expect(node2.value).to.eql(cid1);
-
-      expect(node3.remainderPath).to.eql("");
-      expect(node3.value).to.eql(Buffer.from("I am 1"));
-    });
-
-    it.skip("resolver.get round-trip", async function () {
+    it("resolver.get round-trip", async function () {
       const cid = await resolver.put(node1, "dag-pb");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const node: any = await resolver.get(cid);
