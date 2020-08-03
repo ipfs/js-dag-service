@@ -1,12 +1,13 @@
-import Bitswap from 'ipfs-bitswap'
-import CID from 'cids'
-import { BlockStore, Block } from './blockstore'
+import Bitswap from "ipfs-bitswap";
+import { CID } from "multiformats/basics.js";
+import Old from "cids";
+import { BlockStore, Block } from "./blockstore";
 
 /**
  * BlockService is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
- * A block service is backed by a block store as its datastore for blocks, and uses an "exchange" (bitswap) to fetch
+ * A block service is backed by a block store as its datastore for blocks, and uses an "exchange" (Bitswap) to fetch
  * blocks from the network. This implementation is a simplified variant of the official IPFS block service, requiring
- * only a simple block store (not a full IPFS repo), and reference to a bitwap exchange.
+ * only a simple block store (not a full IPFS repo), and reference to a Bitswap exchange.
  *
  * It satisfies the default IPFS block service interface: https://github.com/ipfs/js-ipfs-block-service.
  */
@@ -15,7 +16,7 @@ export class BlockService {
    * BlockService creates a new block service.
    *
    * @param {BlockStore} store The block store to use for local block storage.
-   * @param {Bitswap} exchange Add a "bitswap" instance that communicates with the network to retrieve blocks that
+   * @param {Bitswap} exchange Add a "Bitswap" instance that communicates with the network to retrieve blocks that
    * are not in the local store. If the node is online, all requests for blocks first check locally and then ask
    * the network for the blocks. To 'go offline', simply set `exchange` to undefined or null.
    */
@@ -24,8 +25,8 @@ export class BlockService {
   /**
    * online returns whether the block service is online or not. i.e. does it have a valid exchange?
    */
-  online() {
-    return this.exchange != null
+  online(): boolean {
+    return this.exchange != null;
   }
 
   /**
@@ -33,11 +34,11 @@ export class BlockService {
    *
    * @param {Block} block An immutable block of data.
    */
-  async put(block: Block) {
+  async put(block: Block): Promise<void> {
     if (this.exchange != null) {
-      return this.exchange.put(block)
+      return this.exchange.put(block);
     } else {
-      return this.store.put(block)
+      return this.store.put(block);
     }
   }
 
@@ -46,11 +47,11 @@ export class BlockService {
    *
    * @param {Iterable<Block>} blocks An iterable of immutable blocks of data.
    */
-  async putMany(blocks: Iterable<Block>) {
+  async putMany(blocks: Iterable<Block>): Promise<void> {
     if (this.exchange != null) {
-      return this.exchange.putMany(blocks)
+      return this.exchange.putMany(blocks);
     } else {
-      return this.store.putMany(blocks)
+      return this.store.putMany(blocks);
     }
   }
 
@@ -62,9 +63,9 @@ export class BlockService {
    */
   async get(cid: CID): Promise<Block> {
     if (this.exchange != null) {
-      return this.exchange.get(cid)
+      return this.exchange.get(new Old(Buffer.from(cid.buffer)));
     } else {
-      return this.store.get(cid)
+      return this.store.get(cid);
     }
   }
 
@@ -77,10 +78,12 @@ export class BlockService {
    */
   async *getMany(cids: Iterable<CID>): AsyncIterableIterator<Block> {
     if (this.exchange != null) {
-      return this.exchange.getMany(cids)
+      // Compatibility with old CID
+      const olds = [...cids].map((cid) => new Old(Buffer.from(cid.buffer)));
+      return this.exchange.getMany(olds);
     } else {
       for (const cid of cids) {
-        yield this.store.get(cid)
+        yield this.store.get(cid);
       }
     }
   }
@@ -90,8 +93,8 @@ export class BlockService {
    *
    * @param {CID} cid The content identifier for an immutable block of data.
    */
-  async delete(cid: CID) {
-    await this.store.delete(cid)
-    return cid
+  async delete(cid: CID): Promise<CID> {
+    await this.store.delete(cid);
+    return cid;
   }
 }

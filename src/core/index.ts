@@ -1,7 +1,7 @@
-export { Block, BlockStore } from './blockstore'
-export { BlockService } from './blockservice'
-export { DAGService } from './dagservice'
-export { Peer, PeerOptions } from './peer'
+export { Block, BlockStore } from "./blockstore";
+export { BlockService } from "./blockservice";
+export { DAGService } from "./dagservice";
+export { Peer, PeerOptions } from "./peer";
 
 // export interface ExtendedIterable<T> extends Iterable<T> {
 //   first(): Promise<T | undefined>
