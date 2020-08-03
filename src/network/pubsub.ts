@@ -13,7 +13,11 @@ export class PubSub {
     }
   }
 
-  async publish(topics: string | string[], messages: any | any[]) {
+  async publish(
+    topics: string | string[],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    messages: any | any[]
+  ): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
       return this.parent.host.pubsub.publish(topics, messages);
@@ -31,7 +35,7 @@ export class PubSub {
    * const handler = (message) => { }
    * await peer.pubsub.subscribe(topic, handler)
    */
-  async subscribe(topics: string | string[], handler: Function) {
+  async subscribe(topics: string | string[], handler: Function): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
       return this.parent.host.pubsub.subscribe(topics, handler, null);
@@ -58,7 +62,7 @@ export class PubSub {
       return this.parent.host.pubsub.unsubscribe(topic, handler);
     }
   }
-  async ls() {
+  async ls(): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
       return this.parent.host.pubsub.ls();
@@ -70,6 +74,7 @@ export class PubSub {
       return this.parent.host.pubsub.peers(topic);
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setMaxListeners(n: number): Promise<any> | undefined {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {

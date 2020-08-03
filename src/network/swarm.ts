@@ -1,6 +1,5 @@
 import type Multiaddr from "multiaddr";
 import type PeerId from "peer-id";
-import type PeerInfo from "peer-info";
 import type { Connection } from "libp2p";
 import type { Peer } from "../core";
 
@@ -78,6 +77,7 @@ export class Swarm {
     for (const [peerId, peer] of this.parent.host.peerStore.peers.entries()) {
       peers.push({
         id: peerId,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         addrs: peer.addresses.map((mi: any) => mi.multiaddr),
       });
     }

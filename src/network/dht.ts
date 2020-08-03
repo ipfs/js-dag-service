@@ -18,6 +18,7 @@ export class Dht {
   async findPeer(
     id: PeerId | string,
     options: { maxTimeout?: number } = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!this.parent.isOnline()) {
       throw new Error("peer is not online");
@@ -36,6 +37,7 @@ export class Dht {
   async findProvs(
     cid: CID | string,
     options: { maxTimeout?: number; maxNumProviders?: number } = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!this.parent.isOnline()) {
       throw new Error("peer is not online");

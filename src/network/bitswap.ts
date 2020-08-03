@@ -10,6 +10,7 @@ export interface Wantlist {
 export interface Stat {
   provideBufLen: number;
   blocksReceived: Big;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   wantlist: { "/": any }[];
   peers: string[];
   dupBlksReceived: Big;
@@ -19,6 +20,7 @@ export interface Stat {
   dataSent: Big;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function formatWantlist(list: Iterable<any>, cidBase?: string) {
   return Array.from(list).map((e) => ({
     "/": e[1].cid.toBaseEncodedString(cidBase),
@@ -32,6 +34,7 @@ export class Bitswap {
     if (!this.parent.isOnline()) {
       throw new Error("peer is not online");
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let list: Iterable<any>;
     if (peerId && typeof peerId === "string") {
       peerId = PeerId.createFromB58String(peerId);

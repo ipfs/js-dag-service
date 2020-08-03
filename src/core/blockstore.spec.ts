@@ -169,7 +169,7 @@ describe("BlockStore", function () {
 
     it("returns an error on invalid block", async function () {
       try {
-        await blocks.put("hello" as any);
+        await blocks.put("hello" as never);
         throw new Error("Shoudl have thrown error on invalid block");
       } catch (err) {
         expect(err).to.not.be.undefined;
@@ -198,7 +198,7 @@ describe("BlockStore", function () {
 
     it("returns an error on invalid block", async function () {
       try {
-        await blocks.get("woot" as any);
+        await blocks.get("woot" as never);
       } catch (err) {
         expect(err).to.not.be.undefined;
         return;
@@ -217,7 +217,7 @@ describe("BlockStore", function () {
 
     it("throws when passed an invalid cid", async function () {
       try {
-        await blocks.get("foo" as any);
+        await blocks.get("foo" as never);
         throw new Error("Should have thrown");
       } catch (err) {
         expect(err.message).to.eql("Not a valid CID");
@@ -266,7 +266,7 @@ describe("BlockStore", function () {
 
     it("throws when passed an invalid cid", async function () {
       try {
-        await blocks.has("foo" as any);
+        await blocks.has("foo" as never);
         expect(false).to.eql(true);
       } catch (err) {
         expect(err.message).to.eql("Not a valid CID");
@@ -292,7 +292,7 @@ describe("BlockStore", function () {
 
     it("throws when passed an invalid cid", async function () {
       try {
-        await blocks.delete("foo" as any);
+        await blocks.delete("foo" as never);
         expect(false).to.eql(true);
       } catch (err) {
         expect(err.message).to.eql("Not a valid CID");

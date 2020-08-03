@@ -1,13 +1,11 @@
 import { expect } from "chai";
-import multiformats from "multiformats/basics.js";
+import { CID } from "multiformats/basics.js";
 import multihashing from "multihashing-async";
 import { Buffer } from "buffer";
 import { collect } from "streaming-iterables";
 import Bitswap from "ipfs-bitswap";
 import { MemoryDatastore } from "interface-datastore";
 import { BlockStore, Block, BlockService } from "..";
-
-const { CID } = multiformats;
 
 let bs: BlockService;
 let testBlocks: Block[];
@@ -71,7 +69,7 @@ describe("fetch only from local repo", function () {
   it("get many blocks through .getMany", async function () {
     const cids = testBlocks.map((b) => b.cid);
     await bs.putMany(testBlocks);
-    const blocks = await collect(bs.getMany(cids) as any);
+    const blocks = await collect(bs.getMany(cids));
     expect(blocks).to.eql(testBlocks);
   });
 
@@ -127,12 +125,12 @@ describe("fetch through Bitswap (has exchange)", function () {
   it("retrieves a block through bitswap", async function () {
     // returns a block with a value equal to its key
     const bitswap = {
-      get(cid: any) {
+      get(cid: CID) {
         return new Block(Buffer.from("secret"), cid);
       },
     };
 
-    bs.exchange = (bitswap as any) as Bitswap;
+    bs.exchange = (bitswap as unknown) as Bitswap;
 
     const data = Buffer.from("secret");
 
@@ -151,7 +149,7 @@ describe("fetch through Bitswap (has exchange)", function () {
         puts.push(block);
       },
     };
-    bs.exchange = (bitswap as any) as Bitswap;
+    bs.exchange = (bitswap as unknown) as Bitswap;
 
     const data = Buffer.from("secret sauce");
 
