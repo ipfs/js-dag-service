@@ -42,7 +42,7 @@
   "devDependencies": {
     "@ipld/codec-interface": "^1.0.7",
     "@types/chai": "^4.2.7",
-    "@types/datastore-core": "^0.7.0",
+    "@types/datastore-core": "^1.1.1",
     "@types/interface-datastore": "^0.8.0",
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.5.0",
