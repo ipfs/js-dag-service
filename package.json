@@ -43,7 +43,7 @@
     "@ipld/codec-interface": "^1.0.7",
     "@types/chai": "^4.2.7",
     "@types/datastore-core": "^0.7.0",
-    "@types/interface-datastore": "^0.8.0",
+    "@types/interface-datastore": "^1.0.1",
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
