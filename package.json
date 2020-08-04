@@ -70,7 +70,7 @@
     "polendina": "^1.0.0",
     "prettier": "^1.18.2",
     "resolve-ts-aliases": "^1.0.0",
-    "streaming-iterables": "^4.1.1",
+    "streaming-iterables": "^5.0.2",
     "terser-webpack-plugin": "^2.2.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.6.4",
