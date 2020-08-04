@@ -1,5 +1,6 @@
-import CID from 'cids'
-import { Query, Key, Datastore, Result } from 'interface-datastore'
+import { CID } from "multiformats/basics.js";
+import type { Query, Datastore, Pair } from "interface-datastore";
+import { Key } from "interface-datastore";
 
 /**
  * Block represents an immutable block of data that is uniquely referenced with a cid.
@@ -10,10 +11,10 @@ export class Block {
   /**
    * Block creates an immutable block of data with the given content identifier (CID).
    *
-   * @param {Buffer} data The data to be stored in the block as a buffer.
+   * @param {Uint8Array} data The data to be stored in the block as a Uint8Array.
    * @param {CID} cid The content identifier of the data.
    */
-  constructor(readonly data: Buffer, readonly cid: CID) {}
+  constructor(readonly data: Uint8Array, readonly cid: CID) {}
 }
 
 /**
@@ -27,41 +28,42 @@ export class BlockStore {
    *
    * @param {Datastore} store The underlying datastore for locally caching immutable blocks of data.
    */
-  constructor(private store: Datastore) {}
+  constructor(private store: Datastore<Uint8Array>) {}
 
   /**
    * cidToKey transforms a CID to the appropriate block store key.
    *
    * @param {CID} cid The content identifier for an immutable block of data.
    */
-  static cidToKey = (cid: CID) => {
-    if (!CID.isCID(cid)) {
-      throw new Error('Not a valid CID')
+  static cidToKey = (cid: CID): Key => {
+    const wrap = CID.asCID(cid); // Compatibility with old CID
+    if (!wrap) {
+      throw new Error("Not a valid CID");
     }
     // We'll only deal with CID version 1
-    return new Key('/' + cid.toV1().toString(), false)
-  }
+    return new Key("/" + wrap.toV1().toString(), false);
+  };
 
   /**
    * keyToCid transforms a block store key to a CID.
    *
    * @param {Key} key The key used to encode the CID.
    */
-  static keyToCid = (key: Key) => {
-    return new CID(key.toString().slice(1))
-  }
+  static keyToCid = (key: Key): CID => {
+    return new CID(key.toString().slice(1));
+  };
 
   /**
    * put adds a block to the block store.
    *
    * @param {Block} block An immutable block of data.
    */
-  async put(block: Block) {
-    const k = BlockStore.cidToKey(block.cid)
+  async put(block: Block): Promise<void> {
+    const k = BlockStore.cidToKey(block.cid);
     if (await this.store.has(k)) {
-      return
+      return;
     }
-    return this.store.put(k, block.data)
+    return this.store.put(k, block.data);
   }
 
   /**
@@ -69,16 +71,16 @@ export class BlockStore {
    *
    * @param {Iterable<Block>} blocks An iterable of immutable blocks of data.
    */
-  async putMany(blocks: Iterable<Block>) {
-    const batch = this.store.batch()
+  async putMany(blocks: Iterable<Block>): Promise<void> {
+    const batch = this.store.batch();
     for await (const block of blocks) {
-      const k = BlockStore.cidToKey(block.cid)
+      const k = BlockStore.cidToKey(block.cid);
       if (await this.store.has(k)) {
-        continue
+        continue;
       }
-      batch.put(k, block.data)
+      batch.put(k, block.data);
     }
-    return await batch.commit()
+    return await batch.commit();
   }
 
   /**
@@ -86,9 +88,9 @@ export class BlockStore {
    *
    * @param {CID} cid The content identifier for an immutable block of data.
    */
-  async get(cid: CID) {
-    const k = BlockStore.cidToKey(cid)
-    return new Block(await this.store.get(k), cid)
+  async get(cid: CID): Promise<Block> {
+    const k = BlockStore.cidToKey(cid);
+    return new Block(await this.store.get(k), cid);
   }
 
   /**
@@ -96,8 +98,8 @@ export class BlockStore {
    *
    * @param {CID} cid The content identifier for an immutable block of data.
    */
-  async delete(cid: CID) {
-    return this.store.delete(BlockStore.cidToKey(cid))
+  async delete(cid: CID): Promise<void> {
+    return this.store.delete(BlockStore.cidToKey(cid));
   }
 
   /**
@@ -105,8 +107,8 @@ export class BlockStore {
    *
    * @param {CID} cid The content identifier for an immutable block of data.
    */
-  async has(cid: CID) {
-    return this.store.has(BlockStore.cidToKey(cid))
+  async has(cid: CID): Promise<boolean> {
+    return this.store.has(BlockStore.cidToKey(cid));
   }
 
   /**
@@ -115,9 +117,11 @@ export class BlockStore {
    *
    * @param {Query} query A set of query options to use when querying the underlying datastore.
    */
-  async *query(query: Query): AsyncIterableIterator<Result> {
+  async *query(
+    query: Query<Uint8Array>
+  ): AsyncIterableIterator<Pair<Uint8Array>> {
     for await (const result of this.store.query(query)) {
-      yield result
+      yield result;
     }
   }
 }
