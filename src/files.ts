@@ -4,7 +4,6 @@ import importer, {
   File,
   Result,
 } from "ipfs-unixfs-importer";
-import { Buffer } from "buffer";
 import exporter, { Options as GetOptions } from "ipfs-unixfs-exporter";
 import { Peer } from "./core";
 import Ipld from "ipld";
@@ -20,7 +19,10 @@ declare module "./core" {
       source: Iterable<File>,
       options?: AddOptions
     ): Promise<Result | undefined>;
-    getFile(cid: CID | Buffer | string, options?: GetOptions): Promise<Buffer>;
+    getFile(
+      cid: CID | Uint8Array | string,
+      options?: GetOptions
+    ): Promise<Uint8Array>;
   }
 }
 
@@ -102,7 +104,7 @@ Peer.prototype.addFile = async function (
  * await peer.stop()
  */
 Peer.prototype.getFile = async function (
-  cid: CID | Buffer | string,
+  cid: CID | Uint8Array | string,
   options?: GetOptions
 ) {
   const file = await exporter(cid as never, (wrap(this) as unknown) as Ipld);
@@ -113,15 +115,19 @@ Peer.prototype.getFile = async function (
   if (!file.content) {
     throw new Error("this dag node has no content");
   }
-  const arr: Buffer[] = [];
+  const arrays: Uint8Array[] = [];
   for await (const entry of file.content(options)) {
     if (entry instanceof Uint8Array) {
-      arr.push(Buffer.from(entry));
+      arrays.push(entry);
     } else {
-      arr.push(Buffer.from(entry.data));
+      arrays.push(entry.data);
     }
   }
-  return Buffer.concat(arr);
+  const flatArray = arrays.reduce<number[]>((acc, curr) => {
+    acc.push(...curr);
+    return acc;
+  }, []);
+  return new Uint8Array(flatArray);
 };
 
 export { Peer };

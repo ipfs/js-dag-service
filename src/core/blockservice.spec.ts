@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { CID } from "multiformats/basics.js";
 import multihashing from "multihashing-async";
-import { Buffer } from "buffer";
 import { collect } from "streaming-iterables";
 import Bitswap from "ipfs-bitswap";
 import { MemoryDatastore } from "interface-datastore";
@@ -11,18 +10,21 @@ let bs: BlockService;
 let testBlocks: Block[];
 const store = new BlockStore(new MemoryDatastore());
 
+const encoder = new TextEncoder();
+
 before(async function () {
   bs = new BlockService(store);
+  const encoder = new TextEncoder();
 
   const datas = [
-    Buffer.from("1"),
-    Buffer.from("2"),
-    Buffer.from("3"),
-    Buffer.from("A random data block"),
+    encoder.encode("1"),
+    encoder.encode("2"),
+    encoder.encode("3"),
+    encoder.encode("A random data block"),
   ];
 
   testBlocks = await Promise.all(
-    datas.map(async (data: Buffer) => {
+    datas.map(async (data: Uint8Array) => {
       const hash = await multihashing(data, "sha2-256");
       return new Block(data, new CID(hash));
     })
@@ -74,7 +76,7 @@ describe("fetch only from local repo", function () {
   });
 
   it("delete a block", async function () {
-    const data = Buffer.from("Will not live that much");
+    const data = encoder.encode("Will not live that much");
 
     const hash = await multihashing(data, "sha2-256");
     const b = { data, cid: new CID(hash) };
@@ -87,7 +89,7 @@ describe("fetch only from local repo", function () {
 
   it("stores and gets lots of blocks", async function () {
     const datas = [...Array(1000)].map((_, i) => {
-      return Buffer.from(`hello-${i}-${Math.random()}`);
+      return encoder.encode(`hello-${i}-${Math.random()}`);
     });
 
     const blocks = await Promise.all(
@@ -126,13 +128,13 @@ describe("fetch through Bitswap (has exchange)", function () {
     // returns a block with a value equal to its key
     const bitswap = {
       get(cid: CID) {
-        return new Block(Buffer.from("secret"), cid);
+        return new Block(encoder.encode("secret"), cid);
       },
     };
 
     bs.exchange = (bitswap as unknown) as Bitswap;
 
-    const data = Buffer.from("secret");
+    const data = encoder.encode("secret");
 
     const hash = await multihashing(data, "sha2-256");
     const block = await bs.get(new CID(hash));
@@ -151,7 +153,7 @@ describe("fetch through Bitswap (has exchange)", function () {
     };
     bs.exchange = (bitswap as unknown) as Bitswap;
 
-    const data = Buffer.from("secret sauce");
+    const data = encoder.encode("secret sauce");
 
     const hash = await multihashing(data, "sha2-256");
     await bs.put(new Block(data, new CID(hash)));

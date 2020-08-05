@@ -63,7 +63,9 @@ export class BlockService {
    */
   async get(cid: CID): Promise<Block> {
     if (this.exchange != null) {
-      return this.exchange.get(new Old(Buffer.from(cid.buffer)));
+      // @todo Remove after next multiformats release
+      const old = Old.isCID(cid) ? cid : new Old(Buffer.from(cid.buffer));
+      return this.exchange.get(old);
     } else {
       return this.store.get(cid);
     }
@@ -79,7 +81,9 @@ export class BlockService {
   async *getMany(cids: Iterable<CID>): AsyncIterableIterator<Block> {
     if (this.exchange != null) {
       // Compatibility with old CID
-      const olds = [...cids].map((cid) => new Old(Buffer.from(cid.buffer)));
+      const olds = [...cids].map((cid) => {
+        return Old.isCID(cid) ? cid : new Old(Buffer.from(cid.buffer));
+      });
       return this.exchange.getMany(olds);
     } else {
       for (const cid of cids) {

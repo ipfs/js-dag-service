@@ -25,3 +25,4 @@ declare module "multiformats/basics.js" {
 declare module "@ipld/dag-cbor";
 declare module "@ipld/dag-json";
 declare module "@ipld/block";
+declare module "multiformats/legacy";

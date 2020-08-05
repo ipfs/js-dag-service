@@ -1,21 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-types */
 declare module "multihashing-async" {
   function Multihashing(
-    buf: Buffer,
+    buf: Uint8Array,
     alg: number | string,
     length?: number
-  ): Promise<Buffer>;
+  ): Promise<Uint8Array>;
   namespace Multihashing {
-    export const Buffer: Buffer;
+    export const Uint8Array: Uint8Array;
     export const multihash: Function;
     export const functions: Record<number, Function>;
     export function digest(
-      buf: Buffer,
+      buf: Uint8Array,
       alg: number | string,
       length?: number
-    ): Promise<Buffer>;
+    ): Promise<Uint8Array>;
     export function createHash(alg: string | number): Function;
-    export function validate(buf: Buffer, hash: Buffer): Promise<boolean>;
+    export function validate(
+      buf: Uint8Array,
+      hash: Uint8Array
+    ): Promise<boolean>;
   }
   export default Multihashing;
 }

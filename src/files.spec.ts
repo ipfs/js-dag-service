@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { createReadStream, promises as fs } from "fs";
 import { MemoryDatastore } from "interface-datastore";
+import type { CID } from "multiformats/basics.js";
 import { Peer, BlockStore } from ".";
 import { setupLibP2PHost } from "./setup";
 import "./files";
@@ -36,13 +37,16 @@ describe("getting and putting files", function () {
     root = await lite.addFile(source);
     // `result` should be the root DAG node
     const str = "bafkreiffsgtnic7uebaeuaixgph3pmmq2ywglpylzwrswv5so7m23hyuny";
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    expect(root!.cid.toString()).to.eql(str);
+    if (!root) throw new Error("root not found");
+    const { cid } = root;
+    expect(cid.toString()).to.eql(str);
   });
 
   it('get block from "network" and recursively export', async function () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const content = await lite.getFile(root!.cid.toString());
-    expect(content.toString()).to.eql("Hello World");
+    const decoder = new TextDecoder();
+    if (!root) throw new Error("root not found");
+    const { cid } = root;
+    const content = await lite.getFile(cid as never);
+    expect(decoder.decode(content)).to.eql("Hello World");
   });
 });

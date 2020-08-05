@@ -36,7 +36,9 @@ export class BlockStore {
    * @param {CID} cid The content identifier for an immutable block of data.
    */
   static cidToKey = (cid: CID): Key => {
-    const wrap = CID.asCID(cid); // Compatibility with old CID
+    // Compatibility with old CID
+    if ((cid as any).bytes) cid.buffer = cid.bytes;
+    const wrap = CID.asCID(cid);
     if (!wrap) {
       throw new Error("Not a valid CID");
     }

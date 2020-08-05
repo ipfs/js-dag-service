@@ -10,12 +10,13 @@ import {
 } from "interface-datastore";
 import multihashing from "multihashing-async";
 import { collect } from "streaming-iterables";
-import { Buffer } from "buffer";
 import { Block, BlockStore } from "./blockstore";
 
 const { CID } = multiformats;
 
 let blocks: BlockStore;
+
+const encoder = new TextEncoder();
 
 class ExplodingStore implements Datastore<Uint8Array> {
   commitInvoked: boolean;
@@ -71,7 +72,7 @@ class ExplodingStore implements Datastore<Uint8Array> {
     return;
   }
   async *query(query: Query<Uint8Array>) {
-    yield { key: new Key(""), value: Buffer.from("data") };
+    yield { key: new Key(""), value: encoder.encode("data") };
   }
 }
 
@@ -93,9 +94,9 @@ describe("BlockStore", function () {
   });
 
   const blockData = [...Array(100).keys()].map((i) =>
-    Buffer.from(`hello-${i}-${Math.random()}`)
+    encoder.encode(`hello-${i}-${Math.random()}`)
   );
-  const bData = Buffer.from("hello world");
+  const bData = encoder.encode("hello world");
   let b: Block;
 
   before(async function () {
@@ -115,7 +116,7 @@ describe("BlockStore", function () {
     });
 
     it("empty value", async function () {
-      const d = Buffer.alloc(0);
+      const d = new Uint8Array(0);
       const multihash = await multihashing(d, "sha2-256");
       const empty = new Block(d, new CID(multihash));
       await blocks.put(empty);
@@ -126,7 +127,7 @@ describe("BlockStore", function () {
         blockData.map((b) => multihashing(b, "sha2-256"))
       );
       await Promise.all(
-        blockData.map((b: Buffer, i: number) => {
+        blockData.map((b: Uint8Array, i: number) => {
           const block = new Block(b, new CID(hashes[i]));
           return blocks.put(block);
         })
@@ -134,10 +135,9 @@ describe("BlockStore", function () {
     });
 
     it(".putMany", async function () {
-      // .map(i => Buffer.from(`hello-${i}-${Math.random()}`))
       const blks = await Promise.all(
         [...Array(50).keys()].map(async function () {
-          const d = Buffer.from("many" + Math.random());
+          const d = encoder.encode("many" + Math.random());
           const hash = await multihashing(d, "sha2-256");
           return new Block(d, new CID(hash));
         })
@@ -150,7 +150,7 @@ describe("BlockStore", function () {
     });
 
     it("should not .putMany when block is already present", async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(hash);
       const store = new ExplodingStore();
@@ -207,7 +207,7 @@ describe("BlockStore", function () {
     });
 
     it("should get block stored under v0 CID with a v1 CID", async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(hash);
       await blocks.put(new Block(data, cid));
@@ -225,7 +225,7 @@ describe("BlockStore", function () {
     });
 
     it("throws error when requesting CID that is not in the store", async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(1, 113, hash);
       try {
@@ -237,7 +237,7 @@ describe("BlockStore", function () {
     });
 
     it("throws unknown error encountered when getting a block", async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(hash);
       const other = new BlockStore(new ExplodingStore());
@@ -274,7 +274,7 @@ describe("BlockStore", function () {
     });
 
     it("returns false when requesting non-dag-pb CID that is not in the store", async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(1, 113, hash);
       const result = await blocks.has(cid);
@@ -302,7 +302,7 @@ describe("BlockStore", function () {
 
   describe(".query", function () {
     before(async function () {
-      const data = Buffer.from(`TEST${Date.now()}`);
+      const data = encoder.encode(`TEST${Date.now()}`);
       const hash = await multihashing(data, "sha2-256");
       const cid = new CID(1, 113, hash);
       blocks.put(new Block(data, cid));

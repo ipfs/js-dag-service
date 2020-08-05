@@ -41,7 +41,8 @@ let p2: Peer;
       await p2.stop();
     });
 
-    it("add, sync, get, delete, test", async function () {
+    // Skip until next multiformats release
+    it.skip("add, sync, get, delete, test", async function () {
       this.timeout(10000);
       const data = {
         akey: "avalue",
