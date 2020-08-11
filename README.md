@@ -10,7 +10,7 @@
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 > DAGService is a library for storing and replicating hash-linked
-> data over IPFS network.
+> data over the IPFS network.
 
 DAGService is aiming to be a bare minimum needed for [IPLD][]-based applications
 to interact with the IPFS network by getting and putting blocks to it.
