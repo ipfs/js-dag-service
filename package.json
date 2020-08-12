@@ -33,7 +33,7 @@
     "node"
   ],
   "author": "Carson Farmer <carson@textile.io>",
-  "license": "MIT",
+  "license": "(Apache-2.0 AND MIT)",
   "bugs": {
     "url": "https://github.com/ipfs/js-dag-service/issues"
   },

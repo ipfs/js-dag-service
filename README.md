@@ -96,7 +96,10 @@ Project follows the [IPFS Community Code of Conduct](https://github.com/ipfs/com
 
 ## License
 
-[MIT](LICENSE) (c) Protocol Labs
+The js-dag-service project is dual-licensed under Apache 2.0 and MIT terms:
+
+- Apache License, Version 2.0, (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
 
 [ipld]: https://ipld.io/
 [ipfs]: https://ipfs.io/
