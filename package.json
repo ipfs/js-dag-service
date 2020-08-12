@@ -1,7 +1,7 @@
 {
-  "name": "@textile/ipfs-lite",
-  "version": "0.1.5",
-  "description": "A lightweight minimal IPFS peer for typescript/javascript.",
+  "name": "dag-service",
+  "version": "0.0.0-dev",
+  "description": "Library for storing and replicating hash-linked data over IPFS network",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": {
@@ -21,22 +21,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/textileio/js-ipfs-lite.git"
+    "url": "git+https://github.com/ipfs/js-dag-service.git"
   },
   "keywords": [
     "ipfs",
-    "lite",
+    "ipld",
+    "dag-service",
     "dag",
     "typescript",
     "browser",
     "node"
   ],
   "author": "Carson Farmer <carson@textile.io>",
-  "license": "MIT",
+  "license": "(Apache-2.0 AND MIT)",
   "bugs": {
-    "url": "https://github.com/textileio/js-ipfs-lite/issues"
+    "url": "https://github.com/ipfs/js-dag-service/issues"
   },
-  "homepage": "https://github.com/textileio/js-ipfs-lite#readme",
+  "homepage": "https://github.com/ipfs/js-dag-service#readme",
   "devDependencies": {
     "@types/browser-or-node": "^1.2.0",
     "@types/chai": "^4.2.12",
