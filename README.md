@@ -2,7 +2,6 @@
 
 [![Chat on IRC](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs)
 [![Chat on Matrix](https://img.shields.io/badge/matrix-%23ipfs%3Amatrix.org-blue.svg?style=popout-square)](https://riot.im/app/#/room/#ipfs-dev:matrix.org)
-[![GitHub license](https://img.shields.io/github/license/ipfs/js-dag-service.svg?style=flat-square)](./LICENSE)
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/ipfs/js-dag-service.svg?style=popout-square)](./package.json)
 [![npm (scoped)](https://img.shields.io/npm/v/dag-service.svg?style=popout-square)](https://www.npmjs.com/package/dag-service)
 [![Release](https://img.shields.io/github/release/textileio/js-ipfs-lite.svg?style=flat-square)](https://github.com/ipfs/js-dag-service/releases/latest)
