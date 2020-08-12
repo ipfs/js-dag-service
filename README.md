@@ -39,7 +39,7 @@ own.
 
 ### Why?
 
-Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package (currently less than 1/2 the size of `js-ipfs` without much optimization -- we will continue to optimize further). It is also highly extensible, so developers need only include the features they _need_, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution, and we think others will find the type safety useful as well. Feel free to use the [Typescript declarations](https://github.com/textileio/js-ipfs-lite/tree/master/src/@types) in your own projects.
+Because 99% of the time, a browser or mobile (d)App only needs to be able to add and get small bits of data over the IPFS network. This library provides that, in a much smaller package (currently less than 1/2 the size of `js-ipfs` without much optimization -- we will continue to optimize further). It is also highly extensible, so developers need only include the features they _need_, keeping load times fast, and (d)Apps feeling snappy. Additionally, Textile needed a Typescript-based IPFS solution, and we think others will find the type safety useful as well. Feel free to use the [Typescript declarations](https://github.com/ipfs/js-dag-service/tree/default/src/@types) in your own projects.
 
 ## Install
 

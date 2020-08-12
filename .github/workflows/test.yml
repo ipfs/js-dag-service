@@ -2,11 +2,11 @@ name: Test
 on:
   push:
     branches:
-      - master
+      - default
       - '!gh-pages'
   pull_request:
     branches:
-      - master
+      - default
 
 jobs:
 
