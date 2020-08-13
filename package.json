@@ -58,7 +58,7 @@
     "mocha": "^8.0.1",
     "multicodec": "^1.0.4",
     "multihashes": "^1.0.1",
-    "multihashing-async": "^1.0.0",
+    "multihashing-async": "^2.0.1",
     "peer-info": "^0.17.5",
     "polendina": "^1.0.0",
     "prettier": "^2.0.5",
