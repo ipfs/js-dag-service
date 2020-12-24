@@ -1,6 +1,6 @@
 import PeerId from "peer-id";
 import Big from "bignumber.js";
-import { CID } from "multiformats/basics.js";
+import CID from "multiformats/cid";
 import { Peer } from "../core";
 
 export interface Wantlist {

@@ -1,12 +1,12 @@
-import multiformats, { CID } from "multiformats/basics.js";
-import dagcbor from "@ipld/dag-cbor";
-import dagjson from "@ipld/dag-json";
-import create from "@ipld/block";
-import base58 from "multiformats/bases/base58.js";
+import CID from "cids";
+import * as dagpb from "@ipld/dag-pb";
+import _Block from "@ipld/block/defaults";
+import { base58btc, base58flickr } from "multiformats/bases/base58";
 
-multiformats.multibase.add(base58);
-multiformats.multicodec.add([dagcbor, dagjson]);
-const _Block = create(multiformats);
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+_Block.multiformats.multibase.add([base58btc, base58flickr]);
+_Block.multiformats.multicodec.add(dagpb);
 
 // Basic constructor interface
 interface Constructor<T> {

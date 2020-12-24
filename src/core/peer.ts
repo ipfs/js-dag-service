@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import type LibP2P from "libp2p";
 import Bitswap from "ipfs-bitswap";
-import type { Blockstore } from "ipfs-repo";
-import { CID } from "multiformats/basics.js";
-import { BlockService } from "./blockservice";
+import CID from "cids";
+import { BlockService, Exchange } from "./blockservice";
 import { BlockStore } from "./blockstore";
 import { DAGService } from "./dagservice";
 
@@ -38,7 +39,7 @@ export class Peer extends DAGService {
    * blockExchange is the "bitswap" instance that communicates with the network to retrieve blocks that are not in
    * the local store.
    */
-  public blockExchange: Bitswap;
+  public blockExchange: Exchange;
   /**
    * blockService is a content-addressable store for adding, deleting, and retrieving blocks of immutable data.
    */
@@ -58,7 +59,7 @@ export class Peer extends DAGService {
     config: PeerOptions = { offline: false }
   ) {
     // @todo: Handle the Uint8Array mixing possibly?
-    const blockExchange = new Bitswap(host, (store as unknown) as Blockstore);
+    const blockExchange = new Bitswap(host, store as unknown) as Exchange;
     const blockService = new BlockService(
       store,
       config.offline ? undefined : blockExchange
@@ -118,7 +119,8 @@ export class Peer extends DAGService {
    * isOnline returns whether the peer has a valid block exchange and its p2p host has been started.
    */
   isOnline(): boolean {
-    return this.blockExchange && this.host && this.host.isStarted();
+    if (this.blockExchange && this.host && this.host.isStarted()) return true;
+    return false;
   }
 
   /**

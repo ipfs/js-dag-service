@@ -3,7 +3,7 @@ import { MemoryDatastore } from "interface-datastore";
 import { isBrowser } from "browser-or-node";
 import { Buffer } from "buffer";
 import { Peer, BlockStore } from "..";
-import { setupLibP2PHost } from "../setup";
+import { createHost } from "../setup";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const writeKey = require("libp2p/src/pnet").generate;
@@ -24,11 +24,11 @@ let p2: Peer;
       this.timeout(10000);
       p1 = new Peer(
         new BlockStore(new MemoryDatastore()),
-        await setupLibP2PHost(undefined, swarmKey, ["/ip4/0.0.0.0/tcp/0"])
+        await createHost(undefined, ["/ip4/0.0.0.0/tcp/0"])
       );
       p2 = new Peer(
         new BlockStore(new MemoryDatastore()),
-        await setupLibP2PHost(undefined, swarmKey, ["/ip4/0.0.0.0/tcp/0"])
+        await createHost(undefined, ["/ip4/0.0.0.0/tcp/0"])
       );
       await p1.start();
       await p2.start();

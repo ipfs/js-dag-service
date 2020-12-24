@@ -1,11 +1,10 @@
 import { expect } from "chai";
-import { CID } from "multiformats/basics.js";
+import CID from "cids";
 import multihashing from "multihashing-async";
 import { Buffer } from "buffer";
 import { collect } from "streaming-iterables";
-import Bitswap from "ipfs-bitswap";
 import { MemoryDatastore } from "interface-datastore";
-import { BlockStore, Block, BlockService } from "..";
+import { BlockStore, Block, BlockService, Exchange } from "..";
 
 let bs: BlockService;
 let testBlocks: Block[];
@@ -105,7 +104,7 @@ describe("fetch only from local repo", function () {
 
   it("sets and unsets exchange", function () {
     bs = new BlockService(store);
-    bs.exchange = {} as Bitswap;
+    bs.exchange = {} as Exchange;
     expect(bs.online()).to.be.true;
     bs.exchange = undefined;
     expect(bs.online()).to.be.false;
@@ -118,7 +117,7 @@ describe("fetch through Bitswap (has exchange)", function () {
   });
 
   it("online returns true when online", function () {
-    bs.exchange = {} as Bitswap;
+    bs.exchange = {} as Exchange;
     expect(bs.online()).to.be.true;
   });
 
@@ -130,7 +129,7 @@ describe("fetch through Bitswap (has exchange)", function () {
       },
     };
 
-    bs.exchange = (bitswap as unknown) as Bitswap;
+    bs.exchange = (bitswap as unknown) as Exchange;
 
     const data = Buffer.from("secret");
 
@@ -149,7 +148,7 @@ describe("fetch through Bitswap (has exchange)", function () {
         puts.push(block);
       },
     };
-    bs.exchange = (bitswap as unknown) as Bitswap;
+    bs.exchange = (bitswap as unknown) as Exchange;
 
     const data = Buffer.from("secret sauce");
 

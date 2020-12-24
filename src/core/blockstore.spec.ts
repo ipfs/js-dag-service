@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { expect } from "chai";
-import multiformats from "multiformats/basics.js";
+import CID from "cids";
 import {
   Key,
   MemoryDatastore,
@@ -12,8 +12,6 @@ import multihashing from "multihashing-async";
 import { collect } from "streaming-iterables";
 import { Buffer } from "buffer";
 import { Block, BlockStore } from "./blockstore";
-
-const { CID } = multiformats;
 
 let blocks: BlockStore;
 
@@ -116,8 +114,8 @@ describe("BlockStore", function () {
 
     it("empty value", async function () {
       const d = Buffer.alloc(0);
-      const multihash = await multihashing(d, "sha2-256");
-      const empty = new Block(d, new CID(multihash));
+      const hash = await multihashing(d, "sha2-256");
+      const empty = new Block(d, new CID(hash));
       await blocks.put(empty);
     });
 

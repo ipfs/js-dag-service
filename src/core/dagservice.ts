@@ -1,5 +1,6 @@
-import { CID } from "multiformats/basics.js";
-import { getName } from "multicodec";
+import CID from "cids";
+import New from "multiformats/cid";
+import { getName, CodecName, CodecNumber } from "multicodec";
 import { BlockService } from "./blockservice";
 import { Block } from "../utils";
 
@@ -36,10 +37,9 @@ export interface DAGOptions extends AddOptions {
  */
 export interface ResolveResult {
   /**
-   * remainderPath is the part of the path that wasn’t resolved yet.
+   * remaining is the part of the path that wasn’t resolved yet.
    */
-  remainderPath?: string;
-  remainder?: string;
+  remaining?: string;
   /**
    * value is what the resolved path points to. If further traversing is possible, then `value` is a CID object
    * linking to another IPLD node. If it was possible to fully resolve the path, `value` is the value the path points
@@ -91,13 +91,13 @@ export class DAGService {
     yield {
       value: node.value,
       // @todo: Double check this, what does the spec say?
-      remainderPath: node.remainderPath || node.remaining || "",
+      remaining: node.remaining || "",
     };
-    if (CID.asCID(node.value)) {
+    if (CID.isCID(node.value) || New.isCID(node.value)) {
       for await (const res of this.resolve(
-        node.value,
+        node.value as CID,
         // @todo: Double check this, what does the spec say?
-        node.remainderPath || node.remaining || ""
+        node.remaining || ""
       )) {
         yield res;
       }
@@ -156,8 +156,9 @@ export class DAGService {
    */
   async get(cid: CID): Promise<unknown> {
     const data = await this.blockService.get(cid);
-    const wrap = CID.asCID(data.cid); // Compatibility with old CID
-    const block = Block.create(data.data, wrap);
+    if (!CID.isCID(data.cid) && !New.isCID(data.cid))
+      throw new Error("block not found");
+    const block = Block.create(data.data, cid);
     return block.decode();
   }
 
@@ -182,13 +183,13 @@ export class DAGService {
    */
   async put(
     node: unknown,
-    codec: string | number = "dag-cbor",
+    codec: CodecName | CodecNumber = "dag-cbor",
     options?: AddOptions
   ): Promise<CID> {
     const opts = options || this.defaultOptions || {};
     if (typeof codec === "number") {
       // Compatibility with js-ipld
-      codec = getName(codec);
+      codec = getName(codec) as CodecName;
     }
     const block = Block.encoder(node, codec, opts.hashAlg);
     const data = block.encode();
@@ -213,12 +214,12 @@ export class DAGService {
    */
   async *putMany(
     nodes: Iterable<unknown>,
-    codec: string | number = "dag-cbor",
+    codec: CodecName | CodecNumber = "dag-cbor",
     options?: AddOptions
   ): AsyncIterableIterator<CID> {
     const opts = options || this.defaultOptions || {};
     if (typeof codec === "number") {
-      codec = getName(codec); // Compatibility with js-ipld
+      codec = getName(codec) as CodecName; // Compatibility with js-ipld
     }
     for await (const node of nodes) {
       yield this.put(node, codec, opts);
@@ -231,8 +232,8 @@ export class DAGService {
    * @param {CID} cid The content identifier for the IPLD node to be removed.
    */
   async remove(cid: CID): Promise<CID> {
-    const wrap = CID.asCID(cid); // Compatibility with old CID
-    return this.blockService.delete(wrap);
+    if (!CID.isCID(cid) && !New.isCID(cid)) throw new Error("block not found");
+    return this.blockService.delete(cid);
   }
 
   /**

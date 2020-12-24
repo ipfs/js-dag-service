@@ -1,4 +1,5 @@
-import { CID } from "multiformats/basics.js";
+import CID from "cids";
+import New from "multiformats/cid";
 import type { Query, Datastore, Pair } from "interface-datastore";
 import { Key } from "interface-datastore";
 
@@ -36,12 +37,11 @@ export class BlockStore {
    * @param {CID} cid The content identifier for an immutable block of data.
    */
   static cidToKey = (cid: CID): Key => {
-    const wrap = CID.asCID(cid); // Compatibility with old CID
-    if (!wrap) {
+    if (!CID.isCID(cid) && !New.isCID(cid)) {
       throw new Error("Not a valid CID");
     }
     // We'll only deal with CID version 1
-    return new Key("/" + wrap.toV1().toString(), false);
+    return new Key("/" + cid.toV1().toString(), false);
   };
 
   /**

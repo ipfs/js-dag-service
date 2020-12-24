@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { Peer } from "../core";
 
 export class PubSub {
@@ -13,72 +12,30 @@ export class PubSub {
     }
   }
 
-  async publish(
-    topics: string | string[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    messages: any | any[]
-  ): Promise<void> {
+  async publish(topic: string, message: Uint8Array): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.publish(topics, messages);
+      return this.parent.host.pubsub.publish(topic, message);
     }
   }
 
   /**
    * Subscribe the given handler to a pubsub topic
-   *
-   * @param topic - The topic to listen on.
-   * @param handler - The handler to subscribe.
-   *
-   * @example <caption>Subscribe a handler to a topic</caption>
-   *
-   * const handler = (message) => { }
-   * await peer.pubsub.subscribe(topic, handler)
    */
-  async subscribe(topics: string | string[], handler: Function): Promise<void> {
+  async subscribe(topic: string): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.subscribe(topics, handler, null);
+      return this.parent.host.pubsub.subscribe(topic);
     }
   }
 
   /**
    * Unsubscribes from a pubsub topic
-   *
-   * @param topic - The topic to listen on.
-   * @param handler - The handler to unsubscribe from.
-   *
-   * @example <caption>Unsubscribe a topic for all handlers</caption>
-   *
-   * await peer.pubsub.unsubscribe(topic, undefined)
-   *
-   * @example <caption>Unsubscribe a topic for 1 handler</caption>
-   *
-   * await peer.pubsub.unsubscribe(topic, handler)
    */
-  async unsubscribe(topic: string, handler?: Function): Promise<void> {
+  async unsubscribe(topic: string): Promise<void> {
     this.checkOnlineAndEnabled();
     if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.unsubscribe(topic, handler);
-    }
-  }
-  async ls(): Promise<void> {
-    this.checkOnlineAndEnabled();
-    if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.ls();
-    }
-  }
-  async peers(topic: string): Promise<string[] | undefined> {
-    this.checkOnlineAndEnabled();
-    if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.peers(topic);
-    }
-  }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setMaxListeners(n: number): Promise<any> | undefined {
-    this.checkOnlineAndEnabled();
-    if (this.parent.host.pubsub) {
-      return this.parent.host.pubsub.setMaxListeners(n);
+      return this.parent.host.pubsub.unsubscribe(topic);
     }
   }
 }

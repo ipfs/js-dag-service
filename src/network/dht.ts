@@ -1,5 +1,5 @@
 import PeerId from "peer-id";
-import { CID } from "multiformats/basics.js";
+import CID from "cids";
 import { Peer } from "../core";
 
 export interface Options {
@@ -17,7 +17,7 @@ export class Dht {
    */
   async findPeer(
     id: PeerId | string,
-    options: { maxTimeout?: number } = {}
+    options: { timeout?: number } = {}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!this.parent.isOnline()) {
@@ -36,21 +36,17 @@ export class Dht {
    */
   async findProvs(
     cid: CID | string,
-    options: { maxTimeout?: number; maxNumProviders?: number } = {}
+    options: { timeout?: number; maxNumProviders?: number } = {}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!this.parent.isOnline()) {
       throw new Error("peer is not online");
     }
     if (typeof cid === "string") {
-      try {
-        cid = new CID(cid);
-      } catch (err) {
-        throw "invalid cid";
-      }
+      cid = new CID(cid);
     }
 
-    return this.parent.host.contentRouting.findProviders(cid as never, options);
+    return this.parent.host.contentRouting.findProviders(cid, options);
   }
 
   /**
@@ -68,11 +64,6 @@ export class Dht {
     }
     if (!Array.isArray(cids)) {
       cids = [cids];
-    }
-    try {
-      cids = cids.map((cid) => new CID(cid));
-    } catch (err) {
-      throw new Error("invalid cid");
     }
     // Ensure blocks are actually local
     const all = await Promise.all(cids.map((cid) => this.parent.hasBlock(cid)));
