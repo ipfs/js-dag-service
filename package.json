@@ -92,7 +92,7 @@
     "libp2p-pubsub": "^0.5.6",
     "libp2p-secio": "^0.12.6",
     "libp2p-tcp": "^0.14.6",
-    "libp2p-webrtc-star": "^0.18.6",
+    "libp2p-webrtc-star": "^0.21.1",
     "libp2p-websockets": "^0.13.6",
     "multiaddr": "^7.5.0",
     "multiformats": "^2.3.0",
