@@ -84,7 +84,7 @@
     "libp2p": "^0.28.9",
     "libp2p-bootstrap": "^0.11.0",
     "libp2p-crypto": "^0.17.8",
-    "libp2p-gossipsub": "0.4.6",
+    "libp2p-gossipsub": "0.9.0",
     "libp2p-kad-dht": "^0.19.9",
     "libp2p-mdns": "^0.14.2",
     "libp2p-mplex": "^0.9.5",
