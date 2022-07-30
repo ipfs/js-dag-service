@@ -1,0 +1,51 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: html-webpack-plugin
+    versions:
+    - "> 4.0.4"
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 7.2.0
+    - 8.0.0
+    - 8.1.0
+    - 8.2.0
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.25
+    - 14.14.28
+    - 14.14.31
+    - 14.14.32
+    - 14.14.34
+    - 14.14.37
+  - dependency-name: highlight.js
+    versions:
+    - 10.5.0
+    - 10.6.0
+    - 10.7.1
+  - dependency-name: libp2p-webrtc-star
+    versions:
+    - 0.20.7
+    - 0.21.0
+    - 0.21.1
+    - 0.21.2
+  - dependency-name: libp2p-tcp
+    versions:
+    - 0.15.2
+    - 0.15.3
+  - dependency-name: bl
+    versions:
+    - 4.0.4
+  - dependency-name: "@ipld/dag-json"
+    versions:
+    - 4.0.0
