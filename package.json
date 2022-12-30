@@ -55,7 +55,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "esm": "^3.2.25",
     "ipld-dag-pb": "^0.19.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "multicodec": "^1.0.4",
     "multihashes": "^1.0.1",
     "multihashing-async": "^1.0.0",
