@@ -57,7 +57,7 @@ jobs:
       run: npm run test:browser
 
     - name: Results
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: Results
         path: test-results
